@@ -339,7 +339,8 @@ Never use other package manages, like `npm`, `yarn`, or `bun`.
 
 ### Language & module system
 
-- **ESM only**: Node ≥ 24.
+- **ESM only**: Use Node 24 or newer for repository tooling and packages unless a managed deployment platform does not support Node 24.
+- **Managed runtime exception**: Use the newest Node version supported by the platform and pin the exception in both the package engine and deployment configuration. Firebase Functions must use Node 22 until Firebase supports Node 24.
 - **NodeNext resolution**: Import paths use .js extension even when importing .ts.
 - import type for types, import for runtime values.
 - No default exports except plugin entries.
@@ -383,7 +384,7 @@ Never use other package manages, like `npm`, `yarn`, or `bun`.
 - Prefer an ADR reference over inline explanation.
 - **Self-documenting code**: Comments should be used to explain:
   - Complex reasoning
-  - Functions, params, arguments, and return type documentation  
+  - Functions, params, arguments, and return type documentation
 - Remove all section comments where the code is self-documenting (e.g. `// Save handler` above a function named `handleSave`).
   - Do not leave `TODO` or `FIXME` comments unresolved in committed code.
 
@@ -652,4 +653,9 @@ When writting tests with Playwright, always review these tools and choose most c
 
 ## Documentation Index
 
-_No documentation yet. Add markdown files under this directory._
+### roadmaps
+
+- [Authenticated editor application roadmap](roadmaps/app.md): Delivery plan for authentication, subscription gating, document APIs, and the Tiptap workspace in @leadtech/app.
+- [Firebase Functions roadmap](roadmaps/functions.md): Delivery plan for verified Stripe webhook processing and Firestore entitlement projection in @leadtech/functions.
+- [Integration contracts and parallel delivery plan](roadmaps/integration-contracts.md): Canonical boundaries, API contracts, persistence schemas, and sequencing for the Leadtech take-home implementation.
+- [Marketing website roadmap](roadmaps/website.md): Delivery plan for the public conversion surface in the @leadtech/website workspace.
