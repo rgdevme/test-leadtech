@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "skills": {
+    "github:Leonxlnx/taste-skill/skills/brandkit": {
+      "computedHash": "4615b3ac48c32c31385dc72c1e91ce763fba329a779ae7a7297af91a42a27968",
+      "resolvedAt": "2026-08-13T10:47:39.371Z",
+      "resolvedCommit": "e988add20dab0fa97d7a76781c48961c8184288e",
+      "ref": "main"
+    },
+    "github:Leonxlnx/taste-skill/skills/gpt-tasteskill": {
+      "computedHash": "a03edce4cf88aead0ae2227ff45040bb166e08662b8671a6e13bd5996074ceb7",
+      "resolvedAt": "2026-08-13T10:47:41.843Z",
+      "resolvedCommit": "e988add20dab0fa97d7a76781c48961c8184288e",
+      "ref": "main"
+    },
+    "github:Leonxlnx/taste-skill/skills/image-to-code-skill": {
+      "computedHash": "f954135a7029a0c09c2a894c412423d3523cd6bf916768d2780b3b4941739713",
+      "resolvedAt": "2026-08-13T10:47:44.473Z",
+      "resolvedCommit": "e988add20dab0fa97d7a76781c48961c8184288e",
+      "ref": "main"
+    },
+    "github:Leonxlnx/taste-skill/skills/imagegen-frontend-mobile": {
+      "computedHash": "5a64b28f3bc4b82260c6a283ec852c700e9280f77e19b1d23cda1b7aae10af9e",
+      "resolvedAt": "2026-08-13T10:47:47.138Z",
+      "resolvedCommit": "e988add20dab0fa97d7a76781c48961c8184288e",
+      "ref": "main"
+    },
+    "github:Leonxlnx/taste-skill/skills/imagegen-frontend-web": {
+      "computedHash": "ccd0bcd3f1f6449bf91536e7b52a133afa799fb2037b167084b7c25dad4f6907",
+      "resolvedAt": "2026-08-13T10:47:49.741Z",
+      "resolvedCommit": "e988add20dab0fa97d7a76781c48961c8184288e",
+      "ref": "main"
+    },
+    "github:Leonxlnx/taste-skill/skills/minimalist-skill": {
+      "computedHash": "da272a6da86a1862fb9dd48a00d48c7a8a9c60ff585a7f6eaf8fa943a336af41",
+      "resolvedAt": "2026-08-13T10:47:52.211Z",
+      "resolvedCommit": "e988add20dab0fa97d7a76781c48961c8184288e",
+      "ref": "main"
+    },
+    "github:Leonxlnx/taste-skill/skills/redesign-skill": {
+      "computedHash": "fb5a08052b0aead6124ddab3c11d742cb2a392a08eab15d26bbd55b835e2b441",
+      "resolvedAt": "2026-08-13T10:47:54.807Z",
+      "resolvedCommit": "e988add20dab0fa97d7a76781c48961c8184288e",
+      "ref": "main"
+    },
+    "github:Leonxlnx/taste-skill/skills/soft-skill": {
+      "computedHash": "0bc192cbf2ece0865dc60b591ed6a86b1d1370a04f1ab42a7a1dbe1139d59e9a",
+      "resolvedAt": "2026-08-13T10:47:57.516Z",
+      "resolvedCommit": "e988add20dab0fa97d7a76781c48961c8184288e",
+      "ref": "main"
+    },
+    "github:firebase/agent-skills/skills/firebase-auth-basics": {
+      "computedHash": "56b7a3d0b5125ac267c5dcba38d77bc36e1fbe5c426625bf140981c1615cf470",
+      "resolvedAt": "2026-08-13T11:13:30.718Z",
+      "resolvedCommit": "073edf7bb747c27b9c911a9126adaa5bc4648fdc",
+      "ref": "main"
+    },
+    "github:firebase/agent-skills/skills/firebase-basics": {
+      "computedHash": "fecf56b35a655b3a8ce04a6548292e00825db2ca03085421b10ec9d21e2a35f6",
+      "resolvedAt": "2026-08-13T11:13:33.452Z",
+      "resolvedCommit": "073edf7bb747c27b9c911a9126adaa5bc4648fdc",
+      "ref": "main"
+    },
+    "github:firebase/agent-skills/skills/firebase-firestore": {
+      "computedHash": "41ab005c34eaccbcf5e782955d4824b0feb35f359fe574a7213fe80a410722f3",
+      "resolvedAt": "2026-08-13T11:13:36.320Z",
+      "resolvedCommit": "073edf7bb747c27b9c911a9126adaa5bc4648fdc",
+      "ref": "main"
+    },
+    "github:firebase/agent-skills/skills/firebase-security-rules-auditor": {
+      "computedHash": "1cd678026c3d827256a3942c0bd67ce4a6c72eb3245de7c6bbead9068fb0a99a",
+      "resolvedAt": "2026-08-13T11:13:38.772Z",
+      "resolvedCommit": "073edf7bb747c27b9c911a9126adaa5bc4648fdc",
+      "ref": "main"
+    },
+    "github:rgdevme/luxia/skills/doc-authoring": {
+      "computedHash": "b7edb80321b1a899ca1d94658f30d2239d07d46b6b9a07529dc62be86004fdd7",
+      "resolvedAt": "2026-08-13T10:48:00.444Z",
+      "resolvedCommit": "40d88dae1c547322ecd5a722d127d821f7ade93e",
+      "ref": "main"
+    },
+    "github:rgdevme/luxia/skills/okf-authoring": {
+      "computedHash": "c8a11902e9cb16f157463e4230b14090bd9565fe841afa38b11eb30b71ec353f",
+      "resolvedAt": "2026-08-13T10:48:03.111Z",
+      "resolvedCommit": "40d88dae1c547322ecd5a722d127d821f7ade93e",
+      "ref": "main"
+    },
+    "github:rgdevme/luxia/skills/rules-authoring": {
+      "computedHash": "2e684a4893aee4aa8a8344c1eae41c825e6ea8e25d1c2cfc34093bec6d647c51",
+      "resolvedAt": "2026-08-13T10:48:05.660Z",
+      "resolvedCommit": "40d88dae1c547322ecd5a722d127d821f7ade93e",
+      "ref": "main"
+    },
+    "github:stripe/ai/providers/claude/plugin/skills/connect-recommend": {
+      "computedHash": "f6871581c87b1b21015fc222e966227cb800838a94d91939eaae786218668b01",
+      "resolvedAt": "2026-08-13T10:48:08.774Z",
+      "resolvedCommit": "1953b6cce7344d880a054c42b8dd21ca3e50ebd5",
+      "ref": "main"
+    },
+    "github:stripe/ai/skills/stripe-best-practices": {
+      "computedHash": "ddf5e9169275b00f781907bd17b2d8c6baa5ed866c9bffa8afb03b2801ea3a34",
+      "resolvedAt": "2026-08-13T10:48:11.555Z",
+      "resolvedCommit": "1953b6cce7344d880a054c42b8dd21ca3e50ebd5",
+      "ref": "main"
+    },
+    "github:stripe/ai/skills/stripe-directory": {
+      "computedHash": "c89ffcae656691408ca38a558bb0a3d702edcb0ac10fe22654e7babf6a3a2d64",
+      "resolvedAt": "2026-08-13T10:48:14.200Z",
+      "resolvedCommit": "1953b6cce7344d880a054c42b8dd21ca3e50ebd5",
+      "ref": "main"
+    },
+    "github:stripe/ai/skills/stripe-projects": {
+      "computedHash": "d6c89e18942c1bc07e7cb9de06b85876245f67dc77adeae41cb50c4e2d9e5e8d",
+      "resolvedAt": "2026-08-13T10:48:16.902Z",
+      "resolvedCommit": "1953b6cce7344d880a054c42b8dd21ca3e50ebd5",
+      "ref": "main"
+    },
+    "github:stripe/ai/skills/upgrade-stripe": {
+      "computedHash": "2bbf5f6b771ee140559aa3d945bb10b6f6cfe09216b252609c5fc51b930b697b",
+      "resolvedAt": "2026-08-13T10:48:19.425Z",
+      "resolvedCommit": "1953b6cce7344d880a054c42b8dd21ca3e50ebd5",
+      "ref": "main"
+    },
+    "github:vercel-labs/agent-skills/skills/composition-patterns": {
+      "computedHash": "c523b04af0c0bf7aa85d173180839debc5fdb502b74e8bdfbfc173d12e25807d",
+      "resolvedAt": "2026-08-13T10:48:41.055Z",
+      "resolvedCommit": "b8caa260a420a73042e35521de4b5c8baf6446cc",
+      "ref": "main"
+    },
+    "github:vercel-labs/agent-skills/skills/deploy-to-vercel": {
+      "computedHash": "d1655d2f4883e7ffe0f994a7a0994c050afa86bf0404e6b1a4b85f4f4933de39",
+      "resolvedAt": "2026-08-13T10:48:44.223Z",
+      "resolvedCommit": "b8caa260a420a73042e35521de4b5c8baf6446cc",
+      "ref": "main"
+    },
+    "github:vercel-labs/agent-skills/skills/react-best-practices": {
+      "computedHash": "4b9d4624e6afa20868635261c34224d9e5ac6d58695adaa514a1dade7acafe3e",
+      "resolvedAt": "2026-08-13T10:48:51.633Z",
+      "resolvedCommit": "b8caa260a420a73042e35521de4b5c8baf6446cc",
+      "ref": "main"
+    },
+    "github:vercel-labs/agent-skills/skills/react-view-transitions": {
+      "computedHash": "84469928c1b28a9347fc5b578d27bc1c0a84639d2babc7c009faa497ea36f414",
+      "resolvedAt": "2026-08-13T10:48:54.492Z",
+      "resolvedCommit": "b8caa260a420a73042e35521de4b5c8baf6446cc",
+      "ref": "main"
+    },
+    "github:vercel-labs/agent-skills/skills/vercel-cli-with-tokens": {
+      "computedHash": "25f0b5b97d6a4a67ed42bcf9ea95b8c5ac2d7c5d968147136c4c47ff8efb6d48",
+      "resolvedAt": "2026-08-13T10:48:57.264Z",
+      "resolvedCommit": "b8caa260a420a73042e35521de4b5c8baf6446cc",
+      "ref": "main"
+    },
+    "github:vercel-labs/agent-skills/skills/web-design-guidelines": {
+      "computedHash": "6963044959cf7a7975b1eba95dea4b0ca3103416468f68572a587736b3770114",
+      "resolvedAt": "2026-08-13T10:49:00.023Z",
+      "resolvedCommit": "b8caa260a420a73042e35521de4b5c8baf6446cc",
+      "ref": "main"
+    },
+    "github:vercel-labs/skills/skills/find-skills": {
+      "computedHash": "72147fbf75726e2864a3574d084f1fd4b11cecdcc310fa430aaf3c45469830db",
+      "resolvedAt": "2026-08-13T10:48:47.098Z",
+      "resolvedCommit": "c6f69c631292444cc541ac6d91e2226b0ff247da",
+      "ref": "main"
+    },
+    "github:vercel/next.js/skills/next-cache-components-adoption#canary": {
+      "computedHash": "0c47c7dfd5d64fa1f2f971d00d7da3f2427c24f448c027464967380fa32e6928",
+      "resolvedAt": "2026-08-13T10:48:24.069Z",
+      "resolvedCommit": "9690bae79a9b31a9e9d58cbdf3d82e1b8dad6461",
+      "ref": "canary"
+    },
+    "github:vercel/next.js/skills/next-cache-components-optimizer#canary": {
+      "computedHash": "4296e78e9cd7afc0ea8635c574e4c693490cf2618111b9629677bb01cb3151c3",
+      "resolvedAt": "2026-08-13T10:48:28.549Z",
+      "resolvedCommit": "9690bae79a9b31a9e9d58cbdf3d82e1b8dad6461",
+      "ref": "canary"
+    },
+    "github:vercel/next.js/skills/next-dev-loop#canary": {
+      "computedHash": "2c46ffd754c4256ffc272a47407eeae68bab2294786fc70e40e13179d4e7981c",
+      "resolvedAt": "2026-08-13T10:48:32.671Z",
+      "resolvedCommit": "9690bae79a9b31a9e9d58cbdf3d82e1b8dad6461",
+      "ref": "canary"
+    },
+    "github:vercel/turborepo/skills/turborepo": {
+      "computedHash": "2aec77f8d3211a84ebdd895e7c5e00812e0b66dc4f29c878b94ac1520afcd461",
+      "resolvedAt": "2026-08-13T10:48:37.374Z",
+      "resolvedCommit": "c4ac03b45da815030be3c1dfae8003dfa05325a8",
+      "ref": "main"
+    }
+  }
+}

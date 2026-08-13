@@ -1,0 +1,56 @@
+{
+  "$schema": "https://unpkg.com/@luxia/agnos/schema.json",
+  "schemaVersion": 1,
+  "agents": [
+    "codex"
+  ],
+  "rules": {
+    "files": {
+      "./AGENTS.md": [
+        ".docs/.rules",
+        ".docs/index.md"
+      ]
+    }
+  },
+  "skills": {
+    "sources": {
+      "brandkit": "github:Leonxlnx/taste-skill/skills/brandkit",
+      "gpt-tasteskill": "github:Leonxlnx/taste-skill/skills/gpt-tasteskill",
+      "image-to-code-skill": "github:Leonxlnx/taste-skill/skills/image-to-code-skill",
+      "imagegen-frontend-mobile": "github:Leonxlnx/taste-skill/skills/imagegen-frontend-mobile",
+      "imagegen-frontend-web": "github:Leonxlnx/taste-skill/skills/imagegen-frontend-web",
+      "minimalist-skill": "github:Leonxlnx/taste-skill/skills/minimalist-skill",
+      "redesign-skill": "github:Leonxlnx/taste-skill/skills/redesign-skill",
+      "soft-skill": "github:Leonxlnx/taste-skill/skills/soft-skill",
+      "doc-authoring": "github:rgdevme/luxia/skills/doc-authoring",
+      "okf-authoring": "github:rgdevme/luxia/skills/okf-authoring",
+      "rules-authoring": "github:rgdevme/luxia/skills/rules-authoring",
+      "connect-recommend": "github:stripe/ai/providers/claude/plugin/skills/connect-recommend",
+      "stripe-best-practices": "github:stripe/ai/skills/stripe-best-practices",
+      "stripe-directory": "github:stripe/ai/skills/stripe-directory",
+      "stripe-projects": "github:stripe/ai/skills/stripe-projects",
+      "upgrade-stripe": "github:stripe/ai/skills/upgrade-stripe",
+      "next-cache-components-adoption": "github:vercel/next.js/skills/next-cache-components-adoption#canary",
+      "next-cache-components-optimizer": "github:vercel/next.js/skills/next-cache-components-optimizer#canary",
+      "next-dev-loop": "github:vercel/next.js/skills/next-dev-loop#canary",
+      "turborepo": "github:vercel/turborepo/skills/turborepo",
+      "composition-patterns": "github:vercel-labs/agent-skills/skills/composition-patterns",
+      "deploy-to-vercel": "github:vercel-labs/agent-skills/skills/deploy-to-vercel",
+      "find-skills": "github:vercel-labs/skills/skills/find-skills",
+      "react-best-practices": "github:vercel-labs/agent-skills/skills/react-best-practices",
+      "react-view-transitions": "github:vercel-labs/agent-skills/skills/react-view-transitions",
+      "vercel-cli-with-tokens": "github:vercel-labs/agent-skills/skills/vercel-cli-with-tokens",
+      "web-design-guidelines": "github:vercel-labs/agent-skills/skills/web-design-guidelines",
+      "firebase-auth-basics": "github:firebase/agent-skills/skills/firebase-auth-basics",
+      "firebase-basics": "github:firebase/agent-skills/skills/firebase-basics",
+      "firebase-firestore": "github:firebase/agent-skills/skills/firebase-firestore",
+      "firebase-security-rules-auditor": "github:firebase/agent-skills/skills/firebase-security-rules-auditor"
+    }
+  },
+  "docs": {
+    "root": ".docs",
+    "ignore": [
+      ".rules"
+    ]
+  }
+}
