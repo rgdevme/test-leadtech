@@ -1,0 +1,11 @@
+node_modules
+.next
+lib
+dist
+out
+coverage
+.firebase
+pnpm-lock.yaml
+firebase-debug.log*
+firestore-debug.log*
+ui-debug.log*

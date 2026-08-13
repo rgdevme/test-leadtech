@@ -6,12 +6,15 @@
     "node": ">=22"
   },
   "scripts": {
-    "build": "pnpm -r --if-present build",
-    "dev": "pnpm --parallel --filter @leadtech/website --filter @leadtech/app --filter @leadtech/functions dev",
+    "build": "pnpm -r --parallel build",
+    "check": "pnpm -r --parallel check",
+    "check:format": "pnpm -r --parallel check:format",
+    "check:lint": "pnpm -r --parallel check:lint",
+    "check:typecheck": "pnpm -r --parallel check:typecheck",
+    "dev": "pnpm -r --parallel dev",
     "dev:apps": "pnpm --parallel --filter @leadtech/website --filter @leadtech/app dev",
     "dev:functions": "pnpm --filter @leadtech/functions dev",
-    "lint": "pnpm -r --if-present lint",
-    "typecheck": "pnpm -r --if-present typecheck"
+    "start": "pnpm -r --parallel start"
   },
   "devDependencies": {
     "@luxia/agnos": "^1.1.1",

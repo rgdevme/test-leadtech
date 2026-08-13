@@ -9,9 +9,7 @@ if (!process.env.FIREBASE_AUTH_EMULATOR_HOST || !process.env.FIRESTORE_EMULATOR_
 }
 
 const firebaseAdminApp =
-  getApps().length === 0
-    ? initializeApp({ projectId: process.env.FIREBASE_PROJECT_ID })
-    : getApp();
+  getApps().length === 0 ? initializeApp({ projectId: process.env.FIREBASE_PROJECT_ID }) : getApp();
 
 const firebaseAdminAuth = getAuth(firebaseAdminApp);
 const firebaseAdminFirestore = getFirestore(firebaseAdminApp);

@@ -4,4 +4,3 @@
  * access to private routes.
  */
 export type AuthenticationGuard = never;
-

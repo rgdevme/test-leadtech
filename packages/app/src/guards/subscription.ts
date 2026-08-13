@@ -4,4 +4,3 @@
  * webhooks rather than trusting client state or a checkout redirect.
  */
 export type SubscriptionGuard = never;
-
