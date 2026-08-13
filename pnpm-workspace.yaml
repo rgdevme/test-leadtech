@@ -1,0 +1,8 @@
+packages:
+  - "packages/*"
+
+allowBuilds:
+  "@firebase/util": true
+  node-sass: true
+  protobufjs: true
+  unrs-resolver: true
