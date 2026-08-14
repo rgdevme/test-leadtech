@@ -1,44 +1,44 @@
 {
-  "name": "@leadtech/app",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "build": "next build",
-    "check": "pnpm --filter . run --parallel \"/^check:(format|lint|typecheck)$/\"",
-    "check:format": "prettier --check . --ignore-path ../../.prettierignore",
-    "check:lint": "eslint .",
-    "check:typecheck": "tsc --noEmit",
-    "dev": "next dev --port 3001",
-    "start": "next start --port 3001"
-  },
-  "dependencies": {
-    "@gsap/react": "^2.1.2",
-    "@leadtech/contracts": "workspace:*",
-    "@mantine/form": "^8.3.7",
-    "@stripe/stripe-js": "^9.13.0",
-    "@tabler/icons-react": "^3.34.1",
-    "@tiptap/react": "^3.30.0",
-    "@tiptap/starter-kit": "^3.30.0",
-    "firebase": "^12.17.1",
-    "firebase-admin": "^14.2.0",
-    "gsap": "^3.15.0",
-    "next": "^16.3.0",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "stripe": "^22.5.0",
-    "zod": "^4.4.3",
-    "zustand": "^5.0.11"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4.3.3",
-    "@types/node": "^26.2.0",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.4",
-    "eslint": "^9.39.5",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-config-next": "^16.3.0",
-    "prettier": "^3.9.6",
-    "tailwindcss": "^4.3.3",
-    "typescript": "^5.9.3"
-  }
+	"name": "@leadtech/app",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"build": "next build",
+		"check": "pnpm --filter . run --parallel \"/^check:(format|lint|typecheck)$/\"",
+		"check:format": "prettier --check . --ignore-path ../../.prettierignore",
+		"check:lint": "eslint .",
+		"check:typecheck": "tsc --noEmit",
+		"dev": "next dev --port 3001",
+		"start": "next start --port 3001"
+	},
+	"dependencies": {
+		"@gsap/react": "^2.1.2",
+		"@leadtech/contracts": "workspace:*",
+		"@mantine/form": "^8.3.7",
+		"@stripe/stripe-js": "^9.13.0",
+		"@tabler/icons-react": "^3.34.1",
+		"@tiptap/react": "^3.30.0",
+		"@tiptap/starter-kit": "^3.30.0",
+		"firebase": "^12.17.1",
+		"firebase-admin": "^14.2.0",
+		"gsap": "^3.15.0",
+		"next": "^16.3.0",
+		"react": "^19.2.8",
+		"react-dom": "^19.2.8",
+		"stripe": "^22.5.0",
+		"zod": "^4.4.3",
+		"zustand": "^5.0.11"
+	},
+	"devDependencies": {
+		"@tailwindcss/postcss": "^4.3.3",
+		"@types/node": "^26.2.0",
+		"@types/react": "^19.2.18",
+		"@types/react-dom": "^19.2.4",
+		"eslint": "^9.39.5",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-config-next": "^16.3.0",
+		"prettier": "^3.9.6",
+		"tailwindcss": "^4.3.3",
+		"typescript": "^5.9.3"
+	}
 }

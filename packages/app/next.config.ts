@@ -1,8 +1,8 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-  agentRules: false,
-  transpilePackages: ["@leadtech/contracts"],
-};
+	agentRules: false,
+	transpilePackages: ["@leadtech/contracts"]
+}
 
-export default nextConfig;
+export default nextConfig

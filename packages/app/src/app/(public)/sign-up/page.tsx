@@ -1,15 +1,20 @@
-import { subscriptionPlanKeySchema } from "@leadtech/contracts";
+import { subscriptionPlanKeySchema } from "@leadtech/contracts"
 
-import { SignUpPage as SignUpPageView } from "@/components/pages/SignUpPage";
+import { SignUpPage as SignUpPageView } from "@/components/pages/SignUpPage"
 
 type SignUpPageProps = {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-};
+	searchParams: Promise<Record<string, string | string[] | undefined>>
+}
 
 export default async function SignUpPage({ searchParams }: SignUpPageProps) {
-  const query = await searchParams;
-  const intent = query.intent === "subscribe" ? "subscribe" : undefined;
-  const plan = subscriptionPlanKeySchema.safeParse(query.plan);
+	const query = await searchParams
+	const intent = query.intent === "subscribe" ? "subscribe" : undefined
+	const plan = subscriptionPlanKeySchema.safeParse(query.plan)
 
-  return <SignUpPageView intent={intent} planKey={plan.success ? plan.data : undefined} />;
+	return (
+		<SignUpPageView
+			intent={intent}
+			planKey={plan.success ? plan.data : undefined}
+		/>
+	)
 }

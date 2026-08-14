@@ -1,7 +1,7 @@
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react"
 
-type ContentProps = PropsWithChildren;
+type ContentProps = PropsWithChildren
 
 export function Content({ children }: ContentProps) {
-  return <div>{children}</div>;
+	return <div>{children}</div>
 }

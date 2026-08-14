@@ -1,21 +1,21 @@
-import { redirect } from "next/navigation";
-import type { PropsWithChildren } from "react";
+import { redirect } from "next/navigation"
+import type { PropsWithChildren } from "react"
 
-import { AppHeader } from "@/components/organisms/AppHeader";
-import { getSessionPrincipal } from "@/guards/authentication";
+import { AppHeader } from "@/components/organisms/AppHeader"
+import { getSessionPrincipal } from "@/guards/authentication"
 
-type AuthenticatedLayoutProps = PropsWithChildren;
+type AuthenticatedLayoutProps = PropsWithChildren
 
 export default async function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
-  const principal = await getSessionPrincipal();
-  if (!principal) {
-    redirect("/api/auth/session");
-  }
+	const principal = await getSessionPrincipal()
+	if (!principal) {
+		redirect("/api/auth/session")
+	}
 
-  return (
-    <>
-      <AppHeader email={principal.email} />
-      {children}
-    </>
-  );
+	return (
+		<>
+			<AppHeader email={principal.email} />
+			{children}
+		</>
+	)
 }
