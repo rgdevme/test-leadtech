@@ -126,10 +126,10 @@ export const SubscriptionModal = ({ initialPlanKey, onClose, open }: Subscriptio
 						{en.common.loading}
 					</div>
 				) : plans.length > 0 ? (
-					<div className='mt-8 grid grid-flow-dense grid-cols-1 gap-3 lg:grid-cols-12'>
+					<div className='mt-8 grid grid-flow-dense gap-3 grid-cols-1 md:grid-cols-3'>
 						{plans.map(plan => (
 							<div
-								className='lg:col-span-4'
+								className='col-span-1'
 								key={plan.key}>
 								<SubscriptionPlanCard
 									onSelect={setSelectedPlanKey}

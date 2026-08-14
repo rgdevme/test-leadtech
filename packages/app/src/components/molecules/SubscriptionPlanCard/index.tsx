@@ -21,7 +21,7 @@ const formatPrice = (plan: SubscriptionPlan) =>
 export const SubscriptionPlanCard = ({ onSelect, plan, selected }: SubscriptionPlanCardProps) => (
 	<button
 		aria-pressed={selected}
-		className={`group relative flex h-full min-h-80 flex-col overflow-hidden rounded-xl border p-6 text-left transition duration-200 active:scale-[0.99] ${
+		className={`group relative flex size-full min-h-80 flex-col overflow-hidden rounded-xl border p-6 text-left transition duration-200 active:scale-[0.99] ${
 			selected
 				? "border-charcoal bg-charcoal text-white"
 				: "border-line bg-white text-charcoal hover:border-soft"
