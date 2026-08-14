@@ -1,35 +1,45 @@
 import { z } from "zod";
 
+import { projectedSubscriptionStatusSchema } from "./billing.js";
 import { richTextDocumentSchema } from "./documents.js";
-import { subscriptionStatusSchema } from "./billing.js";
+import {
+  firebaseUidSchema,
+  stripeCustomerIdSchema,
+  stripeEventIdSchema,
+  stripePriceIdSchema,
+  stripeSubscriptionIdSchema,
+} from "./stripe.js";
 
 export const firestoreTimestampValueSchema = z.object({
-  seconds: z.number(),
-  nanoseconds: z.number(),
+  seconds: z.number().int(),
+  nanoseconds: z.number().int().min(0).max(999_999_999),
 });
 
 export const userPersistenceSchema = z.object({
-  uid: z.string().min(1),
+  uid: firebaseUidSchema,
   email: z.email().nullable(),
-  stripeCustomerId: z.string().min(1).optional(),
+  stripeCustomerId: stripeCustomerIdSchema.optional(),
   createdAt: firestoreTimestampValueSchema,
   updatedAt: firestoreTimestampValueSchema,
 });
 
-export const subscriptionPersistenceSchema = z.object({
-  uid: z.string().min(1),
-  stripeCustomerId: z.string().min(1),
-  stripeSubscriptionId: z.string().min(1),
-  stripePriceId: z.string().min(1),
-  status: subscriptionStatusSchema.exclude(["none"]),
+export const subscriptionPersistenceDataSchema = z.object({
+  uid: firebaseUidSchema,
+  stripeCustomerId: stripeCustomerIdSchema,
+  stripeSubscriptionId: stripeSubscriptionIdSchema,
+  stripePriceId: stripePriceIdSchema,
+  status: projectedSubscriptionStatusSchema,
   entitlement: z.enum(["active", "inactive"]),
   cancelAtPeriodEnd: z.boolean(),
-  lastStripeEventId: z.string().min(1),
+  lastStripeEventId: stripeEventIdSchema,
+});
+
+export const subscriptionPersistenceSchema = subscriptionPersistenceDataSchema.extend({
   updatedAt: firestoreTimestampValueSchema,
 });
 
 export const documentPersistenceSchema = z.object({
-  ownerId: z.string().min(1),
+  ownerId: firebaseUidSchema,
   title: z.string().trim().min(1).max(120),
   content: richTextDocumentSchema,
   version: z.int().positive(),
@@ -37,14 +47,21 @@ export const documentPersistenceSchema = z.object({
   updatedAt: firestoreTimestampValueSchema,
 });
 
-export const stripeWebhookEventPersistenceSchema = z.object({
-  type: z.string().min(1),
-  objectId: z.string().nullable(),
+export const stripeWebhookEventPersistenceDataSchema = z.object({
+  type: z.string().min(1).max(128),
+  objectId: z.string().min(1).max(255).nullable(),
+});
+
+export const stripeWebhookEventPersistenceSchema = stripeWebhookEventPersistenceDataSchema.extend({
   processedAt: firestoreTimestampValueSchema,
 });
 
 export type FirestoreTimestampValue = z.infer<typeof firestoreTimestampValueSchema>;
 export type UserPersistence = z.infer<typeof userPersistenceSchema>;
+export type SubscriptionPersistenceData = z.infer<typeof subscriptionPersistenceDataSchema>;
 export type SubscriptionPersistence = z.infer<typeof subscriptionPersistenceSchema>;
 export type DocumentPersistence = z.infer<typeof documentPersistenceSchema>;
+export type StripeWebhookEventPersistenceData = z.infer<
+  typeof stripeWebhookEventPersistenceDataSchema
+>;
 export type StripeWebhookEventPersistence = z.infer<typeof stripeWebhookEventPersistenceSchema>;

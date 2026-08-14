@@ -21,8 +21,21 @@ export const subscriptionPlanIds = {
 export type SubscriptionPlanKeys = keyof typeof subscriptionPlanIds;
 const subscriptionPlanKeys = Object.keys(subscriptionPlanIds) as SubscriptionPlanKeys[];
 
-export const subscriptionStatusSchema = z.enum(subscriptionStatuses);
+export const projectedSubscriptionStatuses = [
+  "incomplete",
+  "incomplete_expired",
+  "trialing",
+  "active",
+  "past_due",
+  "canceled",
+  "unpaid",
+  "paused",
+] as const;
 
+export const entitledStripeStatuses = ["active", "trialing"] as const;
+
+export const subscriptionStatusSchema = z.enum(subscriptionStatuses);
+export const projectedSubscriptionStatusSchema = z.enum(projectedSubscriptionStatuses);
 export const subscriptionPlanKeySchema = z.literal(subscriptionPlanKeys);
 
 export const subscriptionPlanSchema = z.object({
@@ -95,6 +108,7 @@ export const subscriptionResponseSchema = z.object({
 });
 
 export type SubscriptionStatus = z.infer<typeof subscriptionStatusSchema>;
+export type ProjectedSubscriptionStatus = z.infer<typeof projectedSubscriptionStatusSchema>;
 export type SubscriptionIntent = "subscribe";
 export type SubscriptionPlanKey = z.infer<typeof subscriptionPlanKeySchema>;
 export type SubscriptionPlan = z.infer<typeof subscriptionPlanSchema>;
