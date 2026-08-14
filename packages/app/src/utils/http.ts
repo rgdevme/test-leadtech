@@ -37,9 +37,9 @@ export const parseJsonRequest = async <Schema extends z.ZodType>(
 };
 
 export const getApplicationUrl = () => {
-  const value = process.env.APP_URL;
+  const value = process.env.NEXT_PUBLIC_APP_URL;
   if (!value) {
-    throw new Error("APP_URL must be configured.");
+    throw new Error("NEXT_PUBLIC_APP_URL must be configured.");
   }
 
   return new URL(value);
