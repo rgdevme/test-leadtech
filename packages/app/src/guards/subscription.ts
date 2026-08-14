@@ -1,6 +1,17 @@
-/**
- * Placeholder for the server-only subscription guard.
- * Implementation must read subscription state written by verified Stripe
- * webhooks rather than trusting client state or a checkout redirect.
- */
-export type SubscriptionGuard = never;
+import "server-only";
+
+import { ApiError } from "@/errors/apiError";
+import { getSubscription } from "@/repositories/subscriptions";
+
+export const requireMutationEntitlement = async (uid: string) => {
+  const subscription = await getSubscription(uid);
+  if (!subscription.entitled) {
+    throw new ApiError(
+      403,
+      "subscription_required",
+      "An active subscription is required to change documents.",
+    );
+  }
+
+  return subscription;
+};

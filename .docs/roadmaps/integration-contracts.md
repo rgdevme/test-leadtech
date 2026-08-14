@@ -446,21 +446,15 @@ export type StripeWebhookEventPersistence = {
 
 # Environment contract
 
-| Package   | Variable                                  | Exposure           | Purpose                                         |
-| --------- | ----------------------------------------- | ------------------ | ----------------------------------------------- |
-| Website   | `NEXT_PUBLIC_APP_URL`                     | Browser-safe       | Absolute app origin for CTA links               |
-| App       | `NEXT_PUBLIC_FIREBASE_*`                  | Browser-safe       | Firebase Web SDK configuration                  |
-| App       | `NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST` | Browser-safe local | Auth emulator host                              |
-| App       | `NEXT_PUBLIC_FIRESTORE_EMULATOR_HOST`     | Browser-safe local | Firestore emulator host if retained for tooling |
-| App       | `FIREBASE_PROJECT_ID`                     | Server             | Admin SDK project                               |
-| App       | `FIREBASE_AUTH_EMULATOR_HOST`             | Server local       | Auth emulator connection                        |
-| App       | `FIRESTORE_EMULATOR_HOST`                 | Server local       | Firestore emulator connection                   |
-| App       | `APP_URL`                                 | Server             | Trusted origin and Stripe return URL base       |
-| App       | `STRIPE_APP_RESTRICTED_KEY`               | Secret             | Minimum Checkout and Customer permissions       |
-| App       | `STRIPE_PLAN_PRICE_MAP`                   | Server             | Public plan keys mapped to sandbox Price IDs    |
-| Functions | `STRIPE_WEBHOOK_RESTRICTED_KEY`           | Secret             | Minimum Subscription retrieval permissions      |
-| Functions | `STRIPE_WEBHOOK_SECRET`                   | Secret             | Webhook signature verification                  |
-| Functions | `STRIPE_ENTITLED_PRICE_IDS`               | Server             | Comma-separated entitlement Price allowlist     |
+| Package   | Variable                        | Exposure     | Purpose                                      |
+| --------- | ------------------------------- | ------------ | -------------------------------------------- |
+| Website   | `NEXT_PUBLIC_APP_URL`           | Browser-safe | Absolute app origin for CTA links            |
+| App       | `APP_URL`                       | Server       | Trusted origin and Stripe return URL base    |
+| App       | `STRIPE_APP_RESTRICTED_KEY`     | Secret       | Minimum Checkout and Customer permissions    |
+| App       | `STRIPE_PLAN_PRICE_MAP`         | Server       | Public plan keys mapped to sandbox Price IDs |
+| Functions | `STRIPE_WEBHOOK_RESTRICTED_KEY` | Secret       | Minimum Subscription retrieval permissions   |
+| Functions | `STRIPE_WEBHOOK_SECRET`         | Secret       | Webhook signature verification               |
+| Functions | `STRIPE_ENTITLED_PRICE_IDS`     | Server       | Comma-separated entitlement Price allowlist  |
 
 > [!CAUTION]
 > Real GCP deployments must bind Stripe secrets from Google Secret Manager with least-privilege service access. `.env.example` files contain names and instructions only.
