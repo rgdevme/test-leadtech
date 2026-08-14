@@ -10,10 +10,10 @@ type WorkflowSectionProps = PropsWithChildren<{
 }>;
 
 export const WorkflowSection = ({ copy }: WorkflowSectionProps) => (
-  <section className="section workflow" data-pin-section id="workflow">
+  <section className="section workflow" id="workflow">
     <Container size="wide">
       <div className="workflow__layout">
-        <div className="workflow__copy" data-pin-copy>
+        <div className="workflow__copy">
           <Text as="span" className="eyebrow eyebrow--inverse" unstyled>
             {copy.eyebrow}
           </Text>

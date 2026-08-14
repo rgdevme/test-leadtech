@@ -1,15 +1,15 @@
 import Image from "next/image";
 import type { PropsWithChildren } from "react";
 
-import { Button, Container, Heading, Text } from "@/components/atoms";
+import { Container, Heading, Text } from "@/components/atoms";
+import { ScrollIndicator } from "@/components/molecules";
 import type { Dictionary } from "@/i18n/getDictionary";
 
 type HeroProps = PropsWithChildren<{
   copy: Dictionary["hero"];
-  primaryHref: string;
 }>;
 
-export const Hero = ({ copy, primaryHref }: HeroProps) => (
+export const Hero = ({ copy }: HeroProps) => (
   <section className="hero">
     <Container size="wide">
       <div className="hero__copy" data-reveal>
@@ -28,12 +28,7 @@ export const Hero = ({ copy, primaryHref }: HeroProps) => (
           <Text size="lead" tone="muted">
             {copy.description}
           </Text>
-          <div className="hero__actions">
-            <Button href={primaryHref}>{copy.primaryAction}</Button>
-            <Button href="#workflow" showArrow={false} variant="text">
-              {copy.secondaryAction}
-            </Button>
-          </div>
+          <ScrollIndicator href="#benefits" label={copy.scrollLabel} />
         </div>
       </div>
       <div className="hero__visual-shell" data-media>

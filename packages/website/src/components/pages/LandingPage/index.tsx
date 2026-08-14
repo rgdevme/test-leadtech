@@ -87,7 +87,7 @@ export const LandingPage = ({ copy, locale }: LandingPageProps) => {
           </SiteHeader>
         </Header>
         <Main>
-          <Hero copy={copy.hero} primaryHref={subscribeHref} />
+          <Hero copy={copy.hero} />
           <BenefitsSection copy={copy.benefits} />
           <WorkflowSection copy={copy.workflow} />
           <TrustSection copy={copy.trust} />

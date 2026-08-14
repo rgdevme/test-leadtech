@@ -47,21 +47,6 @@ export const useMarketingMotion = (scope: RefObject<HTMLDivElement | null>) => {
         });
       });
 
-      media.add("(min-width: 960px) and (prefers-reduced-motion: no-preference)", () => {
-        const pin = scope.current?.querySelector<HTMLElement>("[data-pin-copy]");
-        const section = scope.current?.querySelector<HTMLElement>("[data-pin-section]");
-
-        if (pin && section) {
-          ScrollTrigger.create({
-            trigger: section,
-            start: "top 18%",
-            end: "bottom 72%",
-            pin,
-            pinSpacing: false,
-          });
-        }
-      });
-
       return () => media.revert();
     },
     { scope },

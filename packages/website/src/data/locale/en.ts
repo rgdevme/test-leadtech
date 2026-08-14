@@ -26,8 +26,7 @@ export const en = {
     titleAccent: "Keep it yours.",
     description:
       "doc.io is a focused online editor for creating, formatting, and keeping your rich-text documents in one calm browser workspace.",
-    primaryAction: "Start writing",
-    secondaryAction: "See how it works",
+    scrollLabel: "Explore the benefits",
     imageAlt:
       "An angled doc.io browser editor showing formatting controls and a highlighted paragraph",
     note: "Rich text. Browser based. Yours to keep.",
