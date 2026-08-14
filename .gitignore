@@ -12,6 +12,9 @@ ui-debug.log*
 .env
 .env.*
 !.env.example
+.secret
+.secret.*
+!.secret.example
 *.tsbuildinfo
 .DS_Store
 
