@@ -1,11 +1,22 @@
 import type { HTMLAttributes, PropsWithChildren } from "react"
 
-type TextProps = PropsWithChildren<HTMLAttributes<HTMLParagraphElement>>
+type TextProps = PropsWithChildren<
+	HTMLAttributes<HTMLElement> & {
+		as?: "p" | "span"
+		unstyled?: boolean
+	}
+>
 
-export const Text = ({ children, className = "", ...props }: TextProps) => (
-	<p
-		className={`leading-7 text-muted ${className}`}
+export const Text = ({
+	as: Component = "p",
+	children,
+	className = "",
+	unstyled = false,
+	...props
+}: TextProps) => (
+	<Component
+		className={unstyled ? className : `leading-7 text-muted ${className}`}
 		{...props}>
 		{children}
-	</p>
+	</Component>
 )

@@ -10,9 +10,9 @@ type BenefitItemProps = PropsWithChildren<{
 
 export const BenefitItem = ({ description, index, title }: BenefitItemProps) => (
   <article className="benefit-item" data-reveal>
-    <span aria-hidden="true" className="benefit-item__index">
+    <Text as="span" aria-hidden="true" className="benefit-item__index" unstyled>
       {index}
-    </span>
+    </Text>
     <div>
       <Heading as="h3" size="card">
         {title}

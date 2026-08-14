@@ -17,7 +17,9 @@ export const PricingSection = ({ actionHref, copy, locale, plan }: PricingSectio
   <section className="section pricing" id="pricing">
     <Container>
       <div className="pricing__heading" data-reveal>
-        <span className="eyebrow">{copy.eyebrow}</span>
+        <Text as="span" className="eyebrow" unstyled>
+          {copy.eyebrow}
+        </Text>
         <Heading as="h2" size="section">
           {copy.title}
         </Heading>

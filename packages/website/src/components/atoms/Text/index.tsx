@@ -1,14 +1,27 @@
-import type { PropsWithChildren } from "react";
+import type { HTMLAttributes, PropsWithChildren } from "react";
 
-type TextProps = PropsWithChildren<{
-  as?: "p" | "span";
-  tone?: "default" | "muted" | "inverse";
-  size?: "small" | "body" | "lead";
-}>;
+type TextProps = PropsWithChildren<
+  HTMLAttributes<HTMLElement> & {
+    as?: "em" | "p" | "span" | "strong";
+    tone?: "default" | "muted" | "inverse";
+    size?: "small" | "body" | "lead";
+    unstyled?: boolean;
+  }
+>;
 
 export const Text = ({
   as: Component = "p",
   children,
+  className = "",
   size = "body",
   tone = "default",
-}: TextProps) => <Component className={`text text--${size} text--${tone}`}>{children}</Component>;
+  unstyled = false,
+  ...props
+}: TextProps) => (
+  <Component
+    className={unstyled ? className : `text text--${size} text--${tone} ${className}`}
+    {...props}
+  >
+    {children}
+  </Component>
+);

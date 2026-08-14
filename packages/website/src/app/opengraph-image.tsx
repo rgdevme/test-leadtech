@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 
+import { Text } from "@/components/atoms";
 import { en } from "@/data/locale/en";
 
 export const alt = en.metadata.imageAlt;
@@ -44,7 +45,11 @@ const OpenGraphImage = () =>
           }}
         >
           <div style={{ color: "#f2efe6", display: "flex", fontSize: 38, fontWeight: 700 }}>
-            doc<span style={{ color: "#99a48a" }}>.</span>io
+            doc
+            <Text as="span" style={{ color: "#99a48a" }} unstyled>
+              .
+            </Text>
+            io
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div
@@ -53,7 +58,6 @@ const OpenGraphImage = () =>
                 display: "flex",
                 fontSize: 78,
                 fontWeight: 500,
-                letterSpacing: "-4px",
                 lineHeight: 0.95,
                 maxWidth: 850,
               }}

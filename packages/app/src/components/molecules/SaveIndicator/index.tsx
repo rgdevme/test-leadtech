@@ -2,6 +2,7 @@ import { IconAlertCircle, IconCheck, IconLoader2 } from "@tabler/icons-react"
 import type { PropsWithChildren } from "react"
 
 import { Button } from "@/components/atoms/Button"
+import { Text } from "@/components/atoms/Text"
 import { en } from "@/data/locale/en"
 import type { EditorSaveState } from "@/stores/useEditorStore"
 
@@ -33,7 +34,11 @@ export const SaveIndicator = ({
 				size={16}
 				stroke={2}
 			/>
-			<span>{saveLabels[saveState]}</span>
+			<Text
+				as='span'
+				unstyled>
+				{saveLabels[saveState]}
+			</Text>
 			{saveState === "clean" && lastSavedAt ? (
 				<time dateTime={lastSavedAt}>
 					{new Date(lastSavedAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}

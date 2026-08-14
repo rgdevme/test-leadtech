@@ -1,7 +1,7 @@
 import Image from "next/image";
 import type { PropsWithChildren } from "react";
 
-import { Container, Heading } from "@/components/atoms";
+import { Container, Heading, Text } from "@/components/atoms";
 import { FaqItem } from "@/components/molecules";
 import type { Dictionary } from "@/i18n/getDictionary";
 
@@ -13,7 +13,9 @@ export const FaqSection = ({ copy }: FaqSectionProps) => (
   <section className="section faq" id="faq">
     <Container>
       <div className="faq__heading" data-reveal>
-        <span className="eyebrow eyebrow--inverse">{copy.eyebrow}</span>
+        <Text as="span" className="eyebrow eyebrow--inverse" unstyled>
+          {copy.eyebrow}
+        </Text>
         <Heading as="h2" size="section">
           {copy.title}
         </Heading>

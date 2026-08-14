@@ -42,10 +42,16 @@ export const ProfilePage = ({ principal, subscription }: ProfilePageProps) => (
 							stroke={1.8}
 						/>
 					</span>
-					<p className='mt-8 text-xs font-bold uppercase tracking-[0.08em] text-muted'>
+					<Text
+						className='mt-8 text-xs font-bold uppercase text-muted'
+						unstyled>
 						{en.profile.signedInAs}
-					</p>
-					<p className='mt-2 break-all text-lg font-semibold text-charcoal'>{principal.email}</p>
+					</Text>
+					<Text
+						className='mt-2 break-all text-lg font-semibold text-charcoal'
+						unstyled>
+						{principal.email}
+					</Text>
 				</section>
 				<div data-reveal>
 					<SubscriptionPanel subscription={subscription} />

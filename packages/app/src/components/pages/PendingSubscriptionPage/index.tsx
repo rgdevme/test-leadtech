@@ -116,21 +116,33 @@ export const PendingSubscriptionPage = ({}: PendingSubscriptionPageProps) => {
 							<div
 								className='bg-white p-6 text-left'
 								key={step.title}>
-								<span className='grid size-7 place-items-center rounded-full bg-bone text-xs font-bold text-charcoal'>
+								<Text
+									as='span'
+									className='grid size-7 place-items-center rounded-full bg-bone text-xs font-bold text-charcoal'
+									unstyled>
 									{index + 1}
-								</span>
-								<h2 className='mt-5 text-base font-semibold text-charcoal'>{step.title}</h2>
-								<p className='mt-2 text-sm leading-6 text-muted'>{step.description}</p>
+								</Text>
+								<Heading
+									className='mt-5 text-base font-semibold'
+									level={2}>
+									{step.title}
+								</Heading>
+								<Text
+									className='mt-2 text-sm leading-6 text-muted'
+									unstyled>
+									{step.description}
+								</Text>
 							</div>
 						))}
 					</div>
 
 					{error ? (
-						<p
+						<Text
 							className='mt-6 text-sm text-danger'
-							role='alert'>
+							role='alert'
+							unstyled>
 							{error}
-						</p>
+						</Text>
 					) : null}
 
 					<Button

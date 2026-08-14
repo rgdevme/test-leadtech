@@ -3,6 +3,8 @@ import type { PropsWithChildren } from "react"
 
 import type { SubscriptionPlan } from "@leadtech/contracts"
 
+import { Heading } from "@/components/atoms/Heading"
+import { Text } from "@/components/atoms/Text"
 import { en } from "@/data/locale/en"
 
 type SubscriptionPlanCardProps = PropsWithChildren<{
@@ -30,10 +32,16 @@ export const SubscriptionPlanCard = ({ onSelect, plan, selected }: SubscriptionP
 		type='button'>
 		<div className='flex items-start justify-between gap-4'>
 			<div>
-				<h3 className='text-xl font-semibold tracking-[-0.025em]'>{plan.name}</h3>
-				<p className={`mt-2 text-sm leading-6 ${selected ? "text-white/65" : "text-muted"}`}>
+				<Heading
+					className={`text-xl font-semibold ${selected ? "text-white" : "text-charcoal"}`}
+					level={3}>
+					{plan.name}
+				</Heading>
+				<Text
+					className={`mt-2 text-sm leading-6 ${selected ? "text-white/65" : "text-muted"}`}
+					unstyled>
 					{plan.description}
-				</p>
+				</Text>
 			</div>
 			<span
 				className={`grid size-6 shrink-0 place-items-center rounded-full border ${
@@ -47,10 +55,18 @@ export const SubscriptionPlanCard = ({ onSelect, plan, selected }: SubscriptionP
 		</div>
 
 		<div className='mt-8 flex items-baseline gap-2'>
-			<span className='font-serif text-4xl tracking-[-0.04em]'>{formatPrice(plan)}</span>
-			<span className={`text-sm ${selected ? "text-white/60" : "text-muted"}`}>
+			<Text
+				as='span'
+				className='font-serif text-4xl'
+				unstyled>
+				{formatPrice(plan)}
+			</Text>
+			<Text
+				as='span'
+				className={`text-sm ${selected ? "text-white/60" : "text-muted"}`}
+				unstyled>
 				{en.subscription.priceConnector} {plan.interval}
-			</span>
+			</Text>
 		</div>
 
 		<ul className='mt-auto grid gap-3 pt-8 text-sm'>
@@ -63,13 +79,20 @@ export const SubscriptionPlanCard = ({ onSelect, plan, selected }: SubscriptionP
 						size={16}
 						stroke={2.2}
 					/>
-					<span>{feature}</span>
+					<Text
+						as='span'
+						unstyled>
+						{feature}
+					</Text>
 				</li>
 			))}
 		</ul>
 
-		<span className='mt-6 text-xs font-bold uppercase tracking-[0.08em]'>
+		<Text
+			as='span'
+			className='mt-6 text-xs font-bold uppercase'
+			unstyled>
 			{selected ? en.subscription.selectedPlan : en.subscription.selectPlan}
-		</span>
+		</Text>
 	</button>
 )

@@ -6,6 +6,7 @@ import { useState, type PropsWithChildren } from "react"
 
 import { Button } from "@/components/atoms/Button"
 import { Link } from "@/components/atoms/Link"
+import { Text } from "@/components/atoms/Text"
 import { SignInForm, useSignInForm, type SignInFormValues } from "@/components/forms/SignInForm"
 import { AuthTemplate } from "@/components/templates/AuthTemplate"
 import { en } from "@/data/locale/en"
@@ -73,11 +74,12 @@ export const SignInPage = ({ intent, planKey, sessionExpired = false }: SignInPa
 			<form onSubmit={form.onSubmit(handleSubmit)}>
 				<SignInForm form={form} />
 				{error ? (
-					<p
+					<Text
 						className='mt-5 text-sm text-danger'
-						role='alert'>
+						role='alert'
+						unstyled>
 						{error}
-					</p>
+					</Text>
 				) : null}
 				<Button
 					className='mt-7 w-full'
@@ -86,12 +88,14 @@ export const SignInPage = ({ intent, planKey, sessionExpired = false }: SignInPa
 					{form.submitting ? en.auth.signIn.submitting : en.auth.signIn.submit}
 				</Button>
 			</form>
-			<p className='mt-6 text-center text-sm text-muted'>
+			<Text
+				className='mt-6 text-center text-sm text-muted'
+				unstyled>
 				{en.auth.signIn.alternatePrompt}{" "}
 				<Link href={`/sign-up${signUpQuery.size > 0 ? `?${signUpQuery.toString()}` : ""}`}>
 					{en.auth.signIn.alternateAction}
 				</Link>
-			</p>
+			</Text>
 		</AuthTemplate>
 	)
 }

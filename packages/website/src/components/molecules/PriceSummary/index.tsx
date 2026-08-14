@@ -27,11 +27,17 @@ export const PriceSummary = ({ actionHref, copy, locale, plan }: PriceSummaryPro
           </Heading>
           <Text tone="muted">{plan.description}</Text>
         </div>
-        <span className="price-summary__billing">{copy.billedMonthly}</span>
+        <Text as="span" className="price-summary__billing" unstyled>
+          {copy.billedMonthly}
+        </Text>
       </div>
       <div className="price-summary__price">
-        <strong>{formattedPrice}</strong>
-        <span>{copy.perInterval[plan.interval]}</span>
+        <Text as="strong" unstyled>
+          {formattedPrice}
+        </Text>
+        <Text as="span" unstyled>
+          {copy.perInterval[plan.interval]}
+        </Text>
       </div>
       <ul className="price-summary__features">
         {plan.features.map((feature) => (

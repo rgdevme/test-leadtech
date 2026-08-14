@@ -5,6 +5,7 @@ import NextLink from "next/link"
 import { useRef, useState, type PropsWithChildren } from "react"
 
 import { Heading } from "@/components/atoms/Heading"
+import { Text } from "@/components/atoms/Text"
 import { en } from "@/data/locale/en"
 import { useEditorialMotion } from "@/hooks/useEditorialMotion"
 
@@ -33,12 +34,18 @@ export const AuthTemplate = ({ children, description, title }: AuthTemplateProps
 						className='flex w-fit items-center gap-3'
 						href='/sign-in'
 						data-reveal>
-						<span className='grid size-9 place-items-center rounded-md bg-charcoal font-serif text-xl text-white'>
+						<Text
+							as='span'
+							className='grid size-9 place-items-center rounded-md bg-charcoal font-serif text-xl text-white'
+							unstyled>
 							{en.brand.mark}
-						</span>
-						<span className='text-sm font-bold tracking-[-0.015em] text-charcoal'>
+						</Text>
+						<Text
+							as='span'
+							className='text-sm font-bold text-charcoal'
+							unstyled>
 							{en.brand.name}
-						</span>
+						</Text>
 					</NextLink>
 
 					<div
@@ -50,15 +57,16 @@ export const AuthTemplate = ({ children, description, title }: AuthTemplateProps
 							serif>
 							{title}
 						</Heading>
-						<p className='mt-6 max-w-md text-base leading-7 text-muted'>{description}</p>
+						<Text className='mt-6 max-w-md text-base'>{description}</Text>
 						<div className='mt-10'>{children}</div>
 					</div>
 
-					<p
+					<Text
 						className='text-xs text-soft'
-						data-reveal>
+						data-reveal
+						unstyled>
 						{en.brand.product}
-					</p>
+					</Text>
 				</section>
 
 				<aside
@@ -75,16 +83,18 @@ export const AuthTemplate = ({ children, description, title }: AuthTemplateProps
 						</div>
 
 						<blockquote className='max-w-xl py-16'>
-							<p className='font-serif text-[clamp(2.4rem,4vw,4.5rem)] leading-[0.98] tracking-[-0.04em] text-charcoal'>
+							<Text
+								className='font-serif text-[clamp(2.4rem,4vw,4.5rem)] leading-[0.98] text-charcoal'
+								unstyled>
 								{en.auth.aside.headline}
-							</p>
+							</Text>
 							<div className='mt-10 flex items-start gap-3 border-t border-black/8 pt-6 text-sm leading-6 text-muted'>
 								<IconCheck
 									className='mt-0.5 shrink-0'
 									size={18}
 									stroke={2}
 								/>
-								<p>{en.auth.aside.principles[principleIndex]}</p>
+								<Text unstyled>{en.auth.aside.principles[principleIndex]}</Text>
 							</div>
 						</blockquote>
 

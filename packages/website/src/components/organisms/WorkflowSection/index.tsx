@@ -14,7 +14,9 @@ export const WorkflowSection = ({ copy }: WorkflowSectionProps) => (
     <Container size="wide">
       <div className="workflow__layout">
         <div className="workflow__copy" data-pin-copy>
-          <span className="eyebrow eyebrow--inverse">{copy.eyebrow}</span>
+          <Text as="span" className="eyebrow eyebrow--inverse" unstyled>
+            {copy.eyebrow}
+          </Text>
           <Heading as="h2" size="section">
             {copy.title}
           </Heading>

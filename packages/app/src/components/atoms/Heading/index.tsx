@@ -20,7 +20,7 @@ export const Heading = ({
 
 	return (
 		<Component
-			className={`${serif ? "font-serif tracking-[-0.035em]" : "tracking-[-0.025em]"} text-balance text-charcoal ${className}`}
+			className={`${serif ? "font-serif" : ""} text-balance text-charcoal ${className}`}
 			{...props}>
 			{children}
 		</Component>

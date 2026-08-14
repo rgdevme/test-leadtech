@@ -1,10 +1,20 @@
-import type { PropsWithChildren } from "react";
+import type { HTMLAttributes, PropsWithChildren } from "react";
 
-type HeadingProps = PropsWithChildren<{
-  as: "h1" | "h2" | "h3";
-  size: "display" | "section" | "card";
-}>;
+type HeadingProps = PropsWithChildren<
+  HTMLAttributes<HTMLHeadingElement> & {
+    as: "h1" | "h2" | "h3";
+    size: "display" | "section" | "card";
+  }
+>;
 
-export const Heading = ({ as: Component, children, size }: HeadingProps) => (
-  <Component className={`heading heading--${size}`}>{children}</Component>
+export const Heading = ({
+  as: Component,
+  children,
+  className = "",
+  size,
+  ...props
+}: HeadingProps) => (
+  <Component className={`heading heading--${size} ${className}`} {...props}>
+    {children}
+  </Component>
 );

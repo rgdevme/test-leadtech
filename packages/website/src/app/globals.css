@@ -6,6 +6,7 @@
   --color-ink: var(--ink);
   --color-sage: var(--sage);
   --color-signal: var(--signal);
+  --default-transition-duration: 350ms;
 }
 
 :root {
@@ -120,14 +121,12 @@ img {
 
 .heading {
   font-weight: 520;
-  letter-spacing: -0.04em;
 }
 
 .heading--display {
   max-width: 72rem;
   font-size: clamp(3.3rem, 7.7vw, 7.4rem);
   line-height: 0.88;
-  letter-spacing: -0.065em;
 }
 
 .heading--display span,
@@ -149,7 +148,6 @@ img {
 .heading--card {
   font-size: clamp(1.3rem, 2vw, 1.75rem);
   line-height: 1.05;
-  letter-spacing: -0.035em;
 }
 
 .text {
@@ -186,7 +184,6 @@ img {
   color: var(--ink-soft);
   font-size: 0.66rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
   line-height: 1;
   text-transform: uppercase;
 }
@@ -263,7 +260,6 @@ img {
   color: var(--ink);
   font-size: 1.45rem;
   font-weight: 680;
-  letter-spacing: -0.06em;
 }
 
 .logo--inverse {
@@ -447,7 +443,6 @@ img {
   color: var(--ink-soft);
   font-size: 0.72rem;
   font-weight: 650;
-  letter-spacing: 0.04em;
 }
 
 .section {
@@ -609,7 +604,6 @@ img {
 .workflow-step__index {
   color: var(--signal);
   font-size: 0.72rem;
-  letter-spacing: 0.14em;
 }
 
 .workflow-step .heading {
@@ -704,7 +698,6 @@ img {
 .price-summary__billing {
   flex: 0 0 auto;
   font-size: 0.72rem;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -719,7 +712,6 @@ img {
   font-size: clamp(4.8rem, 9vw, 8.5rem);
   font-weight: 520;
   line-height: 0.8;
-  letter-spacing: -0.075em;
 }
 
 .price-summary__price span {
@@ -1027,7 +1019,6 @@ img {
   .site-header__mobile-overlay .site-header__navigation a {
     color: var(--paper);
     font-size: clamp(2rem, 7vw, 4rem);
-    letter-spacing: -0.04em;
     opacity: 0;
     transform: translateY(2rem);
     transition:

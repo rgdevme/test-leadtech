@@ -156,7 +156,11 @@ export const DocumentsPage = ({
 							className='mt-8 flex w-full items-center justify-between gap-5 rounded-lg border border-pale-yellow bg-pale-yellow px-5 py-4 text-left text-sm text-warning transition hover:border-warning'
 							onClick={() => setModalOpen(true)}
 							type='button'>
-							<span>{en.documents.readOnlyNotice}</span>
+							<Text
+								as='span'
+								unstyled>
+								{en.documents.readOnlyNotice}
+							</Text>
 							<IconArrowRight
 								className='shrink-0'
 								size={18}
@@ -165,11 +169,12 @@ export const DocumentsPage = ({
 						</button>
 					) : null}
 					{error ? (
-						<p
+						<Text
 							className='mt-5 text-sm text-danger'
-							role='alert'>
+							role='alert'
+							unstyled>
 							{error}
-						</p>
+						</Text>
 					) : null}
 				</WorkspaceTemplate.Header>
 

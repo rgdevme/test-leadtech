@@ -6,6 +6,7 @@ import { useState, type PropsWithChildren } from "react"
 
 import { Button } from "@/components/atoms/Button"
 import { Link } from "@/components/atoms/Link"
+import { Text } from "@/components/atoms/Text"
 import { SignUpForm, useSignUpForm, type SignUpFormValues } from "@/components/forms/SignUpForm"
 import { AuthTemplate } from "@/components/templates/AuthTemplate"
 import { en } from "@/data/locale/en"
@@ -73,11 +74,12 @@ export const SignUpPage = ({ intent, planKey }: SignUpPageProps) => {
 			<form onSubmit={form.onSubmit(handleSubmit)}>
 				<SignUpForm form={form} />
 				{error ? (
-					<p
+					<Text
 						className='mt-5 text-sm text-danger'
-						role='alert'>
+						role='alert'
+						unstyled>
 						{error}
-					</p>
+					</Text>
 				) : null}
 				<Button
 					className='mt-7 w-full'
@@ -86,12 +88,14 @@ export const SignUpPage = ({ intent, planKey }: SignUpPageProps) => {
 					{form.submitting ? en.auth.signUp.submitting : en.auth.signUp.submit}
 				</Button>
 			</form>
-			<p className='mt-6 text-center text-sm text-muted'>
+			<Text
+				className='mt-6 text-center text-sm text-muted'
+				unstyled>
 				{en.auth.signUp.alternatePrompt}{" "}
 				<Link href={`/sign-in${signInQuery.size > 0 ? `?${signInQuery.toString()}` : ""}`}>
 					{en.auth.signUp.alternateAction}
 				</Link>
-			</p>
+			</Text>
 		</AuthTemplate>
 	)
 }

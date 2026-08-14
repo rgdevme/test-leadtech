@@ -10,7 +10,9 @@ type WorkflowStepProps = PropsWithChildren<{
 
 export const WorkflowStep = ({ description, index, title }: WorkflowStepProps) => (
   <article className="workflow-step" data-reveal>
-    <span className="workflow-step__index">{index}</span>
+    <Text as="span" className="workflow-step__index" unstyled>
+      {index}
+    </Text>
     <div>
       <Heading as="h3" size="card">
         {title}

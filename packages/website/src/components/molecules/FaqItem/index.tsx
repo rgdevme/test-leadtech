@@ -1,5 +1,7 @@
 import type { PropsWithChildren } from "react";
 
+import { Text } from "@/components/atoms";
+
 type FaqItemProps = PropsWithChildren<{
   answer: string;
   question: string;
@@ -8,11 +10,13 @@ type FaqItemProps = PropsWithChildren<{
 export const FaqItem = ({ answer, question }: FaqItemProps) => (
   <details className="faq-item" data-reveal>
     <summary>
-      <span>{question}</span>
+      <Text as="span" unstyled>
+        {question}
+      </Text>
       <span aria-hidden="true" className="faq-item__mark" />
     </summary>
     <div className="faq-item__answer">
-      <p>{answer}</p>
+      <Text>{answer}</Text>
     </div>
   </details>
 );

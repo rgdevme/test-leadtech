@@ -13,10 +13,16 @@ export const Hero = ({ copy, primaryHref }: HeroProps) => (
   <section className="hero">
     <Container size="wide">
       <div className="hero__copy" data-reveal>
-        <span className="eyebrow">{copy.eyebrow}</span>
+        <Text as="span" className="eyebrow" unstyled>
+          {copy.eyebrow}
+        </Text>
         <Heading as="h1" size="display">
-          <span>{copy.titleLead}</span>
-          <em>{copy.titleAccent}</em>
+          <Text as="span" unstyled>
+            {copy.titleLead}
+          </Text>
+          <Text as="em" unstyled>
+            {copy.titleAccent}
+          </Text>
         </Heading>
         <div className="hero__support">
           <Text size="lead" tone="muted">
@@ -41,7 +47,9 @@ export const Hero = ({ copy, primaryHref }: HeroProps) => (
             src="/media/hero-editor.png"
             width={1586}
           />
-          <span className="hero__note">{copy.note}</span>
+          <Text as="span" className="hero__note" unstyled>
+            {copy.note}
+          </Text>
         </div>
       </div>
     </Container>

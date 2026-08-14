@@ -6,8 +6,10 @@ import { useState, type PropsWithChildren } from "react"
 
 import type { DocumentSummary } from "@leadtech/contracts"
 
+import { Heading } from "@/components/atoms/Heading"
 import { IconButton } from "@/components/atoms/IconButton"
 import { Input } from "@/components/atoms/Input"
+import { Text } from "@/components/atoms/Text"
 import { en } from "@/data/locale/en"
 
 type DocumentListItemProps = PropsWithChildren<{
@@ -77,17 +79,19 @@ export const DocumentListItem = ({
 					<NextLink
 						className='block'
 						href={`/documents/${document.id}`}>
-						<h2 className='truncate text-lg font-semibold tracking-[-0.02em] text-charcoal transition group-hover:text-ink'>
+						<Heading className='truncate text-lg font-semibold transition group-hover:text-ink'>
 							{document.title}
-						</h2>
-						<p className='mt-1.5 text-sm text-muted'>
+						</Heading>
+						<Text
+							className='mt-1.5 text-sm text-muted'
+							unstyled>
 							{en.documents.updated}{" "}
 							{new Date(document.updatedAt).toLocaleDateString(undefined, {
 								day: "numeric",
 								month: "short",
 								year: "numeric"
 							})}
-						</p>
+						</Text>
 					</NextLink>
 				)}
 			</div>

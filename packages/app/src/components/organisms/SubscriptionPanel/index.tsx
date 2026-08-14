@@ -42,14 +42,18 @@ export const SubscriptionPanel = ({ subscription }: SubscriptionPanelProps) => {
 
 				<div className='mt-8 flex flex-col gap-5 border-t border-line pt-6 sm:flex-row sm:items-end sm:justify-between'>
 					<div>
-						<p className='text-xs font-bold uppercase tracking-[0.08em] text-muted'>
+						<Text
+							className='text-xs font-bold uppercase text-muted'
+							unstyled>
 							{en.subscription.updated}
-						</p>
-						<p className='mt-1.5 text-sm font-semibold text-charcoal'>
+						</Text>
+						<Text
+							className='mt-1.5 text-sm font-semibold text-charcoal'
+							unstyled>
 							{subscription.updatedAt
 								? new Date(subscription.updatedAt).toLocaleString()
 								: en.subscription.notConfirmed}
-						</p>
+						</Text>
 					</div>
 					{!subscription.entitled ? (
 						<Button onClick={() => setModalOpen(true)}>

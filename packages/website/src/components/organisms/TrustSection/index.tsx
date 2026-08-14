@@ -12,7 +12,9 @@ export const TrustSection = ({ copy }: TrustSectionProps) => (
   <section className="section trust">
     <Container>
       <div className="trust__heading" data-reveal>
-        <span className="eyebrow">{copy.eyebrow}</span>
+        <Text as="span" className="eyebrow" unstyled>
+          {copy.eyebrow}
+        </Text>
         <Heading as="h2" size="section">
           {copy.title}
         </Heading>
@@ -29,7 +31,9 @@ export const TrustSection = ({ copy }: TrustSectionProps) => (
             src="/media/trust-archive.png"
             width={1586}
           />
-          <span className="trust__proof-label">{copy.proofLabel}</span>
+          <Text as="span" className="trust__proof-label" unstyled>
+            {copy.proofLabel}
+          </Text>
         </div>
       </div>
       <div className="trust__assurances">

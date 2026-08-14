@@ -82,7 +82,7 @@ export const RichTextEditor = ({
 						</IconButton>
 						<input
 							aria-label={en.editor.titlePlaceholder}
-							className='min-w-0 flex-1 bg-transparent px-2 py-1 text-lg font-semibold tracking-[-0.02em] text-charcoal outline-none placeholder:text-soft disabled:text-charcoal'
+							className='min-w-0 flex-1 bg-transparent px-2 py-1 text-lg font-semibold text-charcoal outline-none placeholder:text-soft disabled:text-charcoal'
 							disabled={!canEdit}
 							maxLength={120}
 							onChange={event => editorState.updateTitle(event.currentTarget.value)}

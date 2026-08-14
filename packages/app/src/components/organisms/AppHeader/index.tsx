@@ -7,6 +7,7 @@ import type { PropsWithChildren } from "react"
 import { useState } from "react"
 
 import { Button } from "@/components/atoms/Button"
+import { Text } from "@/components/atoms/Text"
 import { en } from "@/data/locale/en"
 import { firebaseAuth } from "@/firebase/client"
 import { requestNoContent } from "@/utils/apiClient"
@@ -43,12 +44,18 @@ export const AppHeader = ({ email }: AppHeaderProps) => {
 				<NextLink
 					className='flex items-center gap-3'
 					href='/documents'>
-					<span className='grid size-8 place-items-center rounded-md bg-charcoal font-serif text-lg text-white'>
+					<Text
+						as='span'
+						className='grid size-8 place-items-center rounded-md bg-charcoal font-serif text-lg text-white'
+						unstyled>
 						{en.brand.mark}
-					</span>
-					<span className='hidden text-sm font-bold tracking-[-0.015em] text-charcoal sm:inline'>
+					</Text>
+					<Text
+						as='span'
+						className='hidden text-sm font-bold text-charcoal sm:inline'
+						unstyled>
 						{en.brand.name}
-					</span>
+					</Text>
 				</NextLink>
 
 				<nav
@@ -69,7 +76,12 @@ export const AppHeader = ({ email }: AppHeaderProps) => {
 									size={17}
 									stroke={1.9}
 								/>
-								<span className='hidden sm:inline'>{label}</span>
+								<Text
+									as='span'
+									className='hidden sm:inline'
+									unstyled>
+									{label}
+								</Text>
 							</NextLink>
 						)
 					})}
@@ -77,7 +89,12 @@ export const AppHeader = ({ email }: AppHeaderProps) => {
 
 				<div className='flex items-center gap-3'>
 					{email ? (
-						<span className='hidden max-w-44 truncate text-xs text-muted lg:block'>{email}</span>
+						<Text
+							as='span'
+							className='hidden max-w-44 truncate text-xs text-muted lg:block'
+							unstyled>
+							{email}
+						</Text>
 					) : null}
 					<Button
 						aria-label={en.navigation.signOut}
@@ -90,7 +107,12 @@ export const AppHeader = ({ email }: AppHeaderProps) => {
 							size={17}
 							stroke={1.9}
 						/>
-						<span className='hidden sm:inline'>{en.navigation.signOut}</span>
+						<Text
+							as='span'
+							className='hidden sm:inline'
+							unstyled>
+							{en.navigation.signOut}
+						</Text>
 					</Button>
 				</div>
 			</div>

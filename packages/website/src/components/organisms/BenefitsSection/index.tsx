@@ -13,7 +13,9 @@ export const BenefitsSection = ({ copy }: BenefitsSectionProps) => (
   <section className="section benefits" id="benefits">
     <Container>
       <div className="section-heading" data-reveal>
-        <span className="eyebrow">{copy.eyebrow}</span>
+        <Text as="span" className="eyebrow" unstyled>
+          {copy.eyebrow}
+        </Text>
         <Heading as="h2" size="section">
           {copy.title}
         </Heading>
