@@ -3,6 +3,7 @@ import type { PropsWithChildren } from "react";
 
 import { Button, Container, Heading, Logo, Text } from "@/components/atoms";
 import type { Dictionary } from "@/i18n/getDictionary";
+import styles from "./index.module.css";
 
 type FooterProps = PropsWithChildren<{
   copy: Dictionary["footer"];
@@ -12,26 +13,26 @@ type FooterProps = PropsWithChildren<{
 }>;
 
 export const Footer = ({ copy, homeHref, primaryHref, signInHref }: FooterProps) => (
-  <footer className="footer">
+  <footer className={styles.footer}>
     <Container size="wide">
-      <div className="footer__cta-shell" data-media>
-        <div className="footer__cta-core">
+      <div className={styles.ctaShell} data-media>
+        <div className={styles.ctaCore}>
           <Image
             alt={copy.imageAlt}
-            className="footer__image"
+            className={styles.image}
             fill
             sizes="100vw"
             src="/media/closing-document.png"
           />
-          <div className="footer__scrim" />
-          <div className="footer__copy" data-reveal>
+          <div className={styles.scrim} />
+          <div className={styles.copy} data-reveal>
             <Heading as="h2" size="section">
               {copy.title}
             </Heading>
             <Text size="lead" tone="inverse">
               {copy.description}
             </Text>
-            <div className="footer__actions">
+            <div className={styles.actions}>
               <Button href={primaryHref}>{copy.action}</Button>
               <Button href={signInHref} showArrow={false} variant="text">
                 {copy.signIn}
@@ -40,7 +41,7 @@ export const Footer = ({ copy, homeHref, primaryHref, signInHref }: FooterProps)
           </div>
         </div>
       </div>
-      <div className="footer__meta">
+      <div className={styles.meta}>
         <div>
           <Logo href={homeHref} inverse label={copy.product} />
           <Text as="span" unstyled>

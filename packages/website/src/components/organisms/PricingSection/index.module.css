@@ -1,0 +1,37 @@
+@reference "../../../app/globals.css";
+
+.section {
+  @apply bg-paper-bright py-24 lg:py-40;
+}
+
+.heading {
+  @apply mb-16 grid grid-cols-1 items-end gap-8 lg:mb-28 lg:grid-cols-3 lg:gap-16;
+
+  & > span {
+    @apply lg:col-span-3 lg:-mb-8 lg:justify-self-start;
+  }
+
+  & > h2 {
+    @apply lg:col-span-2;
+  }
+}
+
+.layout {
+  @apply grid grid-cols-1 items-stretch gap-4 lg:grid-cols-2;
+}
+
+.mediaShell {
+  @apply relative h-full rounded-4xl bg-ink/5 p-2 inset-ring inset-ring-ink/5;
+}
+
+.mediaCore {
+  @apply relative h-full overflow-hidden rounded-3xl bg-paper-bright inset-shadow-sm;
+
+  &:hover img {
+    @apply scale-105;
+  }
+
+  & img {
+    @apply aspect-4/5 h-full w-full object-cover object-right transition-transform duration-1000 ease-mass md:aspect-auto;
+  }
+}

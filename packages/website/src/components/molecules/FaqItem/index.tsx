@@ -4,6 +4,7 @@ import type { PropsWithChildren } from "react";
 import { useId, useState } from "react";
 
 import { Text } from "@/components/atoms";
+import styles from "./index.module.css";
 
 type FaqItemProps = PropsWithChildren<{
   answer: string;
@@ -15,21 +16,23 @@ export const FaqItem = ({ answer, question }: FaqItemProps) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <article className={`faq-item${open ? " faq-item--open" : ""}`} data-reveal>
+    <article className={styles.item} data-open={open} data-reveal>
       <button
         aria-controls={answerId}
         aria-expanded={open}
-        className="faq-item__summary"
-        onClick={() => setOpen((current) => !current)}
-        type="button"
-      >
+        className={styles.summary}
+        onClick={() => setOpen(current => !current)}
+        type="button">
         <Text as="span" unstyled>
           {question}
         </Text>
-        <span aria-hidden="true" className="faq-item__mark" />
+        <span aria-hidden="true" className={styles.mark}>
+          <span />
+          <span />
+        </span>
       </button>
-      <div className="faq-item__answer-shell">
-        <div className="faq-item__answer" id={answerId}>
+      <div className={styles.answerShell}>
+        <div className={styles.answer} id={answerId}>
           <Text>{answer}</Text>
         </div>
       </div>

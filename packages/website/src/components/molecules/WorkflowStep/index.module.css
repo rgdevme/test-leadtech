@@ -1,0 +1,30 @@
+@reference "../../../app/globals.css";
+
+.step {
+  @apply relative grid min-h-56 min-w-0 flex-1 content-between gap-12 overflow-hidden rounded-3xl bg-paper/5 p-6 inset-ring inset-ring-paper/15 transition ease-mass hover:-translate-y-3 hover:bg-paper/10 focus-within:-translate-y-3 focus-within:bg-paper/10 md:min-h-80 md:gap-16;
+
+  &:hover .image,
+  &:focus-within .image {
+    @apply scale-110 opacity-20;
+  }
+
+  & > * {
+    @apply relative z-10;
+  }
+
+  & h3 {
+    @apply mb-3;
+  }
+
+  & p {
+    @apply text-paper/60;
+  }
+}
+
+.image {
+  @apply absolute z-0 object-cover opacity-10 grayscale transition ease-mass;
+}
+
+.index {
+  @apply text-xs text-signal;
+}

@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, type DialogHTMLAttributes, type PropsWithChildren } from "react"
 
+import styles from "./index.module.css"
+
 type DialogProps = PropsWithChildren<
 	DialogHTMLAttributes<HTMLDialogElement> & {
 		labelledBy: string
@@ -30,7 +32,7 @@ export const Dialog = ({ children, labelledBy, onClose, open, ...props }: Dialog
 	return (
 		<dialog
 			aria-labelledby={labelledBy}
-			className='dialog-shell m-auto w-[min(92vw,64rem)] rounded-xl border border-line bg-white p-0 text-charcoal'
+			className={styles.dialog}
 			onCancel={event => {
 				event.preventDefault()
 				onClose()

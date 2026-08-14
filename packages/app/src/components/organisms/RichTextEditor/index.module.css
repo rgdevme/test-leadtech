@@ -1,0 +1,60 @@
+@reference "../../../app/globals.css";
+
+.editor {
+	@apply min-h-96 font-serif text-lg leading-loose text-ink outline-none;
+
+	& > * + * {
+		@apply mt-5;
+	}
+
+	& h1,
+	& h2,
+	& h3 {
+		@apply font-sans leading-tight font-bold text-charcoal;
+	}
+
+	& h1 {
+		@apply mt-12 mb-6 text-5xl lg:text-7xl;
+	}
+
+	& h2 {
+		@apply mt-10 mb-5 text-3xl lg:text-5xl;
+	}
+
+	& ul,
+	& ol {
+		@apply pl-6;
+	}
+
+	& ul {
+		@apply list-disc;
+	}
+
+	& ol {
+		@apply list-decimal;
+	}
+
+	& blockquote {
+		@apply border-l-2 border-charcoal pl-6 italic text-muted;
+	}
+
+	& code {
+		@apply rounded-sm border border-line bg-canvas px-1 py-0.5 font-mono text-sm;
+	}
+
+	& pre {
+		@apply overflow-x-auto rounded-lg border border-line bg-charcoal p-5 font-mono text-sm text-white;
+
+		& code {
+			@apply border-0 bg-transparent p-0 text-inherit;
+		}
+	}
+
+	&:global(.ProseMirror-focused) {
+		@apply outline-none;
+	}
+
+	&:global(.ProseMirror)[contenteditable="false"] {
+		@apply cursor-default;
+	}
+}

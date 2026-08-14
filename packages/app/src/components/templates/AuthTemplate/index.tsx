@@ -7,6 +7,7 @@ import { useRef, useState, type PropsWithChildren } from "react"
 import { Heading } from "@/components/atoms/Heading"
 import { Text } from "@/components/atoms/Text"
 import { en } from "@/data/locale/en"
+import styles from "./index.module.css"
 import { useEditorialMotion } from "@/hooks/useEditorialMotion"
 
 type AuthTemplateProps = PropsWithChildren<{
@@ -72,7 +73,7 @@ export const AuthTemplate = ({ children, description, title }: AuthTemplateProps
 				<aside
 					className='relative hidden overflow-hidden border-l border-line bg-[#eceae3] p-10 lg:flex xl:p-14'
 					data-scroll-image>
-					<div className='absolute inset-0 opacity-50 texture-lines' />
+					<div className={styles.texture} />
 					<div className='relative flex w-full flex-col justify-between rounded-xl border border-black/6 bg-[#f5f3ed] p-8 xl:p-12'>
 						<div
 							className='flex gap-2'

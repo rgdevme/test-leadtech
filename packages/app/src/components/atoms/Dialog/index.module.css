@@ -1,0 +1,5 @@
+@reference "../../../app/globals.css";
+
+.dialog {
+	@apply m-auto w-11/12 max-w-5xl rounded-xl border border-line bg-white p-0 text-charcoal backdrop:bg-charcoal/40 backdrop:backdrop-blur-sm;
+}

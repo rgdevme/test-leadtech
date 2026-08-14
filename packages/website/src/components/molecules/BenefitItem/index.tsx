@@ -1,6 +1,7 @@
 import type { PropsWithChildren } from "react";
 
 import { Heading, Text } from "@/components/atoms";
+import styles from "./index.module.css";
 
 type BenefitItemProps = PropsWithChildren<{
   description: string;
@@ -9,8 +10,8 @@ type BenefitItemProps = PropsWithChildren<{
 }>;
 
 export const BenefitItem = ({ description, index, title }: BenefitItemProps) => (
-  <article className="benefit-item" data-reveal>
-    <Text as="span" aria-hidden="true" className="benefit-item__index" unstyled>
+  <article className={styles.item} data-reveal>
+    <Text as="span" aria-hidden="true" className={styles.index} unstyled>
       {index}
     </Text>
     <div>

@@ -4,30 +4,31 @@ import type { PropsWithChildren } from "react";
 import { Container, Heading, Text } from "@/components/atoms";
 import { FaqItem } from "@/components/molecules";
 import type { Dictionary } from "@/i18n/getDictionary";
+import styles from "./index.module.css";
 
 type FaqSectionProps = PropsWithChildren<{
   copy: Dictionary["faq"];
 }>;
 
 export const FaqSection = ({ copy }: FaqSectionProps) => (
-  <section className="section faq" id="faq">
+  <section className={styles.section} id="faq">
     <Container>
-      <div className="faq__heading" data-reveal>
-        <Text as="span" className="eyebrow eyebrow--inverse" unstyled>
+      <div className={styles.heading} data-reveal>
+        <Text as="span" tone="inverse" variant="eyebrow">
           {copy.eyebrow}
         </Text>
         <Heading as="h2" size="section">
           {copy.title}
         </Heading>
       </div>
-      <div className="faq__layout">
-        <div className="faq__items">
-          {copy.items.map((item) => (
+      <div className={styles.layout}>
+        <div className={styles.items}>
+          {copy.items.map(item => (
             <FaqItem key={item.question} {...item} />
           ))}
         </div>
-        <div className="faq__media-shell" data-media>
-          <div className="faq__media-core">
+        <div className={styles.mediaShell} data-media>
+          <div className={styles.mediaCore}>
             <Image
               alt={copy.imageAlt}
               height={992}

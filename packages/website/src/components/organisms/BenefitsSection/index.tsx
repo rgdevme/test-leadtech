@@ -4,16 +4,17 @@ import type { PropsWithChildren } from "react";
 import { Container, Heading, Text } from "@/components/atoms";
 import { BenefitItem } from "@/components/molecules";
 import type { Dictionary } from "@/i18n/getDictionary";
+import styles from "./index.module.css";
 
 type BenefitsSectionProps = PropsWithChildren<{
   copy: Dictionary["benefits"];
 }>;
 
 export const BenefitsSection = ({ copy }: BenefitsSectionProps) => (
-  <section className="section benefits" id="benefits">
+  <section className={styles.section} id="benefits">
     <Container>
-      <div className="section-heading" data-reveal>
-        <Text as="span" className="eyebrow" unstyled>
+      <div className={styles.heading} data-reveal>
+        <Text as="span" variant="eyebrow">
           {copy.eyebrow}
         </Text>
         <Heading as="h2" size="section">
@@ -23,8 +24,8 @@ export const BenefitsSection = ({ copy }: BenefitsSectionProps) => (
           {copy.description}
         </Text>
       </div>
-      <div className="benefits__media-shell" data-media>
-        <div className="benefits__media-core">
+      <div className={styles.mediaShell} data-media>
+        <div className={styles.mediaCore}>
           <Image
             alt={copy.imageAlt}
             height={1024}
@@ -34,8 +35,8 @@ export const BenefitsSection = ({ copy }: BenefitsSectionProps) => (
           />
         </div>
       </div>
-      <div className="benefits__grid">
-        {copy.items.map((item) => (
+      <div className={styles.grid}>
+        {copy.items.map(item => (
           <BenefitItem key={item.index} {...item} />
         ))}
       </div>

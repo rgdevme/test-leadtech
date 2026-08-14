@@ -4,6 +4,7 @@ import { useRef } from "react";
 import type { PropsWithChildren } from "react";
 
 import { useMarketingMotion } from "./hooks/useMarketingMotion";
+import styles from "./index.module.css";
 
 type MarketingMotionProps = PropsWithChildren;
 
@@ -12,7 +13,7 @@ export const MarketingMotion = ({ children }: MarketingMotionProps) => {
   useMarketingMotion(scope);
 
   return (
-    <div className="marketing-motion" ref={scope}>
+    <div className={styles.motion} ref={scope}>
       {children}
     </div>
   );

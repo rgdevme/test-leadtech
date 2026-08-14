@@ -1,5 +1,7 @@
 import type { HTMLAttributes, PropsWithChildren } from "react";
 
+import styles from "./index.module.css";
+
 type HeadingProps = PropsWithChildren<
   HTMLAttributes<HTMLHeadingElement> & {
     as: "h1" | "h2" | "h3";
@@ -14,7 +16,10 @@ export const Heading = ({
   size,
   ...props
 }: HeadingProps) => (
-  <Component className={`heading heading--${size} ${className}`} {...props}>
+  <Component
+    className={[styles.heading, className].filter(Boolean).join(" ")}
+    data-size={size}
+    {...props}>
     {children}
   </Component>
 );

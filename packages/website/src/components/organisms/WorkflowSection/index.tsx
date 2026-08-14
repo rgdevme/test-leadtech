@@ -4,17 +4,25 @@ import type { PropsWithChildren } from "react";
 import { Container, Heading, Text } from "@/components/atoms";
 import { WorkflowStep } from "@/components/molecules";
 import type { Dictionary } from "@/i18n/getDictionary";
+import styles from "./index.module.css";
+
+const fallbackWorkflowImage = "/media/mobile-editor.png";
+const workflowImages = [
+  fallbackWorkflowImage,
+  "/media/hero-editor.png",
+  "/media/trust-archive.png",
+];
 
 type WorkflowSectionProps = PropsWithChildren<{
   copy: Dictionary["workflow"];
 }>;
 
 export const WorkflowSection = ({ copy }: WorkflowSectionProps) => (
-  <section className="section workflow" id="workflow">
+  <section className={styles.section} id="workflow">
     <Container size="wide">
-      <div className="workflow__layout">
-        <div className="workflow__copy">
-          <Text as="span" className="eyebrow eyebrow--inverse" unstyled>
+      <div className={styles.layout}>
+        <div className={styles.copy}>
+          <Text as="span" tone="inverse" variant="eyebrow">
             {copy.eyebrow}
           </Text>
           <Heading as="h2" size="section">
@@ -24,12 +32,12 @@ export const WorkflowSection = ({ copy }: WorkflowSectionProps) => (
             {copy.description}
           </Text>
         </div>
-        <div className="workflow__story">
-          <div className="workflow__media-shell" data-media>
-            <div className="workflow__media-core">
+        <div className={styles.story}>
+          <div className={styles.mediaShell} data-media>
+            <div className={styles.mediaCore}>
               <Image
                 alt={copy.imageAlt}
-                className="workflow__desktop-image"
+                className={styles.desktopImage}
                 height={1003}
                 sizes="(max-width: 959px) 100vw, 62vw"
                 src="/media/workflow-editor.png"
@@ -37,7 +45,7 @@ export const WorkflowSection = ({ copy }: WorkflowSectionProps) => (
               />
               <Image
                 alt={copy.imageAlt}
-                className="workflow__mobile-image"
+                className={styles.mobileImage}
                 height={1672}
                 sizes="(max-width: 767px) 86vw, 1px"
                 src="/media/mobile-editor.png"
@@ -45,9 +53,13 @@ export const WorkflowSection = ({ copy }: WorkflowSectionProps) => (
               />
             </div>
           </div>
-          <div className="workflow__steps">
-            {copy.steps.map((step) => (
-              <WorkflowStep key={step.index} {...step} />
+          <div className={styles.steps}>
+            {copy.steps.map((step, index) => (
+              <WorkflowStep
+                imageSrc={workflowImages[index] ?? fallbackWorkflowImage}
+                key={step.index}
+                {...step}
+              />
             ))}
           </div>
         </div>

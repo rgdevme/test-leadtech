@@ -1,0 +1,9 @@
+@reference "../../../app/globals.css";
+
+.container {
+  @apply mx-auto w-11/12 max-w-6xl;
+
+  &[data-size="wide"] {
+    @apply max-w-7xl;
+  }
+}

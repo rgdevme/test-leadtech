@@ -1,6 +1,7 @@
 import type { PropsWithChildren } from "react";
 
 import { Text } from "@/components/atoms/Text";
+import styles from "./index.module.css";
 
 type ButtonProps = PropsWithChildren<{
   href: string;
@@ -9,12 +10,12 @@ type ButtonProps = PropsWithChildren<{
 }>;
 
 export const Button = ({ children, href, variant = "primary", showArrow = true }: ButtonProps) => (
-  <a className={`button button--${variant} group`} href={href}>
+  <a className={styles.button} data-variant={variant} href={href}>
     <Text as="span" unstyled>
       {children}
     </Text>
     {showArrow ? (
-      <span aria-hidden="true" className="button__arrow">
+      <span aria-hidden="true" className={styles.icon}>
         ↗
       </span>
     ) : null}

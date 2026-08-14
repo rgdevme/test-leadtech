@@ -1,0 +1,13 @@
+@reference "../../../app/globals.css";
+
+.logo {
+  @apply inline-flex items-baseline text-2xl font-bold text-ink;
+
+  &[data-inverse="true"] {
+    @apply text-paper;
+  }
+}
+
+.dot {
+  @apply text-sage-deep;
+}

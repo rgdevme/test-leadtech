@@ -1,0 +1,29 @@
+@reference "../../../app/globals.css";
+
+.text {
+  @apply m-0 text-base leading-relaxed;
+
+  &[data-size="small"] {
+    @apply text-sm leading-normal;
+  }
+
+  &[data-size="lead"] {
+    @apply text-lg leading-relaxed md:text-xl;
+  }
+
+  &[data-tone="muted"] {
+    @apply text-ink/65;
+  }
+
+  &[data-tone="inverse"] {
+    @apply text-paper/70;
+  }
+
+  &[data-variant="eyebrow"] {
+    @apply mb-6 inline-flex min-h-7 items-center rounded-full bg-ink/5 px-3 py-1 text-xs leading-none font-bold text-ink-soft uppercase;
+
+    &[data-tone="inverse"] {
+      @apply bg-paper/10 text-paper;
+    }
+  }
+}

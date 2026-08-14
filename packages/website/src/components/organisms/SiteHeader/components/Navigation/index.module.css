@@ -1,0 +1,9 @@
+@reference "../../../../../app/globals.css";
+
+.navigation {
+  @apply flex items-center gap-5;
+
+  & a {
+    @apply py-2 text-sm font-medium text-ink/65 underline-offset-8 transition-colors ease-mass hover:text-ink hover:underline;
+  }
+}

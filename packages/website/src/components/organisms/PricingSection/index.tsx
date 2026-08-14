@@ -5,6 +5,7 @@ import type { PropsWithChildren } from "react";
 import { Container, Heading, Text } from "@/components/atoms";
 import { PriceSummary } from "@/components/molecules";
 import type { Dictionary } from "@/i18n/getDictionary";
+import styles from "./index.module.css";
 
 type PricingSectionProps = PropsWithChildren<{
   actionHref: string;
@@ -14,10 +15,10 @@ type PricingSectionProps = PropsWithChildren<{
 }>;
 
 export const PricingSection = ({ actionHref, copy, locale, plan }: PricingSectionProps) => (
-  <section className="section pricing" id="pricing">
+  <section className={styles.section} id="pricing">
     <Container>
-      <div className="pricing__heading" data-reveal>
-        <Text as="span" className="eyebrow" unstyled>
+      <div className={styles.heading} data-reveal>
+        <Text as="span" variant="eyebrow">
           {copy.eyebrow}
         </Text>
         <Heading as="h2" size="section">
@@ -27,10 +28,10 @@ export const PricingSection = ({ actionHref, copy, locale, plan }: PricingSectio
           {copy.description}
         </Text>
       </div>
-      <div className="pricing__layout">
+      <div className={styles.layout}>
         <PriceSummary actionHref={actionHref} copy={copy} locale={locale} plan={plan} />
-        <div className="pricing__media-shell" data-media>
-          <div className="pricing__media-core">
+        <div className={styles.mediaShell} data-media>
+          <div className={styles.mediaCore}>
             <Image
               alt={copy.imageAlt}
               height={992}

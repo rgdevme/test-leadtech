@@ -6,6 +6,7 @@ import { useComponentSlots } from "@/hooks/useComponentSlots";
 import { Actions } from "./components/Actions";
 import { Brand } from "./components/Brand";
 import { Navigation } from "./components/Navigation";
+import styles from "./index.module.css";
 
 type SiteHeaderProps = PropsWithChildren<{
   menuLabel: string;
@@ -18,22 +19,22 @@ const SiteHeader = ({ children, menuLabel }: SiteHeaderProps) => {
   );
 
   return (
-    <header className="site-header">
+    <header className={styles.header}>
       <Container size="wide">
-        <div className="site-header__island">
+        <div className={styles.island}>
           {slots.brand}
-          <nav aria-label={menuLabel} className="site-header__desktop-nav">
+          <nav aria-label={menuLabel} className={styles.desktopNavigation}>
             {slots.navigation}
           </nav>
-          <div className="site-header__desktop-actions">{slots.actions}</div>
-          <details className="site-header__mobile-menu">
-            <summary aria-label={menuLabel}>
-              <span className="site-header__hamburger" aria-hidden="true">
+          <div className={styles.desktopActions}>{slots.actions}</div>
+          <details className={styles.mobileMenu}>
+            <summary aria-label={menuLabel} className={styles.mobileTrigger}>
+              <span className={styles.hamburger} aria-hidden="true">
                 <i />
                 <i />
               </span>
             </summary>
-            <div className="site-header__mobile-overlay">
+            <div className={styles.mobileOverlay}>
               <nav aria-label={menuLabel}>{slots.navigation}</nav>
               {slots.actions}
             </div>

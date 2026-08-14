@@ -1,0 +1,26 @@
+@reference "../../../app/globals.css";
+
+.heading {
+  @apply m-0 font-medium;
+
+  &[data-size="display"] {
+    @apply max-w-6xl text-5xl leading-none sm:text-7xl lg:text-8xl;
+
+    & span,
+    & em {
+      @apply block;
+    }
+
+    & em {
+      @apply text-sage-deep not-italic;
+    }
+  }
+
+  &[data-size="section"] {
+    @apply max-w-3xl text-5xl leading-none md:text-6xl lg:text-7xl;
+  }
+
+  &[data-size="card"] {
+    @apply text-2xl leading-tight;
+  }
+}

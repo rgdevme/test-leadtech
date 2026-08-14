@@ -3,16 +3,17 @@ import type { PropsWithChildren } from "react";
 
 import { Container, Heading, Text } from "@/components/atoms";
 import type { Dictionary } from "@/i18n/getDictionary";
+import styles from "./index.module.css";
 
 type TrustSectionProps = PropsWithChildren<{
   copy: Dictionary["trust"];
 }>;
 
 export const TrustSection = ({ copy }: TrustSectionProps) => (
-  <section className="section trust">
+  <section className={styles.section}>
     <Container>
-      <div className="trust__heading" data-reveal>
-        <Text as="span" className="eyebrow" unstyled>
+      <div className={styles.heading} data-reveal>
+        <Text as="span" variant="eyebrow">
           {copy.eyebrow}
         </Text>
         <Heading as="h2" size="section">
@@ -22,8 +23,8 @@ export const TrustSection = ({ copy }: TrustSectionProps) => (
           {copy.description}
         </Text>
       </div>
-      <div className="trust__media-shell" data-media>
-        <div className="trust__media-core">
+      <div className={styles.mediaShell} data-media>
+        <div className={styles.mediaCore}>
           <Image
             alt={copy.imageAlt}
             height={992}
@@ -31,15 +32,15 @@ export const TrustSection = ({ copy }: TrustSectionProps) => (
             src="/media/trust-archive.png"
             width={1586}
           />
-          <Text as="span" className="trust__proof-label" unstyled>
+          <Text as="span" className={styles.proofLabel} unstyled>
             {copy.proofLabel}
           </Text>
         </div>
       </div>
-      <div className="trust__assurances">
-        {copy.items.map((item) => (
-          <article className="trust__assurance" data-reveal key={item.title}>
-            <span aria-hidden="true" className="trust__marker" />
+      <div className={styles.assurances}>
+        {copy.items.map(item => (
+          <article className={styles.assurance} data-reveal key={item.title}>
+            <span aria-hidden="true" className={styles.marker} />
             <Heading as="h3" size="card">
               {item.title}
             </Heading>

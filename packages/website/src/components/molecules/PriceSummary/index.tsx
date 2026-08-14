@@ -3,6 +3,7 @@ import type { PropsWithChildren } from "react";
 
 import { Button, Heading, Text } from "@/components/atoms";
 import type { Dictionary } from "@/i18n/getDictionary";
+import styles from "./index.module.css";
 
 type PriceSummaryProps = PropsWithChildren<{
   actionHref: string;
@@ -19,19 +20,19 @@ export const PriceSummary = ({ actionHref, copy, locale, plan }: PriceSummaryPro
   }).format(plan.unitAmount / 100);
 
   return (
-    <article className="price-summary" data-reveal>
-      <div className="price-summary__header">
+    <article className={styles.summary} data-reveal>
+      <div className={styles.header}>
         <div>
           <Heading as="h3" size="card">
             {plan.name}
           </Heading>
-          <Text tone="muted">{plan.description}</Text>
+          <Text tone="inverse">{plan.description}</Text>
         </div>
-        <Text as="span" className="price-summary__billing" unstyled>
+        <Text as="span" className={styles.billing} unstyled>
           {copy.billedMonthly}
         </Text>
       </div>
-      <div className="price-summary__price">
+      <div className={styles.price}>
         <Text as="strong" unstyled>
           {formattedPrice}
         </Text>
@@ -39,8 +40,8 @@ export const PriceSummary = ({ actionHref, copy, locale, plan }: PriceSummaryPro
           {copy.perInterval[plan.interval]}
         </Text>
       </div>
-      <ul className="price-summary__features">
-        {plan.features.map((feature) => (
+      <ul className={styles.features}>
+        {plan.features.map(feature => (
           <li key={feature}>
             <span aria-hidden="true">✓</span>
             {feature}
@@ -48,7 +49,7 @@ export const PriceSummary = ({ actionHref, copy, locale, plan }: PriceSummaryPro
         ))}
       </ul>
       <Button href={actionHref}>{copy.action}</Button>
-      <Text size="small" tone="muted">
+      <Text size="small" tone="inverse">
         {copy.terms}
       </Text>
     </article>

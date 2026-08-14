@@ -11,6 +11,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 
 import { useEditorStore } from "@/stores/useEditorStore"
 import { ApiClientError, requestJson } from "@/utils/apiClient"
+import styles from "../index.module.css"
 
 type SaveSnapshot = {
 	content: DocumentRecord["content"]
@@ -51,7 +52,7 @@ export const useRichTextEditor = ({
 		immediatelyRender: false,
 		editorProps: {
 			attributes: {
-				class: "editor-prose min-h-[52vh] outline-none",
+				class: styles.editor!,
 				"aria-label": "Document editor"
 			}
 		},
