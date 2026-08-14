@@ -73,6 +73,8 @@ export const publicSubscriptionPlans = [
   },
 ] as const satisfies readonly SubscriptionPlan[];
 
+export const publicSubscriptionPlanKeys = publicSubscriptionPlans.map(({ key }) => key);
+
 export const listSubscriptionPlansResponseSchema = z.object({
   items: z.array(subscriptionPlanSchema),
 });
