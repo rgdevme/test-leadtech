@@ -1,6 +1,7 @@
 import {
   firebaseUidSchema,
   publicSubscriptionPlans,
+  stripeMetadataKeys,
   stripeSubscriptionIdSchema,
   subscriptionPlanIds,
 } from "@leadtech/contracts";
@@ -137,8 +138,8 @@ const resolveCheckoutSubscription = async (
 
   return {
     firebaseUid: resolveFirebaseUid([
-      session.metadata?.firebaseUid,
-      subscription.metadata.firebaseUid,
+      session.metadata?.[stripeMetadataKeys.firebaseUid],
+      subscription.metadata[stripeMetadataKeys.firebaseUid],
     ]),
     forceCanceled: false,
     subscription,
@@ -158,7 +159,7 @@ const resolveSubscriptionEvent = async (
     : await retrieveSubscription(eventSubscription.id);
 
   return {
-    firebaseUid: resolveFirebaseUid([subscription.metadata.firebaseUid]),
+    firebaseUid: resolveFirebaseUid([subscription.metadata[stripeMetadataKeys.firebaseUid]]),
     forceCanceled,
     subscription,
   };
@@ -179,7 +180,7 @@ const resolveInvoiceSubscription = async (
   const subscription = await retrieveSubscription(subscriptionId);
 
   return {
-    firebaseUid: resolveFirebaseUid([subscription.metadata.firebaseUid]),
+    firebaseUid: resolveFirebaseUid([subscription.metadata[stripeMetadataKeys.firebaseUid]]),
     forceCanceled: false,
     subscription,
   };

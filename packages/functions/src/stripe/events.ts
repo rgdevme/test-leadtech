@@ -1,13 +1,5 @@
+import { supportedStripeWebhookEvents } from "@leadtech/contracts";
 import type Stripe from "stripe";
-
-export const supportedStripeEventTypes = [
-  "checkout.session.completed",
-  "customer.subscription.created",
-  "customer.subscription.updated",
-  "customer.subscription.deleted",
-  "invoice.paid",
-  "invoice.payment_failed",
-] as const;
 
 export type SupportedStripeEvent =
   | Stripe.CheckoutSessionCompletedEvent
@@ -18,7 +10,7 @@ export type SupportedStripeEvent =
   | Stripe.InvoicePaymentFailedEvent;
 
 export const isSupportedStripeEvent = (event: Stripe.Event): event is SupportedStripeEvent =>
-  supportedStripeEventTypes.some((eventType) => eventType === event.type);
+  supportedStripeWebhookEvents.some((eventType) => eventType === event.type);
 
 export const getStripeEventObjectId = (event: SupportedStripeEvent) => event.data.object.id;
 

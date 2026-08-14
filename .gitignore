@@ -21,3 +21,5 @@ ui-debug.log*
 .agnos/
 .agents/
 .codex/
+
+firebase.config.json
