@@ -1,7 +1,7 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@leadtech/common"],
-};
+	transpilePackages: ["@leadtech/common"]
+}
 
-export default nextConfig;
+export default nextConfig

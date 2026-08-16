@@ -1,9 +1,9 @@
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react"
 
-import styles from "./index.module.css";
+import styles from "./index.module.css"
 
-type BrandProps = PropsWithChildren;
+type BrandProps = PropsWithChildren
 
 export function Brand({ children }: BrandProps) {
-  return <div className={styles.brand}>{children}</div>;
+	return <div className={styles.brand}>{children}</div>
 }

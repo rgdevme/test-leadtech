@@ -1,19 +1,19 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "incremental": true,
-    "jsx": "preserve",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "noEmit": true,
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"incremental": true,
+		"jsx": "preserve",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"noEmit": true,
+		"paths": {
+			"@/*": ["./src/*"]
+		},
+		"plugins": [
+			{
+				"name": "next"
+			}
+		]
+	},
+	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+	"exclude": ["node_modules"]
 }

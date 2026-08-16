@@ -1,84 +1,84 @@
 @reference "../../../app/globals.css";
 
 .header {
-  @apply absolute top-0 left-0 z-20 w-full pt-4 md:pt-6;
+	@apply absolute top-0 left-0 z-20 w-full pt-4 md:pt-6;
 }
 
 .island {
-  @apply mx-auto grid min-h-15 w-full grid-cols-2 items-center gap-8 rounded-full bg-sage-50/95 py-2 pr-2 pl-4 shadow-xl inset-ring inset-ring-sage-950/10 md:min-h-17 md:pl-5 lg:grid-cols-3;
+	@apply mx-auto grid min-h-15 w-full grid-cols-2 items-center gap-8 rounded-full bg-sage-50/95 py-2 pr-2 pl-4 shadow-xl inset-ring inset-ring-sage-950/10 md:min-h-17 md:pl-5 lg:grid-cols-3;
 }
 
 .desktopNavigation {
-  @apply hidden justify-self-center lg:block;
+	@apply hidden justify-self-center lg:block;
 }
 
 .desktopActions {
-  @apply hidden justify-self-end lg:block;
+	@apply hidden justify-self-end lg:block;
 }
 
 .mobileMenu {
-  @apply justify-self-end lg:hidden;
+	@apply justify-self-end lg:hidden;
 
-  &[open] {
-    & .hamburger i:first-child {
-      @apply translate-y-1 rotate-45;
-    }
+	&[open] {
+		& .hamburger i:first-child {
+			@apply translate-y-1 rotate-45;
+		}
 
-    & .hamburger i:last-child {
-      @apply -translate-y-1 -rotate-45;
-    }
+		& .hamburger i:last-child {
+			@apply -translate-y-1 -rotate-45;
+		}
 
-    & .mobileOverlay {
-      @apply translate-y-0 opacity-100;
+		& .mobileOverlay {
+			@apply translate-y-0 opacity-100;
 
-      & nav a {
-        @apply translate-y-0 opacity-100;
-      }
-    }
-  }
+			& nav a {
+				@apply translate-y-0 opacity-100;
+			}
+		}
+	}
 }
 
 .mobileTrigger {
-  @apply relative z-30 grid size-12 cursor-pointer list-none place-items-center rounded-full bg-sage-950;
+	@apply relative z-30 grid size-12 cursor-pointer list-none place-items-center rounded-full bg-sage-950;
 }
 
 .hamburger {
-  @apply relative block h-3 w-5;
+	@apply relative block h-3 w-5;
 
-  & i {
-    @apply absolute left-0 h-px w-full bg-sage-100 transition-transform ease-mass;
+	& i {
+		@apply absolute left-0 h-px w-full bg-sage-100 transition-transform ease-mass;
 
-    &:first-child {
-      @apply top-0.5;
-    }
+		&:first-child {
+			@apply top-0.5;
+		}
 
-    &:last-child {
-      @apply bottom-0.5;
-    }
-  }
+		&:last-child {
+			@apply bottom-0.5;
+		}
+	}
 }
 
 .mobileOverlay {
-  @apply fixed inset-0 z-20 flex -translate-y-4 flex-col justify-center gap-12 bg-sage-950/95 px-8 pt-28 pb-12 text-sage-100 opacity-0 backdrop-blur-2xl transition ease-mass;
+	@apply fixed inset-0 z-20 flex -translate-y-4 flex-col justify-center gap-12 bg-sage-950/95 px-8 pt-28 pb-12 text-sage-100 opacity-0 backdrop-blur-2xl transition ease-mass;
 
-  & nav > div,
-  & > div {
-    @apply flex-col items-stretch;
-  }
+	& nav > div,
+	& > div {
+		@apply flex-col items-stretch;
+	}
 
-  & nav a {
-    @apply translate-y-8 text-4xl text-sage-100 opacity-0 transition ease-mass;
+	& nav a {
+		@apply translate-y-8 text-4xl text-sage-100 opacity-0 transition ease-mass;
 
-    &:nth-child(2) {
-      @apply delay-75;
-    }
+		&:nth-child(2) {
+			@apply delay-75;
+		}
 
-    &:nth-child(3) {
-      @apply delay-150;
-    }
+		&:nth-child(3) {
+			@apply delay-150;
+		}
 
-    &:nth-child(4) {
-      @apply delay-200;
-    }
-  }
+		&:nth-child(4) {
+			@apply delay-200;
+		}
+	}
 }

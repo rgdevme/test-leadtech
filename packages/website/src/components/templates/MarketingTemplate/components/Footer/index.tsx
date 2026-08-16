@@ -1,7 +1,7 @@
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react"
 
-type FooterProps = PropsWithChildren;
+type FooterProps = PropsWithChildren
 
 export function Footer({ children }: FooterProps) {
-  return <>{children}</>;
+	return <>{children}</>
 }

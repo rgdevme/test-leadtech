@@ -1,7 +1,7 @@
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react"
 
-type MainProps = PropsWithChildren;
+type MainProps = PropsWithChildren
 
 export function Main({ children }: MainProps) {
-  return <>{children}</>;
+	return <>{children}</>
 }

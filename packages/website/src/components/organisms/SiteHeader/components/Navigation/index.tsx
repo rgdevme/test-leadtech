@@ -1,9 +1,9 @@
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react"
 
-import styles from "./index.module.css";
+import styles from "./index.module.css"
 
-type NavigationProps = PropsWithChildren;
+type NavigationProps = PropsWithChildren
 
 export function Navigation({ children }: NavigationProps) {
-  return <div className={styles.navigation}>{children}</div>;
+	return <div className={styles.navigation}>{children}</div>
 }

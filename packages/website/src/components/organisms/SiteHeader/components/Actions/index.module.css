@@ -1,5 +1,5 @@
 @reference "../../../../../app/globals.css";
 
 .actions {
-  @apply flex items-center gap-5;
+	@apply flex items-center gap-5;
 }

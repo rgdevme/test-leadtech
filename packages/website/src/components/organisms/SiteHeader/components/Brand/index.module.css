@@ -1,5 +1,5 @@
 @reference "../../../../../app/globals.css";
 
 .brand {
-  @apply justify-self-start;
+	@apply justify-self-start;
 }

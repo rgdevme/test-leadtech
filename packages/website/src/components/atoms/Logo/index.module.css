@@ -1,13 +1,13 @@
 @reference "../../../app/globals.css";
 
 .logo {
-  @apply inline-flex items-center;
+	@apply inline-flex items-center;
 
-  &[data-inverse="true"] .image {
-    @apply brightness-0 invert;
-  }
+	&[data-inverse="true"] .image {
+		@apply brightness-0 invert;
+	}
 }
 
 .image {
-  @apply h-8 w-auto;
+	@apply h-8 w-auto;
 }
