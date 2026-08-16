@@ -1,4 +1,4 @@
-import type { ApiErrorCode, ApiErrorResponse } from "@leadtech/contracts"
+import type { ApiErrorCode, ApiErrorResponse } from "@leadtech/common/contracts"
 import { ZodError } from "zod"
 
 type ApiErrorOptions = {

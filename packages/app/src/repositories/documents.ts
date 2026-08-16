@@ -6,7 +6,7 @@ import {
 	type DocumentRecord,
 	type DocumentSummary,
 	type UpdateDocumentRequest
-} from "@leadtech/contracts"
+} from "@leadtech/common/contracts"
 import { FieldValue } from "firebase-admin/firestore"
 
 import { getFirebaseAdminFirestore } from "@/firebase/server"

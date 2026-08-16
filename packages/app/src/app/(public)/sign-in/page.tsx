@@ -1,4 +1,4 @@
-import { subscriptionPlanKeySchema } from "@leadtech/contracts"
+import { subscriptionPlanKeySchema } from "@leadtech/common/contracts"
 
 import { SignInPage as SignInPageView } from "@/components/pages/SignInPage"
 

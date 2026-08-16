@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 
-import { documentIdSchema } from "@leadtech/contracts"
+import { documentIdSchema } from "@leadtech/common/contracts"
 
 import { DocumentEditorPage } from "@/components/pages/DocumentEditorPage"
 import { requireSessionPrincipal } from "@/guards/authentication"

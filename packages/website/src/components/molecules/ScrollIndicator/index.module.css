@@ -1,18 +1,18 @@
 @reference "../../../app/globals.css";
 
 .indicator {
-  @apply inline-flex flex-col items-center gap-3 font-semibold text-ink-soft;
+  @apply inline-flex flex-col items-center gap-3 font-semibold text-sage-900;
 
   &:hover .marker,
   &:focus-visible .marker {
-    @apply bg-sage-deep;
+    @apply bg-sage-700;
   }
 }
 
 .rail {
-  @apply relative h-11 w-px overflow-hidden bg-ink/20 sm:h-14;
+  @apply relative h-11 w-px overflow-hidden bg-sage-950/20 sm:h-14;
 }
 
 .marker {
-  @apply block h-5 w-px animate-bounce bg-ink transition-colors;
+  @apply block h-5 w-px animate-bounce bg-sage-950 transition-colors;
 }

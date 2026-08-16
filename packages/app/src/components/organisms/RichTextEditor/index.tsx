@@ -5,7 +5,7 @@ import { IconArrowLeft, IconLock, IconTrash } from "@tabler/icons-react"
 import { useRouter } from "next/navigation"
 import { useCallback, useState, type PropsWithChildren } from "react"
 
-import type { DocumentRecord } from "@leadtech/contracts"
+import type { DocumentRecord } from "@leadtech/common/contracts"
 
 import { Button } from "@/components/atoms/Button"
 import { IconButton } from "@/components/atoms/IconButton"
@@ -82,7 +82,7 @@ export const RichTextEditor = ({
 						</IconButton>
 						<input
 							aria-label={en.editor.titlePlaceholder}
-							className='min-w-0 flex-1 bg-transparent px-2 py-1 text-lg font-semibold text-charcoal outline-none placeholder:text-soft disabled:text-charcoal'
+							className='min-w-0 flex-1 bg-sage-50/0 px-2 py-1 text-lg font-semibold text-sage-950 outline-none placeholder:text-sage-400 disabled:text-sage-950'
 							disabled={!canEdit}
 							maxLength={120}
 							onChange={event => editorState.updateTitle(event.currentTarget.value)}
@@ -126,7 +126,7 @@ export const RichTextEditor = ({
 					</div>
 				</EditorTemplate.Toolbar>
 				<EditorTemplate.Content>
-					<div className='rounded-xl border border-line bg-white px-6 py-8 sm:px-12 sm:py-12 lg:px-20 lg:py-16'>
+					<div className='rounded-xl border border-sage-200 bg-sage-50 px-6 py-8 sm:px-12 sm:py-12 lg:px-20 lg:py-16'>
 						<EditorContent editor={editorState.editor} />
 					</div>
 				</EditorTemplate.Content>
@@ -144,7 +144,7 @@ export const RichTextEditor = ({
 			/>
 			{deleteError ? (
 				<p
-					className='fixed bottom-5 right-5 z-40 rounded-lg border border-pale-red bg-white px-4 py-3 text-sm text-danger'
+					className='fixed bottom-5 right-5 z-40 rounded-lg border border-red-50 bg-sage-50 px-4 py-3 text-sm text-red-700'
 					role='alert'>
 					{deleteError}
 				</p>

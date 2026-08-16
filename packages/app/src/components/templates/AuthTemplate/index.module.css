@@ -1,5 +1,5 @@
 @reference "../../../app/globals.css";
 
 .texture {
-	@apply absolute inset-0 bg-bone opacity-50;
+	@apply absolute inset-0 bg-sage-100 opacity-50;
 }

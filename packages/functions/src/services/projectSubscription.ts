@@ -7,7 +7,7 @@ import {
 	subscriptionPersistenceDataSchema,
 	type ProjectedSubscriptionStatus,
 	type SubscriptionPersistenceData
-} from "@leadtech/contracts"
+} from "@leadtech/common/contracts"
 import type Stripe from "stripe"
 
 type ProjectSubscriptionInput = {

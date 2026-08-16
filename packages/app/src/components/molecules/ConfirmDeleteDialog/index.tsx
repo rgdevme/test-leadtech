@@ -27,7 +27,7 @@ export const ConfirmDeleteDialog = ({
 		onClose={onClose}
 		open={open}>
 		<div className='w-[min(92vw,28rem)] p-7'>
-			<span className='grid size-11 place-items-center rounded-lg bg-pale-red text-danger'>
+			<span className='grid size-11 place-items-center rounded-lg bg-red-50 text-red-700'>
 				<IconTrash
 					size={21}
 					stroke={1.8}

@@ -1,6 +1,9 @@
 import "server-only"
 
-import { subscriptionPersistenceSchema, type SubscriptionResponse } from "@leadtech/contracts"
+import {
+	subscriptionPersistenceSchema,
+	type SubscriptionResponse
+} from "@leadtech/common/contracts"
 
 import { getFirebaseAdminFirestore } from "@/firebase/server"
 

@@ -4,7 +4,7 @@ import { IconArrowUpRight, IconDots, IconEdit, IconTrash } from "@tabler/icons-r
 import NextLink from "next/link"
 import { useState, type PropsWithChildren } from "react"
 
-import type { DocumentSummary } from "@leadtech/contracts"
+import type { DocumentSummary } from "@leadtech/common/contracts"
 
 import { Heading } from "@/components/atoms/Heading"
 import { IconButton } from "@/components/atoms/IconButton"
@@ -43,7 +43,7 @@ export const DocumentListItem = ({
 
 	return (
 		<article
-			className='group relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b border-line py-5 last:border-b-0'
+			className='group relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b border-sage-200 py-5 last:border-b-0'
 			data-reveal>
 			<div className='min-w-0'>
 				{renaming ? (
@@ -61,12 +61,12 @@ export const DocumentListItem = ({
 							value={title}
 						/>
 						<button
-							className='text-sm font-semibold text-charcoal'
+							className='text-sm font-semibold text-sage-950'
 							type='submit'>
 							{en.documents.renameSave}
 						</button>
 						<button
-							className='text-sm text-muted'
+							className='text-sm text-sage-600'
 							onClick={() => {
 								setTitle(document.title)
 								setRenaming(false)
@@ -79,11 +79,11 @@ export const DocumentListItem = ({
 					<NextLink
 						className='block'
 						href={`/documents/${document.id}`}>
-						<Heading className='truncate text-lg font-semibold transition group-hover:text-ink'>
+						<Heading className='truncate text-lg font-semibold transition group-hover:text-sage-900'>
 							{document.title}
 						</Heading>
 						<Text
-							className='mt-1.5 text-sm text-muted'
+							className='mt-1.5 text-sm text-sage-600'
 							unstyled>
 							{en.documents.updated}{" "}
 							{new Date(document.updatedAt).toLocaleDateString(undefined, {
@@ -100,7 +100,7 @@ export const DocumentListItem = ({
 				<div className='flex items-center gap-1'>
 					<NextLink
 						aria-label={`Open ${document.title}`}
-						className='grid size-10 place-items-center rounded-[6px] text-muted transition hover:bg-bone hover:text-charcoal'
+						className='grid size-10 place-items-center rounded-[6px] text-sage-600 transition hover:bg-sage-100 hover:text-sage-950'
 						href={`/documents/${document.id}`}>
 						<IconArrowUpRight
 							size={19}
@@ -118,9 +118,9 @@ export const DocumentListItem = ({
 								/>
 							</IconButton>
 							{menuOpen ? (
-								<div className='absolute right-0 top-11 z-10 w-48 rounded-lg border border-line bg-white p-1.5 shadow-[0_10px_30px_rgba(17,17,17,0.05)]'>
+								<div className='absolute right-0 top-11 z-10 w-48 rounded-lg border border-sage-200 bg-sage-50 p-1.5 shadow-lg'>
 									<button
-										className='flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-charcoal hover:bg-bone'
+										className='flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-sage-950 hover:bg-sage-100'
 										onClick={() => {
 											setRenaming(true)
 											setMenuOpen(false)
@@ -133,7 +133,7 @@ export const DocumentListItem = ({
 										{en.documents.rename}
 									</button>
 									<button
-										className='flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-danger hover:bg-pale-red'
+										className='flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-red-700 hover:bg-red-50'
 										onClick={() => onDelete(document)}
 										type='button'>
 										<IconTrash

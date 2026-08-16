@@ -67,7 +67,7 @@ export const EditorToolbar = ({ editable, editor }: EditorToolbarProps) => {
 				{controls.map(({ Icon, action, active, label }) => (
 					<IconButton
 						aria-pressed={active}
-						className={active ? "border-line bg-white text-charcoal" : ""}
+						className={active ? "border-sage-200 bg-sage-50 text-sage-950" : ""}
 						disabled={!editable || !editor}
 						key={label}
 						label={label}

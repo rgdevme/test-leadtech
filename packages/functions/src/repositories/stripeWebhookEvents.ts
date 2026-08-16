@@ -2,7 +2,7 @@ import {
 	stripeEventIdSchema,
 	stripeWebhookEventPersistenceDataSchema,
 	type StripeWebhookEventPersistenceData
-} from "@leadtech/contracts"
+} from "@leadtech/common/contracts"
 import { FieldValue, type DocumentReference, type Firestore } from "firebase-admin/firestore"
 
 const STRIPE_WEBHOOK_EVENTS_COLLECTION = "stripeWebhookEvents"

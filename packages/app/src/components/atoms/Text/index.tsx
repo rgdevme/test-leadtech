@@ -15,7 +15,7 @@ export const Text = ({
 	...props
 }: TextProps) => (
 	<Component
-		className={unstyled ? className : `leading-7 text-muted ${className}`}
+		className={unstyled ? className : `leading-7 text-sage-600 ${className}`}
 		{...props}>
 		{children}
 	</Component>

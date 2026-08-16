@@ -1,4 +1,4 @@
-import { publicSubscriptionPlanKeys } from "@leadtech/contracts";
+import { publicSubscriptionPlanKeys } from "@leadtech/common/contracts";
 
 import { environment } from "@/config/environment";
 

@@ -3,7 +3,7 @@
 import { IconAt } from "@tabler/icons-react"
 import type { PropsWithChildren } from "react"
 
-import type { AuthUser, SubscriptionResponse } from "@leadtech/contracts"
+import type { AuthUser, SubscriptionResponse } from "@leadtech/common/contracts"
 
 import { Heading } from "@/components/atoms/Heading"
 import { Text } from "@/components/atoms/Text"
@@ -34,21 +34,21 @@ export const ProfilePage = ({ principal, subscription }: ProfilePageProps) => (
 		<WorkspaceTemplate.Content>
 			<div className='grid gap-4 lg:grid-cols-[0.7fr_1.3fr]'>
 				<section
-					className='rounded-xl border border-line bg-white p-6 sm:p-8'
+					className='rounded-xl border border-sage-200 bg-sage-50 p-6 sm:p-8'
 					data-reveal>
-					<span className='grid size-10 place-items-center rounded-lg bg-pale-blue text-accent-blue'>
+					<span className='grid size-10 place-items-center rounded-lg bg-blue-50 text-blue-600'>
 						<IconAt
 							size={21}
 							stroke={1.8}
 						/>
 					</span>
 					<Text
-						className='mt-8 text-xs font-bold uppercase text-muted'
+						className='mt-8 text-xs font-bold uppercase text-sage-600'
 						unstyled>
 						{en.profile.signedInAs}
 					</Text>
 					<Text
-						className='mt-2 break-all text-lg font-semibold text-charcoal'
+						className='mt-2 break-all text-lg font-semibold text-sage-950'
 						unstyled>
 						{principal.email}
 					</Text>

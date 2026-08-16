@@ -8,7 +8,7 @@
 		"node": "22"
 	},
 	"scripts": {
-		"prebuild": "pnpm --filter @leadtech/contracts build",
+		"prebuild": "pnpm --filter @leadtech/common build",
 		"build": "tsc",
 		"check": "pnpm --filter . run --parallel \"/^check:(format|lint|typecheck)$/\"",
 		"check:format": "prettier --check . --ignore-path ../../.prettierignore",
@@ -20,7 +20,7 @@
 		"start": "node lib/index.js"
 	},
 	"dependencies": {
-		"@leadtech/contracts": "workspace:*",
+		"@leadtech/common": "workspace:*",
 		"firebase-admin": "^14.2.0",
 		"firebase-functions": "^7.3.2",
 		"stripe": "^22.5.0",

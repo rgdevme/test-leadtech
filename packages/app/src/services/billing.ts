@@ -7,7 +7,7 @@ import {
 	subscriptionPlanIds,
 	SubscriptionPlanKeys,
 	type CreateCheckoutResponse
-} from "@leadtech/contracts"
+} from "@leadtech/common/contracts"
 
 import { ApiError } from "@/errors/apiError"
 import { getSubscription } from "@/repositories/subscriptions"

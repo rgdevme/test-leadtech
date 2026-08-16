@@ -1,6 +1,6 @@
 import "server-only"
 
-import type { UpdateDocumentRequest } from "@leadtech/contracts"
+import type { UpdateDocumentRequest } from "@leadtech/common/contracts"
 
 import { ApiError } from "@/errors/apiError"
 import { requireMutationEntitlement } from "@/guards/subscription"

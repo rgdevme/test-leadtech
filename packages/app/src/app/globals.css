@@ -1,77 +1,23 @@
+@import "@leadtech/common/styles/theme.css";
 @import "tailwindcss";
 
-@font-face {
-	font-family: "Satoshi";
-	src: url("https://cdn.fontshare.com/wf/TTX2Z3BF3P6Y5BQT3IV2VNOK6FL22KUT/7QYRJOI3JIMYHGY6CH7SOIFRQLZOLNJ6/KFIAZD4RUMEZIYV6FQ3T3GP5PDBDB6JY.woff2")
-		format("woff2");
-	font-display: swap;
-	font-style: normal;
-	font-weight: 400;
-}
-
-@font-face {
-	font-family: "Satoshi";
-	src: url("https://cdn.fontshare.com/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2")
-		format("woff2");
-	font-display: swap;
-	font-style: normal;
-	font-weight: 500;
-}
-
-@font-face {
-	font-family: "Satoshi";
-	src: url("https://cdn.fontshare.com/wf/LAFFD4SDUCDVQEXFPDC7C53EQ4ZELWQI/PXCT3G6LO6ICM5I3NTYENYPWJAECAWDD/GHM6WVH6MILNYOOCXHXB5GTSGNTMGXZR.woff2")
-		format("woff2");
-	font-display: swap;
-	font-style: normal;
-	font-weight: 700;
-}
-
-@theme inline {
-	--color-canvas: #f7f6f3;
-	--color-bone: #f1f0ec;
-	--color-charcoal: #111111;
-	--color-ink: #2f3437;
-	--color-muted: #787774;
-	--color-soft: #a5a39e;
-	--color-line: #eaeaea;
-	--color-pale-red: #fdebec;
-	--color-danger: #9f2f2d;
-	--color-pale-blue: #e1f3fe;
-	--color-accent-blue: #1f6c9f;
-	--color-pale-green: #edf3ec;
-	--color-success: #346538;
-	--color-pale-yellow: #fbf3db;
-	--color-warning: #956400;
-	--font-sans: "Satoshi", "Helvetica Neue", Arial, sans-serif;
-	--font-serif: Georgia, "Times New Roman", serif;
-	--font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-	--default-transition-duration: 350ms;
-}
-
 :root {
+	@apply bg-sage-50 text-sage-950;
 	color-scheme: light;
-	background: #f7f6f3;
-	color: #111111;
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 }
 
 * {
-	box-sizing: border-box;
+	@apply box-border duration-350;
 }
 
 html {
-	background: #f7f6f3;
-	scroll-behavior: smooth;
+	@apply scroll-smooth bg-sage-50;
 }
 
 body {
-	margin: 0;
-	min-width: 320px;
-	background: #f7f6f3;
-	color: #111111;
-	font-family: "Satoshi", "Helvetica Neue", Arial, sans-serif;
+	@apply m-0 min-w-80 bg-sage-50 font-sans text-sage-950;
 }
 
 button,
@@ -79,14 +25,8 @@ input {
 	font: inherit;
 }
 
-button,
-a {
-	-webkit-tap-highlight-color: transparent;
-}
-
 ::selection {
-	background: #dfe4da;
-	color: #111111;
+	@apply bg-sage-200 text-sage-950;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,5 +1,5 @@
 @reference "../../../app/globals.css";
 
 .dialog {
-	@apply m-auto w-11/12 max-w-5xl rounded-xl border border-line bg-white p-0 text-charcoal backdrop:bg-charcoal/40 backdrop:backdrop-blur-sm;
+	@apply m-auto w-11/12 max-w-5xl rounded-xl border border-sage-200 bg-sage-50 p-0 text-sage-950 backdrop:bg-sage-950/40 backdrop:backdrop-blur-sm;
 }

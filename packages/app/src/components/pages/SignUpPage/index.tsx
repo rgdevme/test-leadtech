@@ -75,7 +75,7 @@ export const SignUpPage = ({ intent, planKey }: SignUpPageProps) => {
 				<SignUpForm form={form} />
 				{error ? (
 					<Text
-						className='mt-5 text-sm text-danger'
+						className='mt-5 text-sm text-red-700'
 						role='alert'
 						unstyled>
 						{error}
@@ -89,7 +89,7 @@ export const SignUpPage = ({ intent, planKey }: SignUpPageProps) => {
 				</Button>
 			</form>
 			<Text
-				className='mt-6 text-center text-sm text-muted'
+				className='mt-6 text-center text-sm text-sage-600'
 				unstyled>
 				{en.auth.signUp.alternatePrompt}{" "}
 				<Link href={`/sign-in${signInQuery.size > 0 ? `?${signInQuery.toString()}` : ""}`}>

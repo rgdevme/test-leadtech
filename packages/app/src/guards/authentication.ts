@@ -1,6 +1,6 @@
 import "server-only"
 
-import type { AuthUser } from "@leadtech/contracts"
+import type { AuthUser } from "@leadtech/common/contracts"
 import { cookies } from "next/headers"
 import { cache } from "react"
 

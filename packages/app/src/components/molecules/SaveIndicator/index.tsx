@@ -26,7 +26,7 @@ export const SaveIndicator = ({
 
 	return (
 		<div
-			className='flex flex-wrap items-center justify-end gap-2 text-xs text-muted'
+			className='flex flex-wrap items-center justify-end gap-2 text-xs text-sage-600'
 			role='status'>
 			<Icon
 				aria-hidden='true'

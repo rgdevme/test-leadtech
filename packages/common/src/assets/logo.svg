@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 48" role="img" aria-labelledby="title">
+  <title id="title">DraftRoom</title>
+  <text
+    x="0"
+    y="36"
+    fill="#171814"
+    font-family="Satoshi, Helvetica Neue, Arial, sans-serif"
+    font-size="38"
+    font-weight="700"
+  >Draft<tspan fill="#69725f">Room</tspan></text>
+</svg>

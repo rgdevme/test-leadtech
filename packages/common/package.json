@@ -1,0 +1,45 @@
+{
+	"name": "@leadtech/common",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"main": "./dist/contracts/index.js",
+	"types": "./dist/contracts/index.d.ts",
+	"exports": {
+		"./contracts": {
+			"types": "./dist/contracts/index.d.ts",
+			"import": "./dist/contracts/index.js"
+		},
+		"./data/locale/en": {
+			"types": "./dist/data/locale/en.d.ts",
+			"import": "./dist/data/locale/en.js"
+		},
+		"./assets/favicon.svg": "./src/assets/favicon.svg",
+		"./assets/logo.svg": "./src/assets/logo.svg",
+		"./styles/theme.css": "./src/styles/theme.css"
+	},
+	"files": [
+		"dist",
+		"src/assets",
+		"src/styles/theme.css"
+	],
+	"scripts": {
+		"build": "tsc -p tsconfig.json",
+		"check": "pnpm --filter . run --parallel \"/^check:(format|lint|typecheck)$/\"",
+		"check:format": "prettier --check . --ignore-path ../../.prettierignore",
+		"check:lint": "eslint .",
+		"check:typecheck": "tsc -p tsconfig.json --noEmit"
+	},
+	"dependencies": {
+		"zod": "^4.4.3"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.39.5",
+		"eslint": "^9.39.5",
+		"eslint-config-prettier": "^10.1.8",
+		"globals": "^17.11.0",
+		"prettier": "^3.9.6",
+		"typescript": "^5.9.3",
+		"typescript-eslint": "^8.67.0"
+	}
+}

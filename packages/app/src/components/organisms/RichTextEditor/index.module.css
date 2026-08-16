@@ -1,7 +1,7 @@
 @reference "../../../app/globals.css";
 
 .editor {
-	@apply min-h-96 font-serif text-lg leading-loose text-ink outline-none;
+	@apply min-h-96 font-serif text-lg leading-loose text-sage-900 outline-none;
 
 	& > * + * {
 		@apply mt-5;
@@ -10,7 +10,7 @@
 	& h1,
 	& h2,
 	& h3 {
-		@apply font-sans leading-tight font-bold text-charcoal;
+		@apply font-sans leading-tight font-bold text-sage-950;
 	}
 
 	& h1 {
@@ -35,18 +35,18 @@
 	}
 
 	& blockquote {
-		@apply border-l-2 border-charcoal pl-6 italic text-muted;
+		@apply border-l-2 border-sage-950 pl-6 italic text-sage-600;
 	}
 
 	& code {
-		@apply rounded-sm border border-line bg-canvas px-1 py-0.5 font-mono text-sm;
+		@apply rounded-sm border border-sage-200 bg-sage-50 px-1 py-0.5 font-mono text-sm;
 	}
 
 	& pre {
-		@apply overflow-x-auto rounded-lg border border-line bg-charcoal p-5 font-mono text-sm text-white;
+		@apply overflow-x-auto rounded-lg border border-sage-200 bg-sage-950 p-5 font-mono text-sm text-sage-50;
 
 		& code {
-			@apply border-0 bg-transparent p-0 text-inherit;
+			@apply border-0 bg-sage-50/0 p-0 text-inherit;
 		}
 	}
 

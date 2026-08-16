@@ -6,7 +6,7 @@ import { useForm } from "@mantine/form"
 import { firebaseAuth, prepareFirebaseAuth } from "@/firebase/client"
 import { requestJson, requestNoContent } from "@/utils/apiClient"
 import { enhanceInputPropsWithDisable, validateFormWith } from "@/utils/forms"
-import { csrfTokenResponseSchema } from "@leadtech/contracts"
+import { csrfTokenResponseSchema } from "@leadtech/common/contracts"
 import { signInFormSchema, type SignInFormValues } from "./schemas"
 
 const createSession = async ({ email, password }: SignInFormValues) => {

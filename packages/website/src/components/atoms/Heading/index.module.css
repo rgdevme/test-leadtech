@@ -12,7 +12,7 @@
     }
 
     & em {
-      @apply text-sage-deep not-italic;
+      @apply text-sage-700 not-italic;
     }
   }
 

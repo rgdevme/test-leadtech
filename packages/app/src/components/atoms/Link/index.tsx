@@ -5,7 +5,7 @@ type LinkProps = PropsWithChildren<NextLinkProps & AnchorHTMLAttributes<HTMLAnch
 
 export const Link = ({ children, className = "", ...props }: LinkProps) => (
 	<NextLink
-		className={`text-sm font-semibold text-charcoal underline decoration-line underline-offset-4 transition hover:decoration-charcoal ${className}`}
+		className={`text-sm font-semibold text-sage-950 underline decoration-sage-200 underline-offset-4 transition hover:decoration-sage-950 ${className}`}
 		{...props}>
 		{children}
 	</NextLink>

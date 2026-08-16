@@ -4,7 +4,7 @@ import {
 	documentRecordSchema,
 	type DocumentSummary,
 	type SubscriptionResponse
-} from "@leadtech/contracts"
+} from "@leadtech/common/contracts"
 import { IconArrowRight, IconPlus } from "@tabler/icons-react"
 import { useRouter } from "next/navigation"
 import { useRef, useState, type PropsWithChildren } from "react"
@@ -153,7 +153,7 @@ export const DocumentsPage = ({
 					</div>
 					{!subscription.entitled ? (
 						<button
-							className='mt-8 flex w-full items-center justify-between gap-5 rounded-lg border border-pale-yellow bg-pale-yellow px-5 py-4 text-left text-sm text-warning transition hover:border-warning'
+							className='mt-8 flex w-full items-center justify-between gap-5 rounded-lg border border-yellow-50 bg-yellow-50 px-5 py-4 text-left text-sm text-yellow-800 transition hover:border-yellow-800'
 							onClick={() => setModalOpen(true)}
 							type='button'>
 							<Text
@@ -170,7 +170,7 @@ export const DocumentsPage = ({
 					) : null}
 					{error ? (
 						<Text
-							className='mt-5 text-sm text-danger'
+							className='mt-5 text-sm text-red-700'
 							role='alert'
 							unstyled>
 							{error}

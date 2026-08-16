@@ -4,7 +4,7 @@ import { Text } from "@/components/atoms/Text"
 
 export default function DocumentNotFound() {
 	return (
-		<main className='grid min-h-[calc(100vh-4.5rem)] place-items-center bg-canvas px-6 text-center'>
+		<main className='grid min-h-[calc(100vh-4.5rem)] place-items-center bg-sage-50 px-6 text-center'>
 			<div className='max-w-lg'>
 				<Heading
 					className='text-5xl'

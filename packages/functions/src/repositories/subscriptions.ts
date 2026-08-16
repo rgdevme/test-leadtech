@@ -3,7 +3,7 @@ import {
 	subscriptionPersistenceDataSchema,
 	type StripeWebhookEventPersistenceData,
 	type SubscriptionPersistenceData
-} from "@leadtech/contracts"
+} from "@leadtech/common/contracts"
 import { FieldValue, type Firestore } from "firebase-admin/firestore"
 
 import { getStripeWebhookEventReference } from "./stripeWebhookEvents.js"

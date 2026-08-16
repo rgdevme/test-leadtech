@@ -13,7 +13,7 @@
 	},
 	"dependencies": {
 		"@gsap/react": "^2.1.2",
-		"@leadtech/contracts": "workspace:*",
+		"@leadtech/common": "workspace:*",
 		"@mantine/form": "^8.3.7",
 		"@stripe/stripe-js": "^9.13.0",
 		"@tabler/icons-react": "^3.34.1",

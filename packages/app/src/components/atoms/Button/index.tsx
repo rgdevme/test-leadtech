@@ -12,10 +12,10 @@ type ButtonProps = PropsWithChildren<
 >
 
 const variantClasses: Record<ButtonVariant, string> = {
-	primary: "border-charcoal bg-charcoal text-white hover:bg-ink",
-	secondary: "border-line bg-white text-charcoal hover:bg-bone",
-	quiet: "border-transparent bg-transparent text-muted hover:bg-bone hover:text-charcoal",
-	danger: "border-pale-red bg-pale-red text-danger hover:border-danger"
+	primary: "border-yellow-400 bg-yellow-400 text-sage-950 hover:bg-yellow-300",
+	secondary: "border-sage-200 bg-sage-50 text-sage-950 hover:bg-sage-100",
+	quiet: "border-sage-950/0 bg-sage-50/0 text-sage-600 hover:bg-sage-100 hover:text-sage-950",
+	danger: "border-red-50 bg-red-50 text-red-700 hover:border-red-700"
 }
 
 export const Button = ({
@@ -28,7 +28,7 @@ export const Button = ({
 	...props
 }: ButtonProps) => (
 	<button
-		className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-[6px] border px-4 py-2.5 text-sm font-semibold transition duration-200 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 ${variantClasses[variant]} ${className}`}
+		className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-[6px] border px-4 py-2.5 text-sm font-semibold transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 ${variantClasses[variant]} ${className}`}
 		disabled={disabled || loading}
 		type={type}
 		{...props}>

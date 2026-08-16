@@ -1,6 +1,6 @@
 "use client"
 
-import type { DocumentSummary } from "@leadtech/contracts"
+import type { DocumentSummary } from "@leadtech/common/contracts"
 import type { PropsWithChildren } from "react"
 
 import { DocumentListItem } from "@/components/molecules/DocumentListItem"
@@ -13,7 +13,7 @@ type DocumentListProps = PropsWithChildren<{
 }>
 
 export const DocumentList = ({ documents, editable, onDelete, onRename }: DocumentListProps) => (
-	<section className='rounded-xl border border-line bg-white px-5 sm:px-8'>
+	<section className='rounded-xl border border-sage-200 bg-sage-50 px-5 sm:px-8'>
 		{documents.map(document => (
 			<DocumentListItem
 				document={document}

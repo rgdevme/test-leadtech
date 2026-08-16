@@ -1,7 +1,7 @@
 @reference "../../../app/globals.css";
 
 .section {
-  @apply bg-ink py-24 text-paper lg:py-40;
+  @apply bg-sage-950 py-24 text-sage-100 lg:py-40;
 }
 
 .heading {
@@ -21,11 +21,11 @@
 }
 
 .mediaShell {
-  @apply order-first rounded-4xl bg-paper/10 p-2 inset-ring inset-ring-line-inverse lg:order-none;
+  @apply order-first rounded-4xl bg-sage-100/10 p-2 inset-ring inset-ring-sage-100/15 lg:order-none;
 }
 
 .mediaCore {
-  @apply relative overflow-hidden rounded-3xl bg-paper-bright inset-shadow-sm;
+  @apply relative overflow-hidden rounded-3xl bg-sage-50 inset-shadow-sm;
 
   &:hover img {
     @apply scale-105;

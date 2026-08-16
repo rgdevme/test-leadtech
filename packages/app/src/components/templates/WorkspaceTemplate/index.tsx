@@ -17,7 +17,7 @@ const WorkspaceTemplate = ({ children }: WorkspaceTemplateProps) => {
 
 	return (
 		<main
-			className='min-h-[calc(100vh-4.5rem)] w-full max-w-full overflow-x-hidden bg-canvas'
+			className='min-h-[calc(100vh-4.5rem)] w-full max-w-full overflow-x-hidden bg-sage-50'
 			ref={scope}>
 			<div className='mx-auto max-w-[90rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-12 lg:py-24'>
 				{slots.header}

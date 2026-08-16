@@ -4,7 +4,7 @@ import {
 	createCheckoutResponseSchema,
 	listSubscriptionPlansResponseSchema,
 	type SubscriptionPlan
-} from "@leadtech/contracts"
+} from "@leadtech/common/contracts"
 import { IconArrowRight, IconX } from "@tabler/icons-react"
 import { useEffect, useMemo, useState, type PropsWithChildren } from "react"
 
@@ -122,7 +122,7 @@ export const SubscriptionModal = ({ initialPlanKey, onClose, open }: Subscriptio
 				</div>
 
 				{loading ? (
-					<div className='grid min-h-80 place-items-center text-sm text-muted'>
+					<div className='grid min-h-80 place-items-center text-sm text-sage-600'>
 						{en.common.loading}
 					</div>
 				) : plans.length > 0 ? (
@@ -140,7 +140,7 @@ export const SubscriptionModal = ({ initialPlanKey, onClose, open }: Subscriptio
 						))}
 					</div>
 				) : (
-					<div className='mt-8 rounded-xl border border-line bg-bone p-8 text-center'>
+					<div className='mt-8 rounded-xl border border-sage-200 bg-sage-100 p-8 text-center'>
 						<Heading
 							className='text-xl'
 							level={3}>
@@ -152,13 +152,13 @@ export const SubscriptionModal = ({ initialPlanKey, onClose, open }: Subscriptio
 
 				{error ? (
 					<p
-						className='mt-5 text-sm text-danger'
+						className='mt-5 text-sm text-red-700'
 						role='alert'>
 						{error}
 					</p>
 				) : null}
 
-				<div className='mt-8 flex flex-col-reverse justify-end gap-3 border-t border-line pt-6 sm:flex-row'>
+				<div className='mt-8 flex flex-col-reverse justify-end gap-3 border-t border-sage-200 pt-6 sm:flex-row'>
 					<Button
 						onClick={onClose}
 						variant='secondary'>

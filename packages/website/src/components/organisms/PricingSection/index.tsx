@@ -1,4 +1,4 @@
-import type { SubscriptionPlan } from "@leadtech/contracts";
+import type { SubscriptionPlan } from "@leadtech/common/contracts";
 import Image from "next/image";
 import type { PropsWithChildren } from "react";
 

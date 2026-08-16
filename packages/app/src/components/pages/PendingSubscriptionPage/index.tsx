@@ -1,6 +1,6 @@
 "use client"
 
-import { subscriptionResponseSchema, type SubscriptionResponse } from "@leadtech/contracts"
+import { subscriptionResponseSchema, type SubscriptionResponse } from "@leadtech/common/contracts"
 import { IconCheck, IconRefresh, IconShieldCheck } from "@tabler/icons-react"
 import { useRouter } from "next/navigation"
 import { useCallback, useEffect, useRef, useState, type PropsWithChildren } from "react"
@@ -86,7 +86,7 @@ export const PendingSubscriptionPage = ({}: PendingSubscriptionPageProps) => {
 				<section
 					className='mx-auto max-w-3xl py-8 text-center sm:py-16'
 					data-reveal>
-					<span className='mx-auto grid size-14 place-items-center rounded-xl bg-pale-green text-success'>
+					<span className='mx-auto grid size-14 place-items-center rounded-xl bg-green-50 text-green-700'>
 						{timedOut ? (
 							<IconRefresh
 								size={27}
@@ -111,14 +111,14 @@ export const PendingSubscriptionPage = ({}: PendingSubscriptionPageProps) => {
 							: en.subscription.pendingDescription}
 					</Text>
 
-					<div className='mx-auto mt-12 grid max-w-2xl gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-3'>
+					<div className='mx-auto mt-12 grid max-w-2xl gap-px overflow-hidden rounded-xl border border-sage-200 bg-sage-200 sm:grid-cols-3'>
 						{en.subscription.accessSteps.map((step, index) => (
 							<div
-								className='bg-white p-6 text-left'
+								className='bg-sage-50 p-6 text-left'
 								key={step.title}>
 								<Text
 									as='span'
-									className='grid size-7 place-items-center rounded-full bg-bone text-xs font-bold text-charcoal'
+									className='grid size-7 place-items-center rounded-full bg-sage-100 text-xs font-bold text-sage-950'
 									unstyled>
 									{index + 1}
 								</Text>
@@ -128,7 +128,7 @@ export const PendingSubscriptionPage = ({}: PendingSubscriptionPageProps) => {
 									{step.title}
 								</Heading>
 								<Text
-									className='mt-2 text-sm leading-6 text-muted'
+									className='mt-2 text-sm leading-6 text-sage-600'
 									unstyled>
 									{step.description}
 								</Text>
@@ -138,7 +138,7 @@ export const PendingSubscriptionPage = ({}: PendingSubscriptionPageProps) => {
 
 					{error ? (
 						<Text
-							className='mt-6 text-sm text-danger'
+							className='mt-6 text-sm text-red-700'
 							role='alert'
 							unstyled>
 							{error}

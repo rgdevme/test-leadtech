@@ -1,4 +1,4 @@
-import { createCheckoutRequestSchema } from "@leadtech/contracts"
+import { createCheckoutRequestSchema } from "@leadtech/common/contracts"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 

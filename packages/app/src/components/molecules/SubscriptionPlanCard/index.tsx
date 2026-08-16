@@ -1,7 +1,7 @@
 import { IconCheck } from "@tabler/icons-react"
 import type { PropsWithChildren } from "react"
 
-import type { SubscriptionPlan } from "@leadtech/contracts"
+import type { SubscriptionPlan } from "@leadtech/common/contracts"
 
 import { Heading } from "@/components/atoms/Heading"
 import { Text } from "@/components/atoms/Text"
@@ -23,29 +23,31 @@ const formatPrice = (plan: SubscriptionPlan) =>
 export const SubscriptionPlanCard = ({ onSelect, plan, selected }: SubscriptionPlanCardProps) => (
 	<button
 		aria-pressed={selected}
-		className={`group relative flex size-full min-h-80 flex-col overflow-hidden rounded-xl border p-6 text-left transition duration-200 active:scale-[0.99] ${
+		className={`group relative flex size-full min-h-80 flex-col overflow-hidden rounded-xl border p-6 text-left transition active:scale-[0.99] ${
 			selected
-				? "border-charcoal bg-charcoal text-white"
-				: "border-line bg-white text-charcoal hover:border-soft"
+				? "border-sage-950 bg-sage-950 text-sage-50"
+				: "border-sage-200 bg-sage-50 text-sage-950 hover:border-sage-400"
 		}`}
 		onClick={() => onSelect(plan.key)}
 		type='button'>
 		<div className='flex items-start justify-between gap-4'>
 			<div>
 				<Heading
-					className={`text-xl font-semibold ${selected ? "text-white" : "text-charcoal"}`}
+					className={`text-xl font-semibold ${selected ? "text-sage-50" : "text-sage-950"}`}
 					level={3}>
 					{plan.name}
 				</Heading>
 				<Text
-					className={`mt-2 text-sm leading-6 ${selected ? "text-white/65" : "text-muted"}`}
+					className={`mt-2 text-sm leading-6 ${selected ? "text-sage-50/65" : "text-sage-600"}`}
 					unstyled>
 					{plan.description}
 				</Text>
 			</div>
 			<span
 				className={`grid size-6 shrink-0 place-items-center rounded-full border ${
-					selected ? "border-white bg-white text-charcoal" : "border-line bg-bone text-transparent"
+					selected
+						? "border-sage-50 bg-sage-50 text-sage-950"
+						: "border-sage-200 bg-sage-100 text-sage-950/0"
 				}`}>
 				<IconCheck
 					size={14}
@@ -63,7 +65,7 @@ export const SubscriptionPlanCard = ({ onSelect, plan, selected }: SubscriptionP
 			</Text>
 			<Text
 				as='span'
-				className={`text-sm ${selected ? "text-white/60" : "text-muted"}`}
+				className={`text-sm ${selected ? "text-sage-50/60" : "text-sage-600"}`}
 				unstyled>
 				{en.subscription.priceConnector} {plan.interval}
 			</Text>

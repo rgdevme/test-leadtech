@@ -13,11 +13,11 @@ type EmptyStateProps = PropsWithChildren<{
 }>
 
 export const EmptyState = ({ canCreate, creating, onCreate }: EmptyStateProps) => (
-	<section className='grid min-h-[32rem] place-items-center rounded-xl border border-line bg-white px-6 py-16 text-center'>
+	<section className='grid min-h-[32rem] place-items-center rounded-xl border border-sage-200 bg-sage-50 px-6 py-16 text-center'>
 		<div
 			className='max-w-md'
 			data-reveal>
-			<span className='mx-auto grid size-12 place-items-center rounded-lg bg-pale-blue text-accent-blue'>
+			<span className='mx-auto grid size-12 place-items-center rounded-lg bg-blue-50 text-blue-600'>
 				<IconFilePlus
 					size={24}
 					stroke={1.8}

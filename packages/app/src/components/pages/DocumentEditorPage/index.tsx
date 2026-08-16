@@ -1,6 +1,6 @@
 "use client"
 
-import type { DocumentRecord, SubscriptionResponse } from "@leadtech/contracts"
+import type { DocumentRecord, SubscriptionResponse } from "@leadtech/common/contracts"
 import { useCallback, type PropsWithChildren } from "react"
 
 import { RichTextEditor } from "@/components/organisms/RichTextEditor"

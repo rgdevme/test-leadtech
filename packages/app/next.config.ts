@@ -2,7 +2,7 @@ import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
 	agentRules: false,
-	transpilePackages: ["@leadtech/contracts"]
+	transpilePackages: ["@leadtech/common"]
 }
 
 export default nextConfig

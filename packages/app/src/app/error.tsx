@@ -12,7 +12,7 @@ type ErrorPageProps = {
 
 export default function ErrorPage({ reset }: ErrorPageProps) {
 	return (
-		<main className='grid min-h-screen place-items-center bg-canvas px-6 text-center'>
+		<main className='grid min-h-screen place-items-center bg-sage-50 px-6 text-center'>
 			<div className='max-w-lg'>
 				<Heading
 					className='text-5xl'

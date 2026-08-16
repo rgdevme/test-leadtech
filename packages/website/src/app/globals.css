@@ -1,77 +1,37 @@
+@import "@leadtech/common/styles/theme.css";
 @import "tailwindcss";
-
-@theme inline {
-  --font-sans: var(--font-outfit);
-  --color-paper: #f2efe6;
-  --color-paper-bright: #fbf9f2;
-  --color-paper-deep: #e5dfd2;
-  --color-ink: #171814;
-  --color-ink-soft: #35362f;
-  --color-sage: #99a48a;
-  --color-sage-deep: #69725f;
-  --color-signal: #c7ff3d;
-  --color-line: rgb(23 24 20 / 0.12);
-  --color-line-inverse: rgb(242 239 230 / 0.15);
-  --default-transition-duration: 350ms;
-  --ease-mass: cubic-bezier(0.32, 0.72, 0, 1);
-}
 
 :root {
   color-scheme: light;
 }
 
 * {
-  box-sizing: border-box;
+  @apply box-border duration-350;
 }
 
 html {
-  scroll-behavior: smooth;
-  background: var(--color-paper);
+  @apply scroll-smooth bg-sage-100;
 }
 
 body {
-  margin: 0;
-  background:
-    radial-gradient(circle at 14% 6%, rgb(153 164 138 / 0.2), transparent 30rem), var(--color-paper);
-  color: var(--color-ink);
-  font-family: var(--font-outfit), sans-serif;
+  @apply m-0 bg-radial from-sage-500/20 to-sage-100 font-sans text-sage-950;
   text-rendering: optimizeLegibility;
 }
 
-body::before {
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  pointer-events: none;
-  content: "";
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
-}
-
 ::selection {
-  background: var(--color-signal);
-  color: var(--color-ink);
+  @apply bg-yellow-400 text-sage-950;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button,
-a,
-summary {
-  -webkit-tap-highlight-color: transparent;
+  @apply text-inherit no-underline;
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-signal);
-  outline-offset: 4px;
+  @apply outline-3 outline-offset-4 outline-yellow-400;
 }
 
 img {
-  display: block;
-  max-width: 100%;
+  @apply block max-w-full;
 }
 
 @media (prefers-reduced-motion: reduce) {

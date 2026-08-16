@@ -4,7 +4,7 @@ import {
 	stripeMetadataKeys,
 	stripeSubscriptionIdSchema,
 	subscriptionPlanIds
-} from "@leadtech/contracts"
+} from "@leadtech/common/contracts"
 import type Stripe from "stripe"
 
 import { getFirestoreDatabase } from "../firebase/admin.js"

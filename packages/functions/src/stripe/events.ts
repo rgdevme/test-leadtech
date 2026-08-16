@@ -1,4 +1,4 @@
-import { supportedStripeWebhookEvents } from "@leadtech/contracts"
+import { supportedStripeWebhookEvents } from "@leadtech/common/contracts"
 import type Stripe from "stripe"
 
 export type SupportedStripeEvent =

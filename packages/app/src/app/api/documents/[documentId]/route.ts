@@ -1,4 +1,4 @@
-import { documentIdSchema, updateDocumentRequestSchema } from "@leadtech/contracts"
+import { documentIdSchema, updateDocumentRequestSchema } from "@leadtech/common/contracts"
 import { NextResponse } from "next/server"
 
 import { ApiError } from "@/errors/apiError"

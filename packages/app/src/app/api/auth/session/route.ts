@@ -1,4 +1,4 @@
-import { createSessionRequestSchema } from "@leadtech/contracts"
+import { createSessionRequestSchema } from "@leadtech/common/contracts"
 import type { DecodedIdToken } from "firebase-admin/auth"
 import { cookies } from "next/headers"
 import { NextResponse } from "next/server"

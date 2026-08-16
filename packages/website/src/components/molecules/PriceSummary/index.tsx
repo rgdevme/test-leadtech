@@ -1,4 +1,4 @@
-import type { SubscriptionPlan } from "@leadtech/contracts";
+import type { SubscriptionPlan } from "@leadtech/common/contracts";
 import type { PropsWithChildren } from "react";
 
 import { Button, Heading, Text } from "@/components/atoms";

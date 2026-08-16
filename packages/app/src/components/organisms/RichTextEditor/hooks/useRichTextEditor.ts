@@ -4,7 +4,7 @@ import {
 	documentRecordSchema,
 	richTextDocumentSchema,
 	type DocumentRecord
-} from "@leadtech/contracts"
+} from "@leadtech/common/contracts"
 import { useEditor } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
 import { useCallback, useEffect, useRef, useState } from "react"

@@ -3,7 +3,7 @@
 import { createUserWithEmailAndPassword, signOut } from "firebase/auth"
 import { useForm } from "@mantine/form"
 
-import { csrfTokenResponseSchema } from "@leadtech/contracts"
+import { csrfTokenResponseSchema } from "@leadtech/common/contracts"
 
 import { firebaseAuth, prepareFirebaseAuth } from "@/firebase/client"
 import { requestJson, requestNoContent } from "@/utils/apiClient"

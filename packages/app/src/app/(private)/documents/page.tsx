@@ -1,4 +1,4 @@
-import { subscriptionPlanKeySchema } from "@leadtech/contracts"
+import { subscriptionPlanKeySchema } from "@leadtech/common/contracts"
 
 import { DocumentsPage as DocumentsPageView } from "@/components/pages/DocumentsPage"
 import { requireSessionPrincipal } from "@/guards/authentication"

@@ -7,13 +7,13 @@
   },
   "scripts": {
     "build": "turbo run build",
-    "build:contracts": "turbo run build --filter=@leadtech/contracts ",
+    "build:common": "turbo run build --filter=@leadtech/common",
     "check": "turbo run check:format check:lint check:typecheck",
     "check:format": "turbo run check:format",
     "check:lint": "turbo run check:lint",
     "check:typecheck": "turbo run check:typecheck",
     "dev": "turbo run dev",
-    "dev:apps": "pnpm build:contracts && turbo run dev --filter=@leadtech/website --filter=@leadtech/app",
+    "dev:apps": "pnpm build:common && turbo run dev --filter=@leadtech/website --filter=@leadtech/app",
     "dev:functions": "pnpm --filter @leadtech/functions dev",
     "start": "pnpm -r --parallel start"
   },

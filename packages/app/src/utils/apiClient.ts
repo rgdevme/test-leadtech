@@ -1,6 +1,6 @@
 "use client"
 
-import { apiErrorResponseSchema } from "@leadtech/contracts"
+import { apiErrorResponseSchema } from "@leadtech/common/contracts"
 import type { z } from "zod"
 
 export class ApiClientError extends Error {

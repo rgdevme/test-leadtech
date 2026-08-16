@@ -17,11 +17,11 @@
 }
 
 .mediaShell {
-  @apply relative mb-4 rounded-4xl bg-ink/5 p-2 inset-ring inset-ring-ink/5;
+  @apply relative mb-4 rounded-4xl bg-sage-950/5 p-2 inset-ring inset-ring-sage-950/5;
 }
 
 .mediaCore {
-  @apply relative overflow-hidden rounded-3xl bg-paper-bright inset-shadow-sm;
+  @apply relative overflow-hidden rounded-3xl bg-sage-50 inset-shadow-sm;
 
   &:hover img {
     @apply scale-105;
