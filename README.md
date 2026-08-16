@@ -78,13 +78,25 @@ packages/common ──shared contracts, data, assets, and theme──> all proje
 ```bash
 pnpm install
 ```
-### 4. Configure the apps' environment variables
+### 2. Configure the apps' environment variables
 
 All projects have each an `.env.example` (functions has `secret.example`) indicating the used variables with comments on their purpose, source, an example value, and a default value.
 
 Copy each example file, and rename it to replace `example` with `local`.
 
-### 2. Install Stripe and authenticate with your account
+You also need a `firebase.config.json` file at the root of the repo, with the credentials provided by your firebase project:
+```json
+{
+  "apiKey": "<apiKey>",
+  "authDomain": "<authDomain>",
+  "projectId": "<projectId>",
+  "storageBucket": "<storageBucket>",
+  "messagingSenderId": "<messagingSenderId>",
+  "appId": "<appId>"
+}
+```
+
+### 3. Install Stripe and authenticate with your account
 
 - Install and authenticate:
 ```bash
