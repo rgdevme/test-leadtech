@@ -1,65 +1,172 @@
-# Leadtech monorepo
+# DraftRoom
 
-pnpm workspace for the marketing website, authenticated application, shared runtime contracts, and Firebase Functions backend.
+DraftRoom is a focused browser writing workspace. The repository contains the public website, authenticated editor, shared project resources, and Stripe webhook processing.
 
-## Packages
+## Project architecture
 
-- packages/website: Next.js, Tailwind CSS, and GSAP marketing site.
-- packages/app: Next.js application prepared for Firebase authentication, Stripe subscriptions, and TipTap editing.
-- packages/contracts: provider-independent runtime schemas and shared TypeScript contracts.
-- packages/functions: signature-verified Stripe webhook processing and Firestore subscription projection.
+```text
+Browser
+  ├─ packages/website   Public product and pricing website
+  └─ packages/app       Authentication, billing, documents, and editor
+          │
+          └─ Firestore  Users, documents, subscriptions, and webhook records
 
-## Commands
+Stripe ──signed webhook──> packages/functions ──> Firestore
 
-- `pnpm install`
-- `pnpm dev`
-- `pnpm dev:functions`
-- `pnpm build`
-- `pnpm check`
+packages/common ──shared contracts, data, assets, and theme──> all projects
+```
 
-Keep Stripe and Firebase server credentials out of source control. Stripe subscription access is granted only after a signature-verified webhook atomically updates `subscriptions/{uid}` and records `stripeWebhookEvents/{eventId}`. The Checkout success redirect cannot grant access because it is a browser-controlled navigation, not proof of payment or current subscription state.
+### `packages/website`
 
-## Local Stripe webhook flow
+- Presents the DraftRoom product, benefits, pricing, trust information, and FAQ.
+- Links visitors to registration and sign-in in `packages/app`.
+- Uses shared plan data, brand data, assets, and design settings from `packages/common`.
+- Does not access Firebase, Stripe, or private application data.
 
-1. In Stripe's sandbox, create a restricted API key with `Subscriptions` read access. Copy the `rk_test_...` value. The webhook uses this key to retrieve the current Subscription before projecting entitlement.
+### `packages/app`
 
-2. Start Stripe CLI forwarding and keep it running:
+- Provides registration, sign-in, sign-out, subscription checkout, and subscription status.
+- Provides owner-only document listing, reading, creation, editing, renaming, saving, and deletion.
+- Uses server-validated Firebase sessions and server-side Firestore access.
+- Allows inactive owners to read saved documents while limiting changes to active subscribers.
 
-   ```sh
-   pnpm --dir packages/functions dev:stripe
-   ```
+### `packages/functions`
 
-   Stripe requires each full event name. `customer.subscription` by itself is not a valid event. After the CLI reports `Ready!`, copy the `whsec_...` signing secret it prints.
+- Receives the public Stripe webhook.
+- Verifies Stripe signatures before processing events.
+- Records processed events and projects subscription access into Firestore in one transaction.
+- Uses Node.js 22 because it is the Firebase Functions runtime supported by this project.
 
-3. Copy `packages/functions/.env.example` to `packages/functions/.env.local`, then set the two local secrets:
+### `packages/common`
 
-   ```env
-   STRIPE_SUBSCRIPTION_READ_KEY=rk_test_yourRestrictedKey
-   STRIPE_WEBHOOK_SIGNING_SECRET=whsec_REDACTED
-   ```
+- Owns provider-independent API, document, billing, persistence, authentication, and Stripe contracts.
+- Owns shared English locale data, including the DraftRoom identity and public plan copy.
+- Owns the shared logo, favicon, Tailwind theme, font family, colors, and motion curve.
+- Exposes contracts as compiled TypeScript and exposes assets and styles from source files.
+- Does not contain React components, provider SDK objects, secrets, or business workflows.
 
-   The Stripe CLI `whsec_...` value belongs only in `STRIPE_WEBHOOK_SIGNING_SECRET`. It is not an API key and cannot replace `STRIPE_SUBSCRIPTION_READ_KEY`.
+## Project technologies
 
-4. Start the application packages, Firebase emulators, and Stripe forwarding together:
+| Technology                   | Purpose                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------ |
+| TypeScript                   | Provides strict types across every project.                              |
+| pnpm workspaces              | Installs and links the monorepo packages.                                |
+| Turborepo                    | Orders builds and runs development and validation tasks across projects. |
+| Next.js and React            | Power the website and authenticated application.                         |
+| Tailwind CSS and CSS Modules | Provide shared design settings and component-scoped styles.              |
+| GSAP                         | Handles focused marketing and interface motion.                          |
+| Tiptap                       | Provides the rich-text editor.                                           |
+| Firebase Authentication      | Registers users and verifies identity.                                   |
+| Cloud Firestore              | Stores documents, subscriptions, and processed webhook events.           |
+| Firebase Functions           | Hosts the Stripe webhook on Node.js 22.                                  |
+| Stripe Checkout and webhooks | Collect subscription payments and confirm access on the server.          |
+| Zod                          | Validates shared contracts and untrusted input.                          |
+| Zustand                      | Manages shared client state.                                             |
+| Mantine Form                 | Manages controlled authentication forms.                                 |
 
-   ```sh
-   pnpm dev
-   ```
+## Set up the project
 
-5. Complete a subscription Checkout from the app with Stripe's sandbox card `4242 4242 4242 4242`, any future expiry, and any CVC. The Checkout service must place the Firebase UID in both Session and Subscription `firebaseUid` metadata.
+### Requirements
 
-6. In the Emulator UI at `http://127.0.0.1:4000`, confirm that `subscriptions/{uid}` and `stripeWebhookEvents/{eventId}` were written. Re-deliver the event from Stripe Workbench and confirm that the projection timestamp does not change.
+- Node.js 24 or newer for local project tooling.
+- pnpm 11.
+- Firebase CLI for the local Emulator Suite.
+- Stripe CLI for local webhook forwarding.
 
-Stripe CLI-generated subscription fixtures do not include the application's required Firebase UID metadata by default. Such events are safely recorded as rejected and acknowledged instead of granting entitlement.
+### 1. Install dependencies
 
-## Safe webhook troubleshooting
+```bash
+pnpm install
+```
+### 4. Configure the apps' environment variables
 
-- A `400` response means the signature header is missing or does not match the exact raw request body. The Stripe CLI signing secret is different from a Dashboard endpoint secret.
-- A verified unsupported event returns `200` and performs no write.
-- A supported event with missing, invalid, or conflicting Firebase UID metadata is recorded in the event ledger and returns `200` to avoid endless retries.
-- Stripe retrieval or Firestore failures return `500` so Stripe retries delivery.
-- An active or trialing subscription remains inactive unless its Price ID is configured in `subscriptionPlanIds` and exposed through `publicSubscriptionPlans` in `@leadtech/contracts`.
+All projects have each an `.env.example` (functions has `secret.example`) indicating the used variables with comments on their purpose, source, an example value, and a default value.
 
-## Known scope
+Copy each example file, and rename it to replace `example` with `local`.
 
-The Functions package owns only the public Stripe webhook and subscription projection. Checkout Session creation, Firebase session cookies, browser redirects, document APIs, and UI entitlement decisions belong to the application package. This repository is a local test project; production deployment and production secret configuration are intentionally out of scope.
+### 2. Install Stripe and authenticate with your account
+
+- Install and authenticate:
+```bash
+pnpm install --global @stripe/cli
+stripe login
+```
+Then, create an API key and store it in:
+  -  [functions' .secret.local](packages/functions/.secret.local).
+  -  [app's .env.local](packages/app/.env.local).
+
+### 3. Get your Stripe webhook secret
+
+- Run the following script:
+  ```bash
+  pnpm --filter @leatech/functions dev:stripe
+  ```
+- Copy the resulting webhook secret into [.secret.local](packages/functions/.secret.local).
+
+## Run the project
+
+> Turborepo builds `packages/common` before its consumers, then builds the website, app, and Functions output. A successful build prepares the repository for `pnpm start`.
+
+To run the built project:
+```bash
+pnpm build
+pnpm start
+```
+The root command uses pnpm workspace recursion to run every available `start` script in parallel:
+
+| Project   | Result                                                                     |
+| --------- | -------------------------------------------------------------------------- |
+| Website   | Starts the production Next.js server on `http://localhost:3000`.           |
+| App       | Starts the production Next.js server on `http://localhost:3001`.           |
+| Functions | Loads the compiled Functions package and runs the stripe webhook listener. |
+
+## Run the development servers
+
+```bash
+pnpm dev
+```
+
+Turborepo runs the persistent `dev` task in every project that provides one, after building common:
+
+| Project   | Result                                                            |
+| --------- | ----------------------------------------------------------------- |
+| Website   | Starts Next.js development on `http://localhost:3000`.            |
+| App       | Starts Next.js development on `http://localhost:3001`.            |
+| Functions | Starts the Firebase emulators and Stripe CLI forwarding together. |
+
+Useful focused commands:
+
+- `pnpm dev:apps`: builds `packages/common`, then starts only the website and app.
+- `pnpm dev:functions`: starts only the Functions development process.
+- `pnpm check`: runs formatting, linting, and typechecking through Turborepo.
+
+## Test the Stripe webhook flow
+
+1. Create a Stripe sandbox restricted key with `Subscriptions` read access.
+2. Add the key and local webhook signing secret to `packages/functions/.secret.local`.
+3. Run `pnpm dev`.
+4. Wait for Stripe CLI to report `Ready!` and confirm its `whsec_...` value matches `STRIPE_WEBHOOK_SIGNING_SECRET`.
+5. Register in the app and complete Checkout with Stripe's sandbox card `4242 4242 4242 4242`, any future expiry, and any CVC.
+6. Open the Emulator UI at `http://127.0.0.1:4000`.
+7. Confirm `subscriptions/{uid}` and `stripeWebhookEvents/{eventId}` were written.
+8. Redeliver the event from Stripe Workbench and confirm the projection timestamp does not change.
+
+### Access decision
+
+- A Checkout redirect never grants editor access.
+- The webhook must verify the Stripe signature and write the subscription projection.
+- Only an `active` or `trialing` subscription using an allowed plan grants editing access.
+- A delayed webhook keeps the user on the pending subscription screen.
+
+### Safe troubleshooting
+
+- `400`: the signature is missing or does not match the exact raw request body.
+- `200` with no write: the verified event is unsupported or was already processed.
+- `200` with a rejected event record: required Firebase UID metadata is missing, invalid, or conflicting.
+- `500`: Stripe or Firestore failed temporarily, so Stripe should retry.
+
+## Current limits
+
+- The repository is prepared for local evaluation, not production deployment.
+- Collaboration, native apps, offline editing, email verification, and an admin interface are out of scope.
+- The Firebase project and Stripe integration use local emulators and sandbox credentials.

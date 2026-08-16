@@ -508,6 +508,64 @@ Always follow these rules to manage state with Zustand:
 - Prefer **atomic selectors** over selecting the entire store to avoid unnecessary re-renders.
 - Persist state to `localStorage` only when explicitly required (e.g. cart, theme preference) using Zustand's `persist` middleware.
 
+## Styles architecture: CSS Modules
+
+When styling components, always follow these rules:
+
+- Read the project's design system documentation.
+- Use CSS Modules for component styles.
+- Keep each module beside the component that imports it.
+- Name component style files `index.module.css`.
+- Import module classes through the generated `styles` object.
+- Do not add component selectors to a global stylesheet.
+
+### Styling components with Tailwind
+
+- Use Tailwind utilities through `@apply` instead of CSS properties.
+- Use the closest standard Tailwind value when an exact value is unavailable.
+- Do not use arbitrary values or custom-property utility syntax unless explicitly asked to.
+- Add a shared theme value only when the value represents a reusable design decision.
+- Consume colors from the common theme through Tailwind classes.
+- Do not write color values directly in components or CSS Modules.
+
+#### Global references
+
+- Start every component CSS Module with `@reference` to that project's `globals.css`.
+- Use the reference only to make the shared Tailwind theme available to `@apply`.
+- Keep `globals.css` limited to theme imports, root elements, browser defaults, selection, focus, media preferences, and other shared root-level behavior.
+
+#### Variants
+
+- Use one base module class for styles shared by every variant.
+- Add semantic data attributes to the rendered element for variant state.
+- Select data attributes inside the base module class.
+- Do not build modifier class names from component props.
+
+```tsx
+<button
+	className={styles.button}
+	data-variant={variant}
+/>
+```
+
+```css
+@reference "../../../app/globals.css";
+
+.button {
+	@apply inline-flex items-center;
+
+	&[data-variant="primary"] {
+		@apply bg-yellow-400 text-sage-950;
+	}
+}
+```
+
+### Shared design source
+
+- Read the visual intent in [Design system](../design.md).
+- Consume theme values from `packages/common/src/styles/theme.css`.
+- Do not duplicate shared fonts, colors, or motion settings in project stylesheets.
+
 ## Testing
 
 - Create tests only when:
@@ -653,9 +711,17 @@ When writting tests with Playwright, always review these tools and choose most c
 
 ## Documentation Index
 
+### Overview
+
+- [DraftRoom design system](design.md): Shared visual direction, color roles, shapes, typography, and motion rules for DraftRoom.
+
+### info
+
+- [DraftRoom take-home assignment](info/assignment.md): Original product and delivery requirements for the DraftRoom implementation.
+
 ### roadmaps
 
-- [Authenticated editor application roadmap](roadmaps/app.md): Delivery plan for authentication, subscription gating, document APIs, and the Tiptap workspace in @leadtech/app.
-- [Firebase Functions roadmap](roadmaps/functions.md): Delivery plan for verified Stripe webhook processing and Firestore entitlement projection in @leadtech/functions.
-- [Integration contracts and parallel delivery plan](roadmaps/integration-contracts.md): Canonical boundaries, API contracts, persistence schemas, and sequencing for the Leadtech take-home implementation.
-- [Marketing website roadmap](roadmaps/website.md): Delivery plan for the public conversion surface in the @leadtech/website workspace.
+- [Authenticated editor application roadmap](roadmaps/app.md): Current responsibilities, flows, structure, and remaining validation for the DraftRoom application.
+- [Firebase Functions roadmap](roadmaps/functions.md): Current Stripe webhook responsibilities, processing flow, and remaining validation for DraftRoom Functions.
+- [Integration contracts and project boundaries](roadmaps/integration-contracts.md): Current package ownership, shared contracts, service boundaries, and integration checks for DraftRoom.
+- [Marketing website roadmap](roadmaps/website.md): Current responsibilities, conversion flow, interaction decisions, and remaining validation for the DraftRoom website.

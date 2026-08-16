@@ -2,9 +2,17 @@
 title: Documentation Index
 ---
 
+### Overview
+
+- [DraftRoom design system](design.md): Shared visual direction, color roles, shapes, typography, and motion rules for DraftRoom.
+
+### info
+
+- [DraftRoom take-home assignment](info/assignment.md): Original product and delivery requirements for the DraftRoom implementation.
+
 ### roadmaps
 
-- [Authenticated editor application roadmap](roadmaps/app.md): Delivery plan for authentication, subscription gating, document APIs, and the Tiptap workspace in @leadtech/app.
-- [Firebase Functions roadmap](roadmaps/functions.md): Delivery plan for verified Stripe webhook processing and Firestore entitlement projection in @leadtech/functions.
-- [Integration contracts and parallel delivery plan](roadmaps/integration-contracts.md): Canonical boundaries, API contracts, persistence schemas, and sequencing for the Leadtech take-home implementation.
-- [Marketing website roadmap](roadmaps/website.md): Delivery plan for the public conversion surface in the @leadtech/website workspace.
+- [Authenticated editor application roadmap](roadmaps/app.md): Current responsibilities, flows, structure, and remaining validation for the DraftRoom application.
+- [Firebase Functions roadmap](roadmaps/functions.md): Current Stripe webhook responsibilities, processing flow, and remaining validation for DraftRoom Functions.
+- [Integration contracts and project boundaries](roadmaps/integration-contracts.md): Current package ownership, shared contracts, service boundaries, and integration checks for DraftRoom.
+- [Marketing website roadmap](roadmaps/website.md): Current responsibilities, conversion flow, interaction decisions, and remaining validation for the DraftRoom website.

@@ -9,9 +9,9 @@ export const getStripe = () => {
 		return stripeClient
 	}
 
-	const restrictedKey = process.env.STRIPE_APP_RESTRICTED_KEY
+	const restrictedKey = process.env.STRIPE_API_KEY
 	if (!restrictedKey) {
-		throw new Error("STRIPE_APP_RESTRICTED_KEY must be configured.")
+		throw new Error("STRIPE_API_KEY must be configured.")
 	}
 
 	stripeClient = new Stripe(restrictedKey, {

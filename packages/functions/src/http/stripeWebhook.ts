@@ -4,7 +4,7 @@ import { onRequest } from "firebase-functions/v2/https"
 import {
 	getEnvironment,
 	initializeEnvironment,
-	stripeSubscriptionReadKey,
+	stripeAPIKey,
 	stripeWebhookSigningSecret
 } from "../config/environment.js"
 import { initializeFirebaseAdmin } from "../firebase/admin.js"
@@ -31,7 +31,7 @@ export const stripeWebhook = onRequest(
 		cors: false,
 		invoker: "public",
 		region: "us-central1",
-		secrets: [stripeSubscriptionReadKey, stripeWebhookSigningSecret],
+		secrets: [stripeAPIKey, stripeWebhookSigningSecret],
 		timeoutSeconds: 60
 	},
 	async (request, response) => {

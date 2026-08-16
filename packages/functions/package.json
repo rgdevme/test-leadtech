@@ -17,7 +17,9 @@
 		"dev": "conc \"pnpm:dev:*\"",
 		"dev:functions": "pnpm build && pnpm --dir ../.. exec firebase emulators:start",
 		"dev:stripe": "stripe listen --events checkout.session.completed,customer.subscription.created,customer.subscription.updated,customer.subscription.deleted,invoice.paid,invoice.payment_failed --forward-to http://127.0.0.1:5001/job-application-test-8e837/us-central1/stripeWebhook",
-		"start": "node lib/index.js"
+		"start": "conc \"pnpm:start:*\"",
+		"start:stripe": "pnpm dev:stripe",
+		"start:functions": "node lib/index.js"
 	},
 	"dependencies": {
 		"@leadtech/common": "workspace:*",

@@ -2,14 +2,12 @@ import Stripe from "stripe"
 
 import { getEnvironment } from "../config/environment.js"
 
-const STRIPE_API_VERSION = "2026-07-29.dahlia"
-
 let stripeClient: Stripe | undefined
 
 export const initializeStripeClient = () => {
-	const { stripeSubscriptionReadKey } = getEnvironment()
-	stripeClient = new Stripe(stripeSubscriptionReadKey, {
-		apiVersion: STRIPE_API_VERSION,
+	const { stripeAPIKey } = getEnvironment()
+	stripeClient = new Stripe(stripeAPIKey, {
+		apiVersion: "2026-07-29.dahlia",
 		emitEventBodies: false,
 		maxNetworkRetries: 1,
 		telemetry: false,
