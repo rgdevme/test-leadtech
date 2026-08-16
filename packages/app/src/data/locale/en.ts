@@ -1,9 +1,7 @@
+import { brandLocale } from "@leadtech/common/data/locale/en"
+
 export const en = {
-	brand: {
-		name: "Draftroom",
-		mark: "D",
-		product: "Writing workspace"
-	},
+	brand: brandLocale,
 	navigation: {
 		documents: "Documents",
 		profile: "Account",
@@ -16,7 +14,7 @@ export const en = {
 			description: "Your documents are waiting exactly where you left them.",
 			submit: "Sign in",
 			submitting: "Signing in",
-			alternatePrompt: "New to Draftroom?",
+			alternatePrompt: `New to ${brandLocale.name}?`,
 			alternateAction: "Create an account"
 		},
 		signUp: {

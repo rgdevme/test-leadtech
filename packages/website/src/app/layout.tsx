@@ -1,3 +1,4 @@
+import favicon from "@leadtech/common/assets/favicon.svg";
 import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
 import type { PropsWithChildren } from "react";
@@ -16,6 +17,7 @@ const outfit = Outfit({
 type RootLayoutProps = PropsWithChildren;
 
 export const metadata: Metadata = {
+  icons: { icon: favicon.src },
   metadataBase: environment.siteUrl,
 };
 

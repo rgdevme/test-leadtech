@@ -1,0 +1,13 @@
+@reference "../../../app/globals.css";
+
+.logo {
+	@apply inline-flex items-center;
+
+	&[data-size="compact"] .image {
+		@apply h-6;
+	}
+}
+
+.image {
+	@apply h-8 w-auto;
+}

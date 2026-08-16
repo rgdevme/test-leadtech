@@ -5,7 +5,7 @@ import { en } from "@/data/locale/en";
 const manifest = (): MetadataRoute.Manifest => {
   return {
     name: en.metadata.applicationName,
-    short_name: en.footer.product,
+    short_name: en.brand.name,
     description: en.metadata.description,
     start_url: "/en",
     display: "browser",

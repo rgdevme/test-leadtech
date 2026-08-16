@@ -1,13 +1,13 @@
 @reference "../../../app/globals.css";
 
 .logo {
-  @apply inline-flex items-baseline text-2xl font-bold text-ink;
+  @apply inline-flex items-center;
 
-  &[data-inverse="true"] {
-    @apply text-paper;
+  &[data-inverse="true"] .image {
+    @apply brightness-0 invert;
   }
 }
 
-.dot {
-  @apply text-sage-deep;
+.image {
+  @apply h-8 w-auto;
 }

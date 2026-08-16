@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
 
-import { Text } from "@/components/atoms";
 import { en } from "@/data/locale/en";
 
 export const alt = en.metadata.imageAlt;
@@ -19,8 +18,7 @@ const OpenGraphImage = () =>
         height: "100%",
         padding: 48,
         width: "100%",
-      }}
-    >
+      }}>
       <div
         style={{
           alignItems: "stretch",
@@ -31,8 +29,7 @@ const OpenGraphImage = () =>
           flex: 1,
           overflow: "hidden",
           padding: 8,
-        }}
-      >
+        }}>
         <div
           style={{
             background: "#171814",
@@ -42,14 +39,9 @@ const OpenGraphImage = () =>
             flexDirection: "column",
             justifyContent: "space-between",
             padding: 56,
-          }}
-        >
+          }}>
           <div style={{ color: "#f2efe6", display: "flex", fontSize: 38, fontWeight: 700 }}>
-            doc
-            <Text as="span" style={{ color: "#99a48a" }} unstyled>
-              .
-            </Text>
-            io
+            {en.brand.name}
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div
@@ -60,8 +52,7 @@ const OpenGraphImage = () =>
                 fontWeight: 500,
                 lineHeight: 0.95,
                 maxWidth: 850,
-              }}
-            >
+              }}>
               {en.hero.titleLead} {en.hero.titleAccent}
             </div>
             <div

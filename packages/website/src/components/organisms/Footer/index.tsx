@@ -43,7 +43,7 @@ export const Footer = ({ copy, homeHref, primaryHref, signInHref }: FooterProps)
       </div>
       <div className={styles.meta}>
         <div>
-          <Logo href={homeHref} inverse label={copy.product} />
+          <Logo href={homeHref} inverse />
           <Text as="span" unstyled>
             {copy.descriptor}
           </Text>

@@ -1,11 +1,14 @@
+import { brandLocale } from "@leadtech/common/data/locale/en";
+
 export const en = {
+  brand: brandLocale,
   locale: "en-US",
   metadata: {
-    title: "doc.io — Rich-text writing, without the noise",
+    title: `${brandLocale.name} — Rich-text writing, without the noise`,
     description:
       "Create, format, and keep rich-text documents in a focused online editor. Choose one clear monthly plan and start writing in your browser.",
-    applicationName: "doc.io",
-    imageAlt: "The doc.io rich-text editor on a warm paper-inspired canvas",
+    applicationName: brandLocale.name,
+    imageAlt: `The ${brandLocale.name} rich-text editor on a warm paper-inspired canvas`,
   },
   accessibility: {
     skipToContent: "Skip to content",
@@ -24,11 +27,9 @@ export const en = {
     eyebrow: "A calmer place to write",
     titleLead: "Write richly.",
     titleAccent: "Keep it yours.",
-    description:
-      "doc.io is a focused online editor for creating, formatting, and keeping your rich-text documents in one calm browser workspace.",
+    description: `${brandLocale.name} is a focused online editor for creating, formatting, and keeping your rich-text documents in one calm browser workspace.`,
     scrollLabel: "Explore the benefits",
-    imageAlt:
-      "An angled doc.io browser editor showing formatting controls and a highlighted paragraph",
+    imageAlt: `An angled ${brandLocale.name} browser editor showing formatting controls and a highlighted paragraph`,
     note: "Rich text. Browser based. Yours to keep.",
   },
   benefits: {
@@ -36,7 +37,7 @@ export const en = {
     title: "Everything between the idea and the final full stop.",
     description:
       "The tools you expect from rich text, arranged around the document instead of around distraction.",
-    imageAlt: "A paper-inspired doc.io editor beside save and document archive modules",
+    imageAlt: `A paper-inspired ${brandLocale.name} editor beside save and document archive modules`,
     items: [
       {
         index: "A",
@@ -63,8 +64,7 @@ export const en = {
     title: "From blank page to saved document—without leaving the flow.",
     description:
       "The workspace keeps the essential actions close and the document itself in charge.",
-    imageAlt:
-      "Three layered doc.io browser panels showing document creation, editing, and a saved state",
+    imageAlt: `Three layered ${brandLocale.name} browser panels showing document creation, editing, and a saved state`,
     steps: [
       {
         index: "01",
@@ -86,8 +86,7 @@ export const en = {
   trust: {
     eyebrow: "Clear by design",
     title: "No inflated promises. Just concrete product assurances.",
-    description:
-      "doc.io keeps the subscription boundary explicit so you always know what payment enables and what remains yours.",
+    description: `${brandLocale.name} keeps the subscription boundary explicit so you always know what payment enables and what remains yours.`,
     imageAlt: "An archival folio of tactile document sheets with a precise version rail",
     items: [
       {
@@ -143,19 +142,17 @@ export const en = {
           "Your documents stay attached to your account. Access is owner-scoped, and cancellation does not transfer or erase that ownership.",
       },
       {
-        question: "Where can I use doc.io?",
-        answer:
-          "doc.io runs in a modern web browser on responsive screens. Native apps and offline editing are not part of the current product scope.",
+        question: `Where can I use ${brandLocale.name}?`,
+        answer: `${brandLocale.name} runs in a modern web browser on responsive screens. Native apps and offline editing are not part of the current product scope.`,
       },
     ],
   },
   footer: {
     title: "Give the next idea a place to become clear.",
-    description: "Open doc.io in your browser and begin with a blank page.",
+    description: `Open ${brandLocale.name} in your browser and begin with a blank page.`,
     action: "Start writing",
     signIn: "Already have an account? Sign in",
     imageAlt: "A blank warm paper sheet with a bright text caret on a dark desk",
-    product: "doc.io",
     descriptor: "Online rich-text documents",
     copyright: "Built for focused writing.",
   },

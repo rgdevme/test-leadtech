@@ -70,7 +70,7 @@ export const LandingPage = ({ copy, locale }: LandingPageProps) => {
         <Header>
           <SiteHeader menuLabel={copy.accessibility.toggleNavigation}>
             <Brand>
-              <Logo href={homeHref} label={copy.metadata.applicationName} />
+              <Logo href={homeHref} />
             </Brand>
             <Navigation>
               <a href="#benefits">{copy.navigation.benefits}</a>

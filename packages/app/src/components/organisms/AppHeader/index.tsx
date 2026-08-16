@@ -7,6 +7,7 @@ import type { PropsWithChildren } from "react"
 import { useState } from "react"
 
 import { Button } from "@/components/atoms/Button"
+import { Logo } from "@/components/atoms/Logo"
 import { Text } from "@/components/atoms/Text"
 import { en } from "@/data/locale/en"
 import { firebaseAuth } from "@/firebase/client"
@@ -39,35 +40,23 @@ export const AppHeader = ({ email }: AppHeaderProps) => {
 	}
 
 	return (
-		<header className='sticky top-0 z-30 border-b border-line bg-canvas/90 backdrop-blur-xl'>
+		<header className='sticky top-0 z-30 border-b border-sage-200 bg-sage-50/90 backdrop-blur-xl'>
 			<div className='mx-auto flex min-h-18 max-w-[90rem] items-center justify-between gap-5 px-5 sm:px-8 lg:px-12'>
-				<NextLink
-					className='flex items-center gap-3'
-					href='/documents'>
-					<Text
-						as='span'
-						className='grid size-8 place-items-center rounded-md bg-charcoal font-serif text-lg text-white'
-						unstyled>
-						{en.brand.mark}
-					</Text>
-					<Text
-						as='span'
-						className='hidden text-sm font-bold text-charcoal sm:inline'
-						unstyled>
-						{en.brand.name}
-					</Text>
-				</NextLink>
+				<Logo
+					href='/documents'
+					size='compact'
+				/>
 
 				<nav
 					aria-label='Workspace navigation'
-					className='flex items-center gap-1 rounded-lg border border-line bg-white p-1'>
+					className='flex items-center gap-1 rounded-lg border border-sage-200 bg-sage-50 p-1'>
 					{navItems.map(({ href, label, Icon }) => {
 						const active = pathname === href || pathname.startsWith(`${href}/`)
 						return (
 							<NextLink
 								aria-current={active ? "page" : undefined}
 								className={`flex min-h-9 items-center gap-2 rounded-md px-3 text-sm font-semibold transition ${
-									active ? "bg-bone text-charcoal" : "text-muted hover:text-charcoal"
+									active ? "bg-sage-100 text-sage-950" : "text-sage-600 hover:text-sage-950"
 								}`}
 								href={href}
 								key={href}>
@@ -91,7 +80,7 @@ export const AppHeader = ({ email }: AppHeaderProps) => {
 					{email ? (
 						<Text
 							as='span'
-							className='hidden max-w-44 truncate text-xs text-muted lg:block'
+							className='hidden max-w-44 truncate text-xs text-sage-600 lg:block'
 							unstyled>
 							{email}
 						</Text>
