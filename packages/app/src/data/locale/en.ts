@@ -219,8 +219,6 @@ const workspaceDictionary = {
 		}
 	},
 	documents: {
-		title: "Your writing, arranged.",
-		description: "Open a draft, begin a new one, or return to work already in motion.",
 		create: "New document",
 		creating: "Creating document",
 		emptyTitle: "The first page is still open.",
@@ -259,7 +257,7 @@ const workspaceDictionary = {
 			redo: "Redo"
 		},
 		save: {
-			clean: "All changes saved",
+			clean: "Saved",
 			dirty: "Unsaved changes",
 			saving: "Saving",
 			failed: "Save failed",

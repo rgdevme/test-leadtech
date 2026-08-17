@@ -1,0 +1,17 @@
+@reference "../../../app/globals.css";
+
+.container {
+	@apply relative;
+}
+
+.action {
+	@apply min-h-11 min-w-11 px-3 sm:px-4;
+}
+
+.label {
+	@apply hidden sm:inline;
+}
+
+.error {
+	@apply absolute right-0 top-full mt-2 w-64 rounded-lg border border-red-50 bg-sage-50 p-3 text-xs text-red-700 shadow-sm;
+}

@@ -14,7 +14,7 @@ export default async function AuthenticatedLayout({ children }: AuthenticatedLay
 
 	return (
 		<>
-			<AppHeader email={principal.email} />
+			<AppHeader />
 			{children}
 		</>
 	)

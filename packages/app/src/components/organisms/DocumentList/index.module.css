@@ -1,5 +1,5 @@
 @reference "../../../app/globals.css";
 
 .section {
-	@apply rounded-xl border border-sage-200 bg-sage-50 px-5 sm:px-8;
+	@apply rounded-xl border border-sage-200 bg-sage-50 px-5 sm:px-8 h-full;
 }

@@ -1,15 +1,17 @@
 "use client"
 
-import { IconAt } from "@tabler/icons-react"
+import { IconAt, IconLogout } from "@tabler/icons-react"
 import type { PropsWithChildren } from "react"
 
 import type { AuthUser, SubscriptionResponse } from "@leadtech/common/contracts"
 
+import { Button } from "@/components/atoms/Button"
 import { Heading } from "@/components/atoms/Heading"
 import { Text } from "@/components/atoms/Text"
 import { SubscriptionPanel } from "@/components/organisms/SubscriptionPanel"
 import { WorkspaceTemplate } from "@/components/templates/WorkspaceTemplate"
 import { useLocale } from "@/hooks/useLocale"
+import { useSignOut } from "@/hooks/useSignOut"
 import styles from "./index.module.css"
 
 type ProfilePageProps = PropsWithChildren<{
@@ -19,6 +21,7 @@ type ProfilePageProps = PropsWithChildren<{
 
 export const ProfilePage = ({ principal, subscription }: ProfilePageProps) => {
 	const { dictionary } = useLocale()
+	const { signOut, signingOut } = useSignOut()
 
 	return (
 		<WorkspaceTemplate>
@@ -27,7 +30,7 @@ export const ProfilePage = ({ principal, subscription }: ProfilePageProps) => {
 					className={styles.container}
 					data-reveal>
 					<Heading
-						as='h1'
+						as='h2'
 						className={styles.heading}>
 						{dictionary.workspace.profile.title}
 					</Heading>
@@ -55,6 +58,18 @@ export const ProfilePage = ({ principal, subscription }: ProfilePageProps) => {
 							unstyled>
 							{principal.email}
 						</Text>
+						<Button
+							className={styles.action}
+							loading={signingOut}
+							onClick={() => void signOut()}
+							variant='quiet'>
+							<IconLogout
+								aria-hidden='true'
+								size={17}
+								stroke={1.9}
+							/>
+							{dictionary.workspace.navigation.signOut}
+						</Button>
 					</section>
 					<div data-reveal>
 						<SubscriptionPanel subscription={subscription} />

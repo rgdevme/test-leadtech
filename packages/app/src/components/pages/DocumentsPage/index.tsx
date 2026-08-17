@@ -5,22 +5,18 @@ import {
 	type DocumentSummary,
 	type SubscriptionResponse
 } from "@leadtech/common/contracts"
-import { IconArrowRight, IconPlus } from "@tabler/icons-react"
-import { useRouter } from "next/navigation"
+import { IconArrowRight } from "@tabler/icons-react"
 import { useRef, useState, type PropsWithChildren } from "react"
 
-import { Button } from "@/components/atoms/Button"
-import { Heading } from "@/components/atoms/Heading"
 import { Text } from "@/components/atoms/Text"
 import { ConfirmDeleteDialog } from "@/components/molecules/ConfirmDeleteDialog"
 import { EmptyState } from "@/components/molecules/EmptyState"
-import { SubscriptionBadge } from "@/components/molecules/SubscriptionBadge"
 import { DocumentList } from "@/components/organisms/DocumentList"
 import { SubscriptionModal } from "@/components/organisms/SubscriptionModal"
 import { WorkspaceTemplate } from "@/components/templates/WorkspaceTemplate"
+import { useCreateDocument } from "@/hooks/useCreateDocument"
 import { useEditorialMotion } from "@/hooks/useEditorialMotion"
 import { useLocale } from "@/hooks/useLocale"
-import { routes } from "@/i18n/routes"
 import { ApiClientError, requestJson, requestNoContent } from "@/utils/apiClient"
 import styles from "./index.module.css"
 
@@ -37,15 +33,17 @@ export const DocumentsPage = ({
 	openSubscription,
 	subscription
 }: DocumentsPageProps) => {
-	const { dictionary, locale } = useLocale()
-	const router = useRouter()
+	const { dictionary } = useLocale()
 	const scope = useRef<HTMLElement>(null)
 	const [documents, setDocuments] = useState(initialDocuments)
 	const [modalOpen, setModalOpen] = useState(openSubscription)
-	const [creating, setCreating] = useState(false)
 	const [deleteTarget, setDeleteTarget] = useState<DocumentSummary | null>(null)
 	const [deleting, setDeleting] = useState(false)
 	const [error, setError] = useState<string | null>(null)
+	const { createDocument: createDocumentRequest, creating } = useCreateDocument({
+		onError: setError,
+		onSubscriptionRequired: () => setModalOpen(true)
+	})
 	useEditorialMotion(scope)
 
 	const handleSubscriptionRequired = (errorValue: unknown) => {
@@ -62,21 +60,7 @@ export const DocumentsPage = ({
 			return
 		}
 
-		setCreating(true)
-		setError(null)
-		try {
-			const document = await requestJson("/api/documents", { method: "POST" }, documentRecordSchema)
-			router.push(routes.document(locale, document.id))
-		} catch (createError) {
-			if (!handleSubscriptionRequired(createError)) {
-				setError(
-					createError instanceof Error
-						? createError.message
-						: dictionary.workspace.documents.mutationError
-				)
-			}
-			setCreating(false)
-		}
+		await createDocumentRequest()
 	}
 
 	const renameDocument = async (document: DocumentSummary, title: string) => {
@@ -141,32 +125,7 @@ export const DocumentsPage = ({
 	return (
 		<section ref={scope}>
 			<WorkspaceTemplate>
-				<WorkspaceTemplate.Header>
-					<div
-						className={styles.row}
-						data-reveal>
-						<div className={styles.container}>
-							<SubscriptionBadge subscription={subscription} />
-							<Heading
-								as='h2'
-								className={styles.heading}>
-								{dictionary.workspace.documents.title}
-							</Heading>
-							<Text className={styles.text}>{dictionary.workspace.documents.description}</Text>
-						</div>
-						<Button
-							className={styles.action}
-							loading={creating}
-							onClick={() => void createDocument()}>
-							<IconPlus
-								size={18}
-								stroke={2}
-							/>
-							{creating
-								? dictionary.workspace.documents.creating
-								: dictionary.workspace.documents.create}
-						</Button>
-					</div>
+				<WorkspaceTemplate.Content>
 					{!subscription.entitled ? (
 						<button
 							className={styles.button}
@@ -192,9 +151,6 @@ export const DocumentsPage = ({
 							{error}
 						</Text>
 					) : null}
-				</WorkspaceTemplate.Header>
-
-				<WorkspaceTemplate.Content>
 					{documents.length > 0 ? (
 						<DocumentList
 							documents={documents}

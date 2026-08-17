@@ -1,5 +1,6 @@
 export { AppHeader } from "./AppHeader"
 export { BenefitsSection } from "./BenefitsSection"
+export { CreateDocumentAction } from "./CreateDocumentAction"
 export { DocumentList } from "./DocumentList"
 export { EditorToolbar } from "./EditorToolbar"
 export { FaqSection } from "./FaqSection"

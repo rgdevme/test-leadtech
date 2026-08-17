@@ -23,19 +23,3 @@
 .text {
 	@apply hidden sm:inline;
 }
-
-.row2 {
-	@apply flex items-center gap-3;
-}
-
-.text2 {
-	@apply hidden max-w-44 truncate text-xs text-sage-600 lg:block;
-}
-
-.action {
-	@apply min-h-9 px-2.5 sm:px-3;
-}
-
-.text3 {
-	@apply hidden sm:inline;
-}
