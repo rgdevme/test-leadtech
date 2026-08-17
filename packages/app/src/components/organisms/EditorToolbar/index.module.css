@@ -1,7 +1,7 @@
 @reference "../../../app/globals.css";
 
 .row {
-	@apply mx-auto flex max-w-[90rem] items-center justify-between gap-4;
+	@apply mx-auto flex w-full items-center justify-between gap-4;
 }
 
 .row2 {

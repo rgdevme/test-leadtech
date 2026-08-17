@@ -31,12 +31,6 @@ export const SaveIndicator = ({
 		<div
 			className={styles.row}
 			role='status'>
-			<Icon
-				aria-hidden='true'
-				className={saveState === "saving" ? styles.spinning : undefined}
-				size={16}
-				stroke={2}
-			/>
 			<Text
 				as='span'
 				unstyled>
@@ -63,6 +57,12 @@ export const SaveIndicator = ({
 					{dictionary.workspace.editor.save.reload}
 				</Button>
 			) : null}
+			<Icon
+				aria-hidden='true'
+				className={saveState === "saving" ? styles.spinning : undefined}
+				size={16}
+				stroke={2}
+			/>
 		</div>
 	)
 }

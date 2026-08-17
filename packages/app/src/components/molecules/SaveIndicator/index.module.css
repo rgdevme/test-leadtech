@@ -1,7 +1,7 @@
 @reference "../../../app/globals.css";
 
 .row {
-	@apply flex flex-wrap items-center justify-end gap-2 text-xs text-sage-600;
+	@apply flex flex-wrap items-center justify-end gap-2 text-xs text-sage-600 pointer-events-none select-none;
 }
 
 .action {

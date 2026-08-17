@@ -139,7 +139,7 @@ export const useRichTextEditor = ({
 		if (debounceTimerRef.current) {
 			clearTimeout(debounceTimerRef.current)
 		}
-		debounceTimerRef.current = setTimeout(() => void flush(), 750)
+		debounceTimerRef.current = setTimeout(() => void flush(), 500)
 
 		return () => {
 			if (debounceTimerRef.current) {

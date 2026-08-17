@@ -80,59 +80,60 @@ export const RichTextEditor = ({
 			<EditorTemplate>
 				<EditorTemplate.Header>
 					<div className={layoutStyles.row}>
-						<IconButton
-							label={dictionary.workspace.navigation.backToDocuments}
-							onClick={navigateBack}>
-							<IconArrowLeft
-								size={19}
-								stroke={1.8}
-							/>
-						</IconButton>
-						<input
-							aria-label={dictionary.workspace.editor.titlePlaceholder}
-							className={layoutStyles.input}
-							disabled={!canEdit}
-							maxLength={120}
-							onChange={event => editorState.updateTitle(event.currentTarget.value)}
-							placeholder={dictionary.workspace.editor.titlePlaceholder}
-							value={editorState.title}
-						/>
-						{!canEdit ? (
-							<Button
-								onClick={() => setSubscriptionOpen(true)}
-								variant='secondary'>
-								<IconLock
-									size={16}
-									stroke={1.9}
-								/>
-								{dictionary.workspace.editor.readOnly}
-							</Button>
-						) : (
+						<div>
 							<IconButton
-								label={dictionary.workspace.documents.delete}
-								onClick={() => setDeleteOpen(true)}>
-								<IconTrash
+								label={dictionary.workspace.navigation.backToDocuments}
+								onClick={navigateBack}>
+								<IconArrowLeft
 									size={19}
 									stroke={1.8}
 								/>
 							</IconButton>
-						)}
-					</div>
-				</EditorTemplate.Header>
-				<EditorTemplate.Toolbar>
-					<div className={layoutStyles.grid}>
+							<input
+								aria-label={dictionary.workspace.editor.titlePlaceholder}
+								className={layoutStyles.input}
+								disabled={!canEdit}
+								maxLength={120}
+								onChange={event => editorState.updateTitle(event.currentTarget.value)}
+								placeholder={dictionary.workspace.editor.titlePlaceholder}
+								value={editorState.title}
+							/>
+						</div>
 						<EditorToolbar
 							editable={canEdit}
 							editor={editorState.editor}
 						/>
-						<SaveIndicator
-							lastSavedAt={editorState.lastSavedAt}
-							onReload={() => window.location.reload()}
-							onRetry={editorState.retry}
-							saveState={editorState.saveState}
-						/>
+						<div>
+							<SaveIndicator
+								lastSavedAt={editorState.lastSavedAt}
+								onReload={() => window.location.reload()}
+								onRetry={editorState.retry}
+								saveState={editorState.saveState}
+							/>
+
+							{!canEdit ? (
+								<Button
+									onClick={() => setSubscriptionOpen(true)}
+									variant='secondary'>
+									<IconLock
+										size={16}
+										stroke={1.9}
+									/>
+									{dictionary.workspace.editor.readOnly}
+								</Button>
+							) : (
+								<IconButton
+									label={dictionary.workspace.documents.delete}
+									onClick={() => setDeleteOpen(true)}>
+									<IconTrash
+										size={19}
+										stroke={1.8}
+									/>
+								</IconButton>
+							)}
+						</div>
 					</div>
-				</EditorTemplate.Toolbar>
+				</EditorTemplate.Header>
 				<EditorTemplate.Content>
 					<div className={layoutStyles.card}>
 						<EditorContent editor={editorState.editor} />
