@@ -1,30 +1,23 @@
 # DraftRoom
 
-DraftRoom is a focused browser writing workspace. The repository contains the public website, authenticated editor, shared project resources, and Stripe webhook processing.
+DraftRoom is a focused browser writing workspace. The repository contains the public website and authenticated editor in a single application, shared contracts, tests, and Stripe webhook processing.
 
 ## Project architecture
 
 ```text
 Browser
-  ├─ packages/website   Public product and pricing website
-  └─ packages/app       Authentication, billing, documents, and editor
+  └─ packages/app       Marketing, authentication, billing, documents, and editor
           │
           └─ Firestore  Users, documents, subscriptions, and webhook records
 
 Stripe ──signed webhook──> packages/functions ──> Firestore
 
-packages/common ──shared contracts, data, assets, and theme──> all projects
+packages/common ──shared contracts──> app, functions, and tests
 ```
-
-### `packages/website`
-
-- Presents the DraftRoom product, benefits, pricing, trust information, and FAQ.
-- Links visitors to registration and sign-in in `packages/app`.
-- Uses shared plan data, brand data, assets, and design settings from `packages/common`.
-- Does not access Firebase, Stripe, or private application data.
 
 ### `packages/app`
 
+- Presents the DraftRoom product, benefits, pricing, trust information, and FAQ.
 - Provides registration, sign-in, sign-out, subscription checkout, and subscription status.
 - Provides owner-only document listing, reading, creation, editing, renaming, saving, and deletion.
 - Uses server-validated Firebase sessions and server-side Firestore access.
@@ -40,9 +33,7 @@ packages/common ──shared contracts, data, assets, and theme──> all proje
 ### `packages/common`
 
 - Owns provider-independent API, document, billing, persistence, authentication, and Stripe contracts.
-- Owns shared English locale data, including the DraftRoom identity and public plan copy.
-- Owns the shared logo, favicon, Tailwind theme, font family, colors, and motion curve.
-- Exposes contracts as compiled TypeScript and exposes assets and styles from source files.
+- Exposes contracts as compiled TypeScript.
 - Does not contain React components, provider SDK objects, secrets, or business workflows.
 
 ## Project technologies
@@ -82,7 +73,7 @@ pnpm --filter @leadtech/tests exec playwright install chromium # testing
 
 ### 2. Configure the apps' environment variables
 
-All projects have each an `.env.example` (functions has `secret.example`) indicating the used variables with comments on their purpose, source, an example value, and a default value.
+Environment examples are provided for the app, Functions, and tests, with comments on each variable's purpose, source, example value, and default value.
 
 Copy each example file, and rename it to replace `example` with `local`.
 
@@ -114,7 +105,7 @@ Then, create an API key and store it in:
 - [tests' .secret.local](packages/tests/.secret.local).
 - [app's .env.local](packages/app/.env.local).
 
-### 3. Get your Stripe webhook secret
+### 4. Get your Stripe webhook secret
 
 - Run the following script:
   ```bash
