@@ -18,6 +18,10 @@ If confirmation takes longer than 30 seconds, the page shows a delayed state and
 
 ## 3. One security decision and why
 
-Direct browser access to Firestore is denied. Every document operation passes through server routes that verify the Firebase session, document ownership, and subscription entitlement.
+Direct browser access to Firestore is denied through its rules file.
 
-This prevents a modified client from bypassing access controls. Authorization remains on the server, so hiding or enabling controls in the browser never determines whether a document operation is allowed.
+Every document operation passes through server routes that verify the Firebase session, document ownership, and subscription entitlement.
+
+Authorization remains on the server, so hiding or enabling controls in the browser never determines whether a document operation is allowed.
+
+This prevents a modified client from bypassing access controls, and becomes easier to maintain due to the fragility of Firestore rules.
