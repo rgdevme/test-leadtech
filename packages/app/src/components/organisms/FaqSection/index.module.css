@@ -2,12 +2,17 @@
 
 .section {
 	@apply bg-sage-950 py-24 text-sage-100 lg:py-40;
+
+	h2,
+	h3 {
+		@apply text-sage-400;
+	}
 }
 
 .heading {
 	@apply mb-16 flex max-w-5xl flex-col items-start gap-5 lg:mb-32;
 
-	& > span {
+	&>span {
 		@apply mb-0;
 	}
 }

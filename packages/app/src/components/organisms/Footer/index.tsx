@@ -29,9 +29,9 @@ export const Footer = ({ copy, homeHref, primaryHref, signInHref }: FooterProps)
 					<div className={styles.scrim} />
 					<div
 						className={styles.copy}
-						data-reveal>
+						>
 						<Heading
-							as='h2'
+							as='h3'
 							size='section'>
 							{copy.title}
 						</Heading>

@@ -105,7 +105,11 @@ Then, create an API key and store it in:
 - [tests' .secret.local](packages/tests/.secret.local).
 - [app's .env.local](packages/app/.env.local).
 
-### 4. Get your Stripe webhook secret
+### 5. Add your stripe products IDs to the secrets
+
+Add 3 Stripo product IDs to the [app's .env.local](packages/app/.env.local) as a string of comma separated values.
+
+### 5. Get your Stripe webhook secret
 
 - Run the following script:
   ```bash

@@ -2,6 +2,11 @@
 
 .section {
 	@apply bg-sage-950 py-24 text-sage-100 lg:py-40;
+
+	h2,
+	h3 {
+		@apply text-sage-400;
+	}
 }
 
 .layout {
