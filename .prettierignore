@@ -9,3 +9,4 @@ pnpm-lock.yaml
 firebase-debug.log*
 firestore-debug.log*
 ui-debug.log*
+next-env.d.ts

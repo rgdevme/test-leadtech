@@ -15,7 +15,7 @@
 		"dev": "turbo run dev",
 		"dev:app": "turbo run dev --filter=@leadtech/app",
 		"dev:functions": "pnpm --filter @leadtech/functions dev",
-		"start": "pnpm -r --parallel start"
+		"start": "turbo run start"
 	},
 	"devDependencies": {
 		"@luxia/agnos": "^1.1.1",
