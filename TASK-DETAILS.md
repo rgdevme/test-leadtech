@@ -10,9 +10,9 @@ The authenticated application reads that record on the server. Every document mu
 
 ## 2. What happens if payment succeeds but the webhook is delayed?
 
-After Stripe Checkout succeeds, the user is redirected to a pending subscription page. The redirect does not grant subscriber access.
+After Stripe Checkout succeeds, the user is redirected to a pending subscription page where the user awaits a redirection upon a successful status resolution. The redirect does not grant subscriber access.
 
-The pending page checks the server-side subscription status every two seconds. When the signed webhook arrives, Firebase Functions validates it and writes the active subscription projection to Firestore. The next status check sees the active entitlement and redirects the user to the document workspace with subscriber features enabled.
+The pending page polls the server-side subscription status. When the signed webhook arrives, Firebase Functions validates it and writes the active subscription projection to Firestore. The next status check sees the active entitlement and redirects the user to the document workspace with subscriber features enabled.
 
 If confirmation takes longer than 30 seconds, the page shows a delayed state and lets the user check again. The payment remains recorded by Stripe, but editing stays locked until the webhook has updated the server-side entitlement.
 
@@ -24,4 +24,4 @@ Every document operation passes through server routes that verify the Firebase s
 
 Authorization remains on the server, so hiding or enabling controls in the browser never determines whether a document operation is allowed.
 
-This prevents a modified client from bypassing access controls, and becomes easier to maintain due to the fragility of Firestore rules.
+This prevents a modified client from bypassing access controls, and becomes easier to maintain due to the fragility of Firestore rules, but one of the downsides is that it complicates subscriptions, which is the reason why I implmented polling to view the subscription status.
