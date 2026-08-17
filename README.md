@@ -68,7 +68,7 @@ packages/common ──shared contracts, data, assets, and theme──> all proje
 
 ### Requirements
 
-- Node.js 24 or newer for local project tooling.
+- Node.js 22 for local project tooling.
 - pnpm 11.
 - Firebase CLI for the local Emulator Suite.
 - Stripe CLI for local webhook forwarding.
@@ -76,7 +76,8 @@ packages/common ──shared contracts, data, assets, and theme──> all proje
 ### 1. Install dependencies
 
 ```bash
-pnpm install
+pnpm install # deps
+pnpm --filter @leadtech/tests exec playwright install chromium # testing
 ```
 
 ### 2. Configure the apps' environment variables
@@ -110,34 +111,34 @@ stripe login
 Then, create an API key and store it in:
 
 - [functions' .secret.local](packages/functions/.secret.local).
+- [tests' .secret.local](packages/tests/.secret.local).
 - [app's .env.local](packages/app/.env.local).
 
 ### 3. Get your Stripe webhook secret
 
 - Run the following script:
   ```bash
-  pnpm --filter @leadtech/functions dev:stripe
+  pnpm dev:stripe
   ```
-- Copy the resulting webhook secret into [.secret.local](packages/functions/.secret.local).
+- Copy the resulting webhook secret into [functions' .secret.local](packages/functions/.secret.local).
+- Copy the resulting webhook secret into [tests' .secret.local](packages/tests/.secret.local).
 
 ## Run the project
 
-> Turborepo builds `packages/common` before its consumers, then builds the website, app, and Functions output. A successful build prepares the repository for `pnpm start`.
+Turborepo runs package checks as early as their dependencies allow, builds `packages/common` before the app and Functions, then runs the cached emulator and browser suite against those artifacts.
 
-To run the built project:
+Build and start the local production stack:
 
 ```bash
-pnpm build
 pnpm start
 ```
 
-The root command uses pnpm workspace recursion to run every available `start` script in parallel:
+`pnpm start` restores or creates the required build outputs, starts the production Next.js server, and attaches the Firebase emulators and Stripe webhook listener as persistent Turbo sidecars.
 
-| Project   | Result                                                                     |
-| --------- | -------------------------------------------------------------------------- |
-| Website   | Starts the production Next.js server on `http://localhost:3000`.           |
-| App       | Starts the production Next.js server on `http://localhost:3001`.           |
-| Functions | Loads the compiled Functions package and runs the stripe webhook listener. |
+| Project   | Result                                                           |
+| --------- | ---------------------------------------------------------------- |
+| App       | Starts the production Next.js server on `http://localhost:3000`. |
+| Functions | Starts Firebase emulators and Stripe CLI forwarding.             |
 
 ## Run the development servers
 
@@ -147,17 +148,35 @@ pnpm dev
 
 Turborepo runs the persistent `dev` task in every project that provides one, after building common:
 
-| Project   | Result                                                            |
-| --------- | ----------------------------------------------------------------- |
-| Website   | Starts Next.js development on `http://localhost:3000`.            |
-| App       | Starts Next.js development on `http://localhost:3001`.            |
-| Functions | Starts the Firebase emulators and Stripe CLI forwarding together. |
-
 Useful focused commands:
 
-- `pnpm dev:apps`: builds `packages/common`, then starts only the website and app.
-- `pnpm dev:functions`: starts only the Functions development process.
-- `pnpm check`: runs formatting, linting, and typechecking through Turborepo.
+- `pnpm dev:app`: builds `packages/common`, then starts only the app.
+- `pnpm dev:functions`: builds `packages/common` and Functions, then starts Firebase and Stripe.
+- `pnpm dev:stripe`: builds `packages/common`, then starts only Stripe webhook forwarding.
+- `pnpm check`: runs package formatting, linting, and typechecking through Turborepo.
+- `pnpm test`: builds test dependencies, then runs the cached emulator suite.
+
+## Testing
+
+| Suite                                     | What and why                                                                         | Runner and services                                                                    |
+| ----------------------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
+| Authentication and document authorization | Protects registration, sessions, ownership, and subscription-gated document changes. | Playwright with the built app and Firebase Auth and Firestore emulators.               |
+| Firestore direct access                   | Proves browser clients cannot bypass the server authorization boundary.              | Vitest with `@firebase/rules-unit-testing` and the Firestore emulator.                 |
+| Stripe webhook delivery                   | Protects signature validation, idempotency, retries, and subscription projection.    | Vitest with the Functions and Firestore emulators and deterministic Stripe signatures. |
+| Stripe Checkout provider                  | Verifies Checkout requests and created resources against Stripe's real sandbox.      | Playwright with the built app, Firebase emulators, and the Stripe sandbox API.         |
+
+Run static checks or the cached emulator suite directly. This suite is deterministic and cached by Turborepo.
+
+```bash
+pnpm check
+pnpm test
+```
+
+Run the uncached live provider suite separately. This suite is never cached and requires a Stripe sandbox secret key in `packages/tests/.secret.local`.
+
+```bash
+pnpm test:provider
+```
 
 ## Test the Stripe webhook flow
 

@@ -339,8 +339,8 @@ Never use other package manages, like `npm`, `yarn`, or `bun`.
 
 ### Language & module system
 
-- **ESM only**: Use Node 24 or newer for repository tooling and packages unless a managed deployment platform does not support Node 24.
-- **Managed runtime exception**: Use the newest Node version supported by the platform and pin the exception in both the package engine and deployment configuration. Firebase Functions must use Node 22 until Firebase supports Node 24.
+- **ESM only**: Use Node 22 for repository tooling, packages, and managed runtimes.
+- **Node runtime pinning**: Pin Node 22 in every package engine and platform runtime configuration.
 - **NodeNext resolution**: Import paths use .js extension even when importing .ts.
 - import type for types, import for runtime values.
 - No default exports except plugin entries.
