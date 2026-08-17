@@ -1,6 +1,5 @@
 import {
 	firebaseUidSchema,
-	publicSubscriptionPlans,
 	stripeMetadataKeys,
 	stripeSubscriptionIdSchema,
 	subscriptionPlanIds
@@ -44,7 +43,7 @@ type ResolvedSubscription = {
 	subscription: Stripe.Subscription
 }
 
-const entitledPriceIds = new Set(publicSubscriptionPlans.map(({ key }) => subscriptionPlanIds[key]))
+const entitledPriceIds = new Set(Object.values(subscriptionPlanIds))
 
 export type ProcessStripeWebhookResult =
 	| {

@@ -19,7 +19,7 @@ export const subscriptionPlanIds = {
 } as const
 
 export type SubscriptionPlanKeys = keyof typeof subscriptionPlanIds
-const subscriptionPlanKeys = Object.keys(subscriptionPlanIds) as SubscriptionPlanKeys[]
+export const subscriptionPlanKeys = Object.keys(subscriptionPlanIds) as SubscriptionPlanKeys[]
 
 export const projectedSubscriptionStatuses = [
 	"incomplete",
@@ -49,44 +49,7 @@ export const subscriptionPlanSchema = z.object({
 	featured: z.boolean()
 })
 
-export const publicSubscriptionPlans = [
-	{
-		key: "write",
-		name: "Writing",
-		description: "A focused workspace for a steady writing practice.",
-		unitAmount: 1200,
-		currency: "usd",
-		interval: "month",
-		features: ["Unlimited documents", "Rich-text editing", "Automatic version-safe saving"],
-		featured: false
-	},
-	{
-		key: "studio",
-		name: "Studio",
-		description: "More room for long-form projects and an active archive.",
-		unitAmount: 2200,
-		currency: "usd",
-		interval: "month",
-		features: [
-			"Everything in Writing",
-			"Priority workspace access",
-			"Cancel without losing read access"
-		],
-		featured: true
-	},
-	{
-		key: "studioYearly",
-		name: "Studio annual",
-		description: "A full year of focused writing at a quieter monthly cost.",
-		unitAmount: 22000,
-		currency: "usd",
-		interval: "year",
-		features: ["Everything in Studio", "Two months included", "One annual renewal"],
-		featured: false
-	}
-] as const satisfies readonly SubscriptionPlan[]
-
-export const publicSubscriptionPlanKeys = publicSubscriptionPlans.map(({ key }) => key)
+export const publicSubscriptionPlanKeys = subscriptionPlanKeys
 
 export const listSubscriptionPlansResponseSchema = z.object({
 	items: z.array(subscriptionPlanSchema)

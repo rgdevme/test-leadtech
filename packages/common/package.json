@@ -9,19 +9,10 @@
 		"./contracts": {
 			"types": "./dist/contracts/index.d.ts",
 			"import": "./dist/contracts/index.js"
-		},
-		"./data/locale/en": {
-			"types": "./dist/data/locale/en.d.ts",
-			"import": "./dist/data/locale/en.js"
-		},
-		"./assets/favicon.svg": "./src/assets/favicon.svg",
-		"./assets/logo.svg": "./src/assets/logo.svg",
-		"./styles/theme.css": "./src/styles/theme.css"
+		}
 	},
 	"files": [
-		"dist",
-		"src/assets",
-		"src/styles/theme.css"
+		"dist"
 	],
 	"scripts": {
 		"build": "tsc -p tsconfig.json",
