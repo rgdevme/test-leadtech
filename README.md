@@ -78,6 +78,7 @@ packages/common ──shared contracts, data, assets, and theme──> all proje
 ```bash
 pnpm install
 ```
+
 ### 2. Configure the apps' environment variables
 
 All projects have each an `.env.example` (functions has `secret.example`) indicating the used variables with comments on their purpose, source, an example value, and a default value.
@@ -85,33 +86,37 @@ All projects have each an `.env.example` (functions has `secret.example`) indica
 Copy each example file, and rename it to replace `example` with `local`.
 
 You also need a `firebase.config.json` file at the root of the repo, with the credentials provided by your firebase project:
+
 ```json
 {
-  "apiKey": "<apiKey>",
-  "authDomain": "<authDomain>",
-  "projectId": "<projectId>",
-  "storageBucket": "<storageBucket>",
-  "messagingSenderId": "<messagingSenderId>",
-  "appId": "<appId>"
+	"apiKey": "<apiKey>",
+	"authDomain": "<authDomain>",
+	"projectId": "<projectId>",
+	"storageBucket": "<storageBucket>",
+	"messagingSenderId": "<messagingSenderId>",
+	"appId": "<appId>"
 }
 ```
 
 ### 3. Install Stripe and authenticate with your account
 
 - Install and authenticate:
+
 ```bash
 pnpm install --global @stripe/cli
 stripe login
 ```
+
 Then, create an API key and store it in:
-  -  [functions' .secret.local](packages/functions/.secret.local).
-  -  [app's .env.local](packages/app/.env.local).
+
+- [functions' .secret.local](packages/functions/.secret.local).
+- [app's .env.local](packages/app/.env.local).
 
 ### 3. Get your Stripe webhook secret
 
 - Run the following script:
   ```bash
-  pnpm --filter @leatech/functions dev:stripe
+  pnpm --filter @leadtech/functions dev:stripe
   ```
 - Copy the resulting webhook secret into [.secret.local](packages/functions/.secret.local).
 
@@ -120,10 +125,12 @@ Then, create an API key and store it in:
 > Turborepo builds `packages/common` before its consumers, then builds the website, app, and Functions output. A successful build prepares the repository for `pnpm start`.
 
 To run the built project:
+
 ```bash
 pnpm build
 pnpm start
 ```
+
 The root command uses pnpm workspace recursion to run every available `start` script in parallel:
 
 | Project   | Result                                                                     |
@@ -163,22 +170,39 @@ Useful focused commands:
 7. Confirm `subscriptions/{uid}` and `stripeWebhookEvents/{eventId}` were written.
 8. Redeliver the event from Stripe Workbench and confirm the projection timestamp does not change.
 
-### Access decision
+---
 
-- A Checkout redirect never grants editor access.
-- The webhook must verify the Stripe signature and write the subscription projection.
-- Only an `active` or `trialing` subscription using an allowed plan grants editing access.
-- A delayed webhook keeps the user on the pending subscription screen.
+## Tradeoffs
 
-### Safe troubleshooting
+- **Webhook-backed entitlement:** The application reads subscription access from Firestore instead of calling Stripe during every document request. This keeps authorization fast and centralized, but payment access is eventually consistent while the webhook is pending.
+- **Server-side Firebase access:** Browser clients cannot read or write Firestore directly. Application routes use verified Firebase sessions and enforce document ownership and subscription access on the server. This adds server-side code, but keeps authorization decisions out of the browser.
+- **Debounced autosave:** The editor saves after a short pause instead of requiring a manual save action. This reduces unnecessary writes and keeps writing uninterrupted, but requires visible retry and version-conflict states when persistence fails.
+- **Local-first delivery:** Firebase emulators and Stripe sandbox mode make the project safe and repeatable for local evaluation. Production deployment, monitoring, and operational hardening remain outside the current scope.
 
-- `400`: the signature is missing or does not match the exact raw request body.
-- `200` with no write: the verified event is unsupported or was already processed.
-- `200` with a rejected event record: required Firebase UID metadata is missing, invalid, or conflicting.
-- `500`: Stripe or Firestore failed temporarily, so Stripe should retry.
+### What I would do with another day
 
-## Current limits
+With another day, I would focus on hands-on UI and UX refinement in the authenticated application. Once the core behavior is stable, I prefer to review the product directly and adjust spacing, typography, visual hierarchy, interaction feedback, and responsive details by hand.
 
-- The repository is prepared for local evaluation, not production deployment.
-- Collaboration, native apps, offline editing, email verification, and an admin interface are out of scope.
-- The Firebase project and Stripe integration use local emulators and sandbox credentials.
+The first pass would include an accessibility review with consistent keyboard focus states, a skip link, clearer editor focus treatment, and stronger modal and form behavior. The goal would be to give the interface a more deliberate human touch without expanding the product scope.
+
+I would also consider adopting a UI framework such as Mantine. Building the interface without a full component framework kept this small project focused and avoided setup overhead. On a larger project, the investment would be worthwhile because shared components, accessibility behavior, and design conventions become more valuable as the interface grows.
+
+That setup would include project-level component patterns and agent rules that explain how to compose, style, and extend the framework correctly. Giving the agent those constraints early would help it produce consistent UI code without bypassing the established design system.
+
+## AI disclosure
+
+I used Codex to speed up development with the following configuration (mainly):
+
+- Model: GPT-5.6 Sol
+- Effort: High
+- Speed: Normal
+
+I selected the architecture, technologies, project structure, and priorities to focus on. This included bootstrapping the project with Turborepo for task orchestration and caching, and ESLint and Prettier for code quality and formatting.
+
+AI assisted with creating three delivery roadmaps which were executed in parallel Git worktrees. After the roadmap work was working correctly, the worktrees were merged and the public website and authenticated application were integrated into one product flow.
+
+Every merge and integration required formatting, linting, and type checking to pass. Tests were implemented after the project structure and integrations were stable enough.
+
+I used my project rules in [`.docs/.rules`](.docs/.rules/) to guide the Codex agent. To compose and manage those rules, I used a tool I developed. You may run `pnpm dlx @luxia/agnos@latest --once` to compose the documentation and rules, and install the skills I provided to the agent.
+
+_You may find the project-specific docs, including roadmaps, design guidelines, and rules, in [`.docs`](.docs/)._
