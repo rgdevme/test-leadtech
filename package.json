@@ -1,26 +1,26 @@
 {
-  "name": "leadtech",
-  "private": true,
-  "packageManager": "pnpm@11.5.2",
-  "engines": {
-    "node": ">=22"
-  },
-  "scripts": {
-    "build": "turbo run build",
-    "build:common": "turbo run build --filter=@leadtech/common",
-    "check": "turbo run check:format check:lint check:typecheck",
-    "check:format": "turbo run check:format",
-    "check:lint": "turbo run check:lint",
-    "check:typecheck": "turbo run check:typecheck",
-    "dev": "turbo run dev",
-    "dev:apps": "pnpm build:common && turbo run dev --filter=@leadtech/website --filter=@leadtech/app",
-    "dev:functions": "pnpm --filter @leadtech/functions dev",
-    "start": "pnpm -r --parallel start"
-  },
-  "devDependencies": {
-    "@luxia/agnos": "^1.1.1",
-    "firebase-tools": "^15.26.0",
-    "turbo": "^2.5.6",
-    "typescript": "^5.9.3"
-  }
+	"name": "leadtech",
+	"private": true,
+	"packageManager": "pnpm@11.5.2",
+	"engines": {
+		"node": ">=22"
+	},
+	"scripts": {
+		"build": "turbo run build",
+		"build:common": "turbo run build --filter=@leadtech/common",
+		"check": "turbo run check:format check:lint check:typecheck",
+		"check:format": "turbo run check:format",
+		"check:lint": "turbo run check:lint",
+		"check:typecheck": "turbo run check:typecheck",
+		"dev": "turbo run dev",
+		"dev:app": "turbo run dev --filter=@leadtech/app",
+		"dev:functions": "pnpm --filter @leadtech/functions dev",
+		"start": "pnpm -r --parallel start"
+	},
+	"devDependencies": {
+		"@luxia/agnos": "^1.1.1",
+		"firebase-tools": "^15.26.0",
+		"turbo": "^2.5.6",
+		"typescript": "^5.9.3"
+	}
 }

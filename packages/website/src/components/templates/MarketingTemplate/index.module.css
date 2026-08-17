@@ -1,5 +1,0 @@
-@reference "../../../app/globals.css";
-
-.skipLink {
-	@apply fixed top-4 left-4 z-50 -translate-y-32 rounded-full bg-yellow-400 px-4 py-3 font-bold text-sage-950 transition-transform duration-500 ease-mass focus:translate-y-0;
-}

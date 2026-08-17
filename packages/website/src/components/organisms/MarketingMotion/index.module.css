@@ -1,5 +1,0 @@
-@reference "../../../app/globals.css";
-
-.motion {
-	@apply w-full max-w-full overflow-x-clip;
-}

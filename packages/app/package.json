@@ -8,8 +8,8 @@
 		"check:format": "prettier --check . --ignore-path ../../.prettierignore",
 		"check:lint": "eslint .",
 		"check:typecheck": "tsc --noEmit",
-		"dev": "next dev --port 3001",
-		"start": "next start --port 3001"
+		"dev": "next dev --port 3000",
+		"start": "next start --port 3000"
 	},
 	"dependencies": {
 		"@gsap/react": "^2.1.2",
