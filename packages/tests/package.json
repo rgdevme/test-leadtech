@@ -1,0 +1,43 @@
+{
+	"name": "@leadtech/tests",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"main": "functions/index.js",
+	"engines": {
+		"node": "22"
+	},
+	"scripts": {
+		"check:format": "prettier --check . --ignore-path ../../.prettierignore",
+		"check:lint": "eslint .",
+		"check:typecheck": "tsc --noEmit",
+		"test": "pnpm --dir ../.. exec firebase --config firebase.test.json emulators:exec --only auth,firestore,functions \"pnpm --dir packages/tests test:emulated\"",
+		"test:emulated": "pnpm test:vitest && pnpm test:playwright",
+		"test:playwright": "playwright test --config playwright.config.ts",
+		"test:provider": "pnpm --dir ../.. exec firebase --config firebase.test.json emulators:exec --only auth,firestore \"pnpm --dir packages/tests test:provider:run\"",
+		"test:provider:run": "playwright test --config playwright.provider.config.ts",
+		"test:vitest": "vitest run --config vitest.config.ts"
+	},
+	"dependencies": {
+		"@leadtech/app": "workspace:*",
+		"@leadtech/common": "workspace:*",
+		"@leadtech/functions": "workspace:*"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.39.5",
+		"@firebase/rules-unit-testing": "^5.0.1",
+		"@playwright/test": "^1.62.1",
+		"@types/node": "^22.20.1",
+		"eslint": "^9.39.5",
+		"eslint-config-prettier": "^10.1.8",
+		"firebase": "^12.17.1",
+		"firebase-admin": "^14.2.0",
+		"firebase-functions": "^7.3.2",
+		"globals": "^17.11.0",
+		"prettier": "^3.9.6",
+		"stripe": "^22.5.0",
+		"typescript": "^5.9.3",
+		"typescript-eslint": "^8.67.0",
+		"vitest": "^4.1.10"
+	}
+}

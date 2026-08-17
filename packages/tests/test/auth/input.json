@@ -1,0 +1,6 @@
+{
+	"invalidEmail": "not-an-email",
+	"mismatchedPassword": "Different!234",
+	"password": "DraftRoom!234",
+	"wrongPassword": "Incorrect!234"
+}

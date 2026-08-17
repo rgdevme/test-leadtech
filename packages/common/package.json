@@ -3,6 +3,9 @@
 	"version": "0.0.0",
 	"private": true,
 	"type": "module",
+	"engines": {
+		"node": "22"
+	},
 	"main": "./dist/contracts/index.js",
 	"types": "./dist/contracts/index.d.ts",
 	"exports": {
@@ -16,7 +19,6 @@
 	],
 	"scripts": {
 		"build": "tsc -p tsconfig.json",
-		"check": "pnpm --filter . run --parallel \"/^check:(format|lint|typecheck)$/\"",
 		"check:format": "prettier --check . --ignore-path ../../.prettierignore",
 		"check:lint": "eslint .",
 		"check:typecheck": "tsc -p tsconfig.json --noEmit"

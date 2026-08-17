@@ -4,6 +4,10 @@ out/
 dist/
 lib/
 coverage/
+playwright-report/
+playwright-report-provider/
+test-results/
+test-results-provider/
 .turbo/
 .firebase/
 firebase-debug.log*

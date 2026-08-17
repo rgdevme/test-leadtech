@@ -1,0 +1,31 @@
+{
+	"extends": ["//"],
+	"tasks": {
+		"check:typecheck": {
+			"dependsOn": ["@leadtech/common#build"]
+		},
+		"test": {
+			"env": ["CI"],
+			"inputs": [
+				"$TURBO_DEFAULT$",
+				"!.env.example",
+				"!.secret.example",
+				"!eslint.config.mjs",
+				"!playwright.provider.config.ts",
+				"!test/billing/**",
+				"!test/helpers/stripe.ts",
+				".env.local",
+				".secret.local",
+				"$TURBO_ROOT$/.firebaserc",
+				"$TURBO_ROOT$/firebase.test.json",
+				"$TURBO_ROOT$/firestore.indexes.json",
+				"$TURBO_ROOT$/firestore.rules"
+			],
+			"outputs": ["playwright-report/**", "test-results/**"]
+		},
+		"test:provider": {
+			"cache": false,
+			"env": ["CI"]
+		}
+	}
+}

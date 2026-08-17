@@ -1,13 +1,10 @@
 {
 	"functions": [
 		{
-			"source": "packages/functions",
+			"source": "packages/tests",
 			"codebase": "default",
 			"runtime": "nodejs22",
-			"ignore": ["node_modules", ".git", "firebase-debug.log", "firebase-debug.*.log"],
-			"predeploy": [
-				"pnpm --dir \"$RESOURCE_DIR/../..\" exec turbo run build --filter=@leadtech/functions"
-			]
+			"ignore": ["node_modules", ".git", "firebase-debug.log", "firebase-debug.*.log"]
 		}
 	],
 	"firestore": {

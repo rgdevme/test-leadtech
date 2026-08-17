@@ -1,0 +1,24 @@
+{
+	"extends": ["//"],
+	"tasks": {
+		"build": {
+			"env": ["NEXT_PUBLIC_APP_URL", "STRIPE_API_KEY"],
+			"inputs": ["$TURBO_EXTENDS$", "$TURBO_ROOT$/firebase.config.json", ".env", ".env.*"],
+			"outputs": [".next/**", "!.next/cache/**", "!.next/dev/**"]
+		},
+		"check:typecheck": {
+			"dependsOn": ["$TURBO_EXTENDS$", "build"]
+		},
+		"dev": {
+			"dependsOn": ["^build"],
+			"cache": false,
+			"persistent": true
+		},
+		"start": {
+			"dependsOn": ["build"],
+			"cache": false,
+			"persistent": true,
+			"with": ["@leadtech/functions#dev"]
+		}
+	}
+}

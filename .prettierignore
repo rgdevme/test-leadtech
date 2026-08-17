@@ -4,6 +4,10 @@ lib
 dist
 out
 coverage
+**/playwright-report
+**/playwright-report-provider
+**/test-results
+**/test-results-provider
 .firebase
 pnpm-lock.yaml
 firebase-debug.log*

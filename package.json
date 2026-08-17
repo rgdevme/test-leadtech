@@ -3,19 +3,22 @@
 	"private": true,
 	"packageManager": "pnpm@11.5.2",
 	"engines": {
-		"node": ">=22"
+		"node": "22"
 	},
 	"scripts": {
-		"build": "turbo run build",
+		"build": "turbo run verify",
 		"build:common": "turbo run build --filter=@leadtech/common",
-		"check": "turbo run check:format check:lint check:typecheck",
+		"check": "turbo run check",
 		"check:format": "turbo run check:format",
 		"check:lint": "turbo run check:lint",
 		"check:typecheck": "turbo run check:typecheck",
 		"dev": "turbo run dev",
 		"dev:app": "turbo run dev --filter=@leadtech/app",
-		"dev:functions": "pnpm --filter @leadtech/functions dev",
-		"start": "turbo run start"
+		"dev:functions": "turbo run dev --filter=@leadtech/functions",
+		"dev:stripe": "turbo run dev:stripe --filter=@leadtech/functions",
+		"start": "turbo run start",
+		"test": "turbo run test",
+		"test:provider": "turbo run test:provider"
 	},
 	"devDependencies": {
 		"@luxia/agnos": "^1.1.1",

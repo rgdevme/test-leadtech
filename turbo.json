@@ -1,41 +1,41 @@
 {
-	"$schema": "https://turbo.build/schema.json",
+	"$schema": "https://turborepo.com/schema.json",
+	"remoteCache": {
+		"enabled": true
+	},
 	"tasks": {
 		"build": {
-			"dependsOn": [
-				"^build"
-			],
-			"outputs": [
-				".next/**",
-				"!.next/cache/**",
-				"dist/**",
-				"lib/**"
-			]
+			"dependsOn": ["^build"],
+			"inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/tsconfig.base.json"]
+		},
+		"check": {
+			"dependsOn": ["check:format", "check:lint", "check:typecheck"]
 		},
 		"check:format": {
-			"dependsOn": [
-				"^build"
+			"inputs": [
+				"$TURBO_DEFAULT$",
+				"$TURBO_ROOT$/.prettierignore",
+				"$TURBO_ROOT$/.prettierrc.json"
 			],
 			"outputs": []
 		},
 		"check:lint": {
-			"dependsOn": [
-				"^build"
-			],
 			"outputs": []
 		},
 		"check:typecheck": {
-			"dependsOn": [
-				"^build"
-			],
+			"dependsOn": ["^build"],
+			"inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/tsconfig.base.json"],
 			"outputs": []
 		},
-		"dev": {
-			"dependsOn": [
-				"^build"
-			],
+		"test": {
+			"dependsOn": ["^build"]
+		},
+		"test:provider": {
 			"cache": false,
-			"persistent": true
+			"dependsOn": ["^build"]
+		},
+		"verify": {
+			"dependsOn": ["build", "check", "test"]
 		}
 	}
 }

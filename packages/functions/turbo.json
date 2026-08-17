@@ -1,0 +1,19 @@
+{
+	"extends": ["//"],
+	"tasks": {
+		"build": {
+			"outputs": ["lib/**"]
+		},
+		"dev": {
+			"dependsOn": ["^build", "build"],
+			"cache": false,
+			"persistent": true,
+			"with": ["dev:stripe"]
+		},
+		"dev:stripe": {
+			"dependsOn": ["^build"],
+			"cache": false,
+			"persistent": true
+		}
+	}
+}

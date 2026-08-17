@@ -1,0 +1,4 @@
+{
+	"eventPrefix": "webhook",
+	"uidPrefix": "webhook_writer"
+}
