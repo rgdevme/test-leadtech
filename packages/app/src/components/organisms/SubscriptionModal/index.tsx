@@ -14,8 +14,9 @@ import { Heading } from "@/components/atoms/Heading"
 import { IconButton } from "@/components/atoms/IconButton"
 import { Text } from "@/components/atoms/Text"
 import { SubscriptionPlanCard } from "@/components/molecules/SubscriptionPlanCard"
-import { en } from "@/data/locale/en"
+import { useLocale } from "@/hooks/useLocale"
 import { requestJson } from "@/utils/apiClient"
+import styles from "./index.module.css"
 
 type SubscriptionModalProps = PropsWithChildren<{
 	initialPlanKey?: string
@@ -24,6 +25,7 @@ type SubscriptionModalProps = PropsWithChildren<{
 }>
 
 export const SubscriptionModal = ({ initialPlanKey, onClose, open }: SubscriptionModalProps) => {
+	const { dictionary } = useLocale()
 	const [plans, setPlans] = useState<SubscriptionPlan[]>([])
 	const [selectedPlanKey, setSelectedPlanKey] = useState<string | null>(null)
 	const [loading, setLoading] = useState(false)
@@ -52,7 +54,11 @@ export const SubscriptionModal = ({ initialPlanKey, onClose, open }: Subscriptio
 					requestedPlan?.key ?? featuredPlan?.key ?? response.items[0]?.key ?? null
 				)
 			} catch (loadError) {
-				setError(loadError instanceof Error ? loadError.message : en.documents.mutationError)
+				setError(
+					loadError instanceof Error
+						? loadError.message
+						: dictionary.workspace.documents.mutationError
+				)
 			} finally {
 				setLoading(false)
 				setPlansLoaded(true)
@@ -60,7 +66,7 @@ export const SubscriptionModal = ({ initialPlanKey, onClose, open }: Subscriptio
 		}
 
 		void loadPlans()
-	}, [initialPlanKey, loading, open, plansLoaded])
+	}, [dictionary.workspace.documents.mutationError, initialPlanKey, loading, open, plansLoaded])
 
 	const selectedPlan = useMemo(
 		() => plans.find(plan => plan.key === selectedPlanKey) ?? null,
@@ -89,7 +95,11 @@ export const SubscriptionModal = ({ initialPlanKey, onClose, open }: Subscriptio
 			)
 			window.location.assign(response.checkoutUrl)
 		} catch (checkoutError) {
-			setError(checkoutError instanceof Error ? checkoutError.message : en.documents.mutationError)
+			setError(
+				checkoutError instanceof Error
+					? checkoutError.message
+					: dictionary.workspace.documents.mutationError
+			)
 			setCheckoutLoading(false)
 		}
 	}
@@ -99,20 +109,21 @@ export const SubscriptionModal = ({ initialPlanKey, onClose, open }: Subscriptio
 			labelledBy='subscription-modal-title'
 			onClose={onClose}
 			open={open}>
-			<div className='max-h-[92vh] overflow-y-auto p-6 sm:p-8 lg:p-10'>
-				<div className='flex items-start justify-between gap-6'>
-					<div className='max-w-2xl'>
+			<div className={styles.container}>
+				<div className={styles.row}>
+					<div className={styles.container2}>
 						<Heading
-							className='text-3xl sm:text-4xl'
-							id='subscription-modal-title'
-							level={2}
-							serif>
-							{en.subscription.modalTitle}
+							as='h2'
+							className={styles.heading}
+							id='subscription-modal-title'>
+							{dictionary.workspace.subscription.modalTitle}
 						</Heading>
-						<Text className='mt-3'>{en.subscription.modalDescription}</Text>
+						<Text className={styles.text}>
+							{dictionary.workspace.subscription.modalDescription}
+						</Text>
 					</div>
 					<IconButton
-						label={en.common.close}
+						label={dictionary.common.close}
 						onClick={onClose}>
 						<IconX
 							size={20}
@@ -122,14 +133,12 @@ export const SubscriptionModal = ({ initialPlanKey, onClose, open }: Subscriptio
 				</div>
 
 				{loading ? (
-					<div className='grid min-h-80 place-items-center text-sm text-sage-600'>
-						{en.common.loading}
-					</div>
+					<div className={styles.grid}>{dictionary.common.loading}</div>
 				) : plans.length > 0 ? (
-					<div className='mt-8 grid grid-flow-dense gap-3 grid-cols-1 md:grid-cols-3'>
+					<div className={styles.grid2}>
 						{plans.map(plan => (
 							<div
-								className='col-span-1'
+								className={styles.container3}
 								key={plan.key}>
 								<SubscriptionPlanCard
 									onSelect={setSelectedPlanKey}
@@ -140,35 +149,37 @@ export const SubscriptionModal = ({ initialPlanKey, onClose, open }: Subscriptio
 						))}
 					</div>
 				) : (
-					<div className='mt-8 rounded-xl border border-sage-200 bg-sage-100 p-8 text-center'>
+					<div className={styles.card}>
 						<Heading
-							className='text-xl'
-							level={3}>
-							{en.subscription.unavailable}
+							className={styles.heading2}
+							as='h3'>
+							{dictionary.workspace.subscription.unavailable}
 						</Heading>
-						<Text className='mt-2 text-sm'>{en.subscription.unavailableDescription}</Text>
+						<Text className={styles.text2}>
+							{dictionary.workspace.subscription.unavailableDescription}
+						</Text>
 					</div>
 				)}
 
 				{error ? (
 					<p
-						className='mt-5 text-sm text-red-700'
+						className={styles.error}
 						role='alert'>
 						{error}
 					</p>
 				) : null}
 
-				<div className='mt-8 flex flex-col-reverse justify-end gap-3 border-t border-sage-200 pt-6 sm:flex-row'>
+				<div className={styles.row2}>
 					<Button
 						onClick={onClose}
 						variant='secondary'>
-						{en.subscription.dismiss}
+						{dictionary.workspace.subscription.dismiss}
 					</Button>
 					<Button
 						disabled={!selectedPlan}
 						loading={checkoutLoading}
 						onClick={() => void startCheckout()}>
-						{en.subscription.confirm}
+						{dictionary.workspace.subscription.confirm}
 						{!checkoutLoading ? (
 							<IconArrowRight
 								size={18}

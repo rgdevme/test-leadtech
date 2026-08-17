@@ -1,0 +1,33 @@
+@reference "../../../app/globals.css";
+
+.container {
+	@apply max-w-4xl;
+}
+
+.heading {
+	@apply max-w-5xl text-[clamp(3rem,7vw,6rem)] leading-[0.92];
+}
+
+.text {
+	@apply mt-6 max-w-xl;
+}
+
+.grid {
+	@apply grid gap-4 lg:grid-cols-[0.7fr_1.3fr];
+}
+
+.section {
+	@apply rounded-xl border border-sage-200 bg-sage-50 p-6 sm:p-8;
+}
+
+.text2 {
+	@apply grid size-10 place-items-center rounded-lg bg-blue-50 text-blue-600;
+}
+
+.text3 {
+	@apply mt-8 text-xs font-bold uppercase text-sage-600;
+}
+
+.text4 {
+	@apply mt-2 break-all text-lg font-semibold text-sage-950;
+}

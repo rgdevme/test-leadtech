@@ -5,6 +5,7 @@ import { randomUUID, timingSafeEqual } from "node:crypto"
 import { NextResponse } from "next/server"
 import type { z } from "zod"
 
+import { applicationUrl } from "@/config/environment"
 import { ApiError, asApiError, toApiErrorResponse } from "@/errors/apiError"
 
 export const noStoreHeaders = {
@@ -36,14 +37,7 @@ export const parseJsonRequest = async <Schema extends z.ZodType>(
 	}
 }
 
-export const getApplicationUrl = () => {
-	const value = process.env.NEXT_PUBLIC_APP_URL
-	if (!value) {
-		throw new Error("NEXT_PUBLIC_APP_URL must be configured.")
-	}
-
-	return new URL(value)
-}
+export const getApplicationUrl = () => applicationUrl
 
 export const assertTrustedOrigin = (request: Request) => {
 	const origin = request.headers.get("origin")

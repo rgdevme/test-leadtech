@@ -1,0 +1,61 @@
+@reference "../../../app/globals.css";
+
+.item {
+	@apply relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b border-sage-200 py-5 last:border-b-0;
+}
+
+.container {
+	@apply min-w-0;
+}
+
+.form {
+	@apply flex max-w-lg items-center gap-2;
+}
+
+.button {
+	@apply text-sm font-semibold text-sage-950;
+}
+
+.button2 {
+	@apply text-sm text-sage-600;
+}
+
+.link {
+	@apply block;
+}
+
+.heading {
+	@apply truncate text-lg font-semibold transition;
+}
+
+.item:hover .heading {
+	@apply text-sage-900;
+}
+
+.text {
+	@apply mt-1.5 text-sm text-sage-600;
+}
+
+.row {
+	@apply flex items-center gap-1;
+}
+
+.link2 {
+	@apply grid size-10 place-items-center rounded-[6px] text-sage-600 transition hover:bg-sage-100 hover:text-sage-950;
+}
+
+.container2 {
+	@apply relative;
+}
+
+.card {
+	@apply absolute right-0 top-11 z-10 w-48 rounded-lg border border-sage-200 bg-sage-50 p-1.5 shadow-lg;
+}
+
+.button3 {
+	@apply flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-sage-950 hover:bg-sage-100;
+}
+
+.error {
+	@apply flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-red-700 hover:bg-red-50;
+}

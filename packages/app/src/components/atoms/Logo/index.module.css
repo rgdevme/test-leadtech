@@ -6,6 +6,10 @@
 	&[data-size="compact"] .image {
 		@apply h-6;
 	}
+
+	&[data-inverse="true"] .image {
+		@apply brightness-0 invert;
+	}
 }
 
 .image {

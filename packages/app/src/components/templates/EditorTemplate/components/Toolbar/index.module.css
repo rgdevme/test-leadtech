@@ -1,0 +1,5 @@
+@reference "../../../../../app/globals.css";
+
+.container {
+	@apply sticky top-[4.5rem] z-20 border-b border-sage-200 bg-sage-50/92 px-5 py-2 backdrop-blur-xl sm:px-8;
+}

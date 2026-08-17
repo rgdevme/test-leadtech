@@ -1,0 +1,66 @@
+@reference "../../../app/globals.css";
+
+.card {
+	@apply relative flex size-full min-h-80 flex-col overflow-hidden rounded-xl border border-sage-200 bg-sage-50 p-6 text-left text-sage-950 transition hover:border-sage-400 active:scale-[0.99];
+
+	&[data-selected="true"] {
+		@apply border-sage-950 bg-sage-950 text-sage-50;
+	}
+}
+
+.heading {
+	@apply text-xl font-semibold text-sage-950;
+}
+
+.description {
+	@apply mt-2 text-sm leading-6 text-sage-600;
+}
+
+.selectionIndicator {
+	@apply grid size-6 shrink-0 place-items-center rounded-full border border-sage-200 bg-sage-100 text-sage-950/0;
+}
+
+.interval {
+	@apply text-sm text-sage-600;
+}
+
+.card[data-selected="true"] .heading {
+	@apply text-sage-50;
+}
+
+.card[data-selected="true"] .description,
+.card[data-selected="true"] .interval {
+	@apply text-sage-50/65;
+}
+
+.card[data-selected="true"] .selectionIndicator {
+	@apply border-sage-50 bg-sage-50 text-sage-950;
+}
+
+.row {
+	@apply flex items-start justify-between gap-4;
+}
+
+.row2 {
+	@apply mt-8 flex items-baseline gap-2;
+}
+
+.text {
+	@apply font-serif text-4xl;
+}
+
+.list {
+	@apply mt-auto grid gap-3 pt-8 text-sm;
+}
+
+.listItem {
+	@apply flex items-start gap-2.5;
+}
+
+.icon {
+	@apply mt-0.5 shrink-0;
+}
+
+.text2 {
+	@apply mt-6 text-xs font-bold uppercase;
+}

@@ -1,0 +1,17 @@
+@reference "../../../app/globals.css";
+
+.row {
+	@apply flex flex-wrap items-center justify-end gap-2 text-xs text-sage-600;
+}
+
+.action {
+	@apply min-h-8 px-2.5 py-1 text-xs;
+}
+
+.action2 {
+	@apply min-h-8 px-2.5 py-1 text-xs;
+}
+
+.spinning {
+	@apply animate-spin;
+}

@@ -1,16 +1,23 @@
 import { z } from "zod"
 
-import { en } from "@/data/locale/en"
+import type { Dictionary } from "@/i18n/getDictionary"
 
-export const signUpFormSchema = z
-	.object({
-		email: z.email("Enter a valid email address."),
-		password: z.string().min(8, en.auth.errors.weakPassword),
-		confirmPassword: z.string().min(1, "Confirm your password.")
-	})
-	.refine(values => values.password === values.confirmPassword, {
-		path: ["confirmPassword"],
-		message: en.auth.errors.passwordMismatch
-	})
+export type SignUpFormValues = {
+	confirmPassword: string
+	email: string
+	password: string
+}
 
-export type SignUpFormValues = z.infer<typeof signUpFormSchema>
+export const createSignUpFormSchema = (
+	errors: Dictionary["workspace"]["auth"]["errors"]
+): z.ZodType<SignUpFormValues> =>
+	z
+		.object({
+			email: z.email(errors.invalidEmail),
+			password: z.string().min(8, errors.weakPassword),
+			confirmPassword: z.string().min(1, errors.confirmPasswordRequired)
+		})
+		.refine(values => values.password === values.confirmPassword, {
+			path: ["confirmPassword"],
+			message: errors.passwordMismatch
+		})

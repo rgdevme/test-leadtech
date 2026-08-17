@@ -10,6 +10,8 @@ import {
 } from "@leadtech/common/contracts"
 
 import { ApiError } from "@/errors/apiError"
+import { defaultLocale } from "@/i18n/config"
+import { routes } from "@/i18n/routes"
 import { getSubscription } from "@/repositories/subscriptions"
 import { getUserAccount, setStripeCustomerId } from "@/repositories/users"
 import { getStripe } from "@/stripe/server"
@@ -69,9 +71,9 @@ export const createSubscriptionCheckout = async (
 				subscription_data: {
 					metadata: { [stripeMetadataKeys.firebaseUid]: uid }
 				},
-				success_url: new URL("/subscribe/pending", appUrl).toString(),
+				success_url: new URL(routes.pendingSubscription(defaultLocale), appUrl).toString(),
 				cancel_url: new URL(
-					`/documents?intent=subscribe&plan=${encodeURIComponent(planKey)}`,
+					`${routes.documents(defaultLocale)}?intent=subscribe&plan=${encodeURIComponent(planKey)}`,
 					appUrl
 				).toString()
 			},

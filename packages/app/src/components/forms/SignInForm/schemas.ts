@@ -1,8 +1,16 @@
 import { z } from "zod"
 
-export const signInFormSchema = z.object({
-	email: z.email("Enter a valid email address."),
-	password: z.string().min(1, "Enter your password.")
-})
+import type { Dictionary } from "@/i18n/getDictionary"
 
-export type SignInFormValues = z.infer<typeof signInFormSchema>
+export type SignInFormValues = {
+	email: string
+	password: string
+}
+
+export const createSignInFormSchema = (
+	errors: Dictionary["workspace"]["auth"]["errors"]
+): z.ZodType<SignInFormValues> =>
+	z.object({
+		email: z.email(errors.invalidEmail),
+		password: z.string().min(1, errors.passwordRequired)
+	})

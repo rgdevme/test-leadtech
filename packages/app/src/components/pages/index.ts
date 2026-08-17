@@ -1,5 +1,6 @@
 export { DocumentsPage } from "./DocumentsPage"
 export { DocumentEditorPage } from "./DocumentEditorPage"
+export { LandingPage } from "./LandingPage"
 export { ProfilePage } from "./ProfilePage"
 export { SignInPage } from "./SignInPage"
 export { SignUpPage } from "./SignUpPage"

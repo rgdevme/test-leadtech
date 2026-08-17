@@ -1,10 +1,13 @@
+"use client"
+
 import { IconAlertCircle, IconCheck, IconLoader2 } from "@tabler/icons-react"
 import type { PropsWithChildren } from "react"
 
 import { Button } from "@/components/atoms/Button"
 import { Text } from "@/components/atoms/Text"
-import { en } from "@/data/locale/en"
+import { useLocale } from "@/hooks/useLocale"
 import type { EditorSaveState } from "@/stores/useEditorStore"
+import styles from "./index.module.css"
 
 type SaveIndicatorProps = PropsWithChildren<{
 	lastSavedAt: string | null
@@ -13,24 +16,24 @@ type SaveIndicatorProps = PropsWithChildren<{
 	saveState: EditorSaveState
 }>
 
-const saveLabels: Record<EditorSaveState, string> = en.editor.save
-
 export const SaveIndicator = ({
 	lastSavedAt,
 	onReload,
 	onRetry,
 	saveState
 }: SaveIndicatorProps) => {
+	const { dictionary } = useLocale()
+	const saveLabels: Record<EditorSaveState, string> = dictionary.workspace.editor.save
 	const isProblem = saveState === "failed" || saveState === "conflict"
 	const Icon = saveState === "saving" ? IconLoader2 : isProblem ? IconAlertCircle : IconCheck
 
 	return (
 		<div
-			className='flex flex-wrap items-center justify-end gap-2 text-xs text-sage-600'
+			className={styles.row}
 			role='status'>
 			<Icon
 				aria-hidden='true'
-				className={saveState === "saving" ? "animate-spin" : ""}
+				className={saveState === "saving" ? styles.spinning : undefined}
 				size={16}
 				stroke={2}
 			/>
@@ -46,18 +49,18 @@ export const SaveIndicator = ({
 			) : null}
 			{saveState === "failed" && onRetry ? (
 				<Button
-					className='min-h-8 px-2.5 py-1 text-xs'
+					className={styles.action}
 					onClick={onRetry}
 					variant='secondary'>
-					{en.editor.save.retry}
+					{dictionary.workspace.editor.save.retry}
 				</Button>
 			) : null}
 			{saveState === "conflict" && onReload ? (
 				<Button
-					className='min-h-8 px-2.5 py-1 text-xs'
+					className={styles.action2}
 					onClick={onReload}
 					variant='secondary'>
-					{en.editor.save.reload}
+					{dictionary.workspace.editor.save.reload}
 				</Button>
 			) : null}
 		</div>

@@ -1,0 +1,85 @@
+@reference "../../../app/globals.css";
+
+.main {
+	@apply min-h-screen w-full max-w-full overflow-x-hidden bg-sage-50;
+}
+
+.grid {
+	@apply grid min-h-screen lg:grid-cols-[minmax(0,1fr)_minmax(28rem,0.8fr)];
+}
+
+.section {
+	@apply flex min-h-screen flex-col px-6 py-7 sm:px-10 lg:px-16 xl:px-24;
+}
+
+.container {
+	@apply my-auto w-full max-w-lg py-20;
+}
+
+.heading {
+	@apply max-w-5xl text-[clamp(2.8rem,6vw,4.75rem)] leading-[0.98];
+}
+
+.text {
+	@apply mt-6 max-w-md text-base;
+}
+
+.container2 {
+	@apply mt-10;
+}
+
+.text2 {
+	@apply text-xs text-sage-400;
+}
+
+.aside {
+	@apply relative hidden overflow-hidden border-l border-sage-200 bg-sage-200 p-10 lg:flex xl:p-14;
+}
+
+.card {
+	@apply relative flex w-full flex-col justify-between rounded-xl border border-sage-950/5 bg-sage-100 p-8 xl:p-12;
+}
+
+.row {
+	@apply flex gap-2;
+}
+
+.badge {
+	@apply size-2.5 rounded-full bg-sage-950/10;
+}
+
+.badge2 {
+	@apply size-2.5 rounded-full bg-sage-950/10;
+}
+
+.badge3 {
+	@apply size-2.5 rounded-full bg-sage-950/10;
+}
+
+.container3 {
+	@apply max-w-xl py-16;
+}
+
+.text3 {
+	@apply font-serif text-[clamp(2.4rem,4vw,4.5rem)] leading-[0.98] text-sage-950;
+}
+
+.row2 {
+	@apply mt-10 flex items-start gap-3 border-t border-sage-950/8 pt-6 text-sm leading-6 text-sage-600;
+}
+
+.icon {
+	@apply mt-0.5 shrink-0;
+}
+
+.row3 {
+	@apply flex justify-end gap-2;
+}
+
+.button {
+	@apply grid size-10 place-items-center rounded-md border border-sage-950/8 bg-sage-50/60 text-sage-950 transition hover:bg-sage-50 active:scale-[0.96];
+}
+
+.button2 {
+	@apply grid size-10 place-items-center rounded-md border border-sage-950/8 bg-sage-50/60 text-sage-950 transition hover:bg-sage-50 active:scale-[0.96];
+}

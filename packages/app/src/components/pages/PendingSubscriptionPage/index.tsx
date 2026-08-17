@@ -9,8 +9,10 @@ import { Button } from "@/components/atoms/Button"
 import { Heading } from "@/components/atoms/Heading"
 import { Text } from "@/components/atoms/Text"
 import { WorkspaceTemplate } from "@/components/templates/WorkspaceTemplate"
-import { en } from "@/data/locale/en"
+import { useLocale } from "@/hooks/useLocale"
+import { routes } from "@/i18n/routes"
 import { requestJson } from "@/utils/apiClient"
+import styles from "./index.module.css"
 
 type PendingSubscriptionPageProps = PropsWithChildren
 
@@ -18,6 +20,7 @@ const DEADLINE_MILLISECONDS = 30_000
 const POLL_INTERVAL_MILLISECONDS = 2_000
 
 export const PendingSubscriptionPage = ({}: PendingSubscriptionPageProps) => {
+	const { dictionary, locale } = useLocale()
 	const router = useRouter()
 	const startedAt = useRef(0)
 	const [checking, setChecking] = useState(true)
@@ -33,15 +36,19 @@ export const PendingSubscriptionPage = ({}: PendingSubscriptionPageProps) => {
 				subscriptionResponseSchema
 			)
 			if (subscription.entitled) {
-				router.replace("/documents")
+				router.replace(routes.documents(locale))
 				router.refresh()
 			}
 			return subscription
 		} catch (checkError) {
-			setError(checkError instanceof Error ? checkError.message : en.documents.mutationError)
+			setError(
+				checkError instanceof Error
+					? checkError.message
+					: dictionary.workspace.documents.mutationError
+			)
 			return null
 		}
-	}, [router])
+	}, [dictionary.workspace.documents.mutationError, locale, router])
 
 	useEffect(() => {
 		startedAt.current = Date.now()
@@ -84,9 +91,9 @@ export const PendingSubscriptionPage = ({}: PendingSubscriptionPageProps) => {
 		<WorkspaceTemplate>
 			<WorkspaceTemplate.Content>
 				<section
-					className='mx-auto max-w-3xl py-8 text-center sm:py-16'
+					className={styles.section}
 					data-reveal>
-					<span className='mx-auto grid size-14 place-items-center rounded-xl bg-green-50 text-green-700'>
+					<span className={styles.text}>
 						{timedOut ? (
 							<IconRefresh
 								size={27}
@@ -100,35 +107,36 @@ export const PendingSubscriptionPage = ({}: PendingSubscriptionPageProps) => {
 						)}
 					</span>
 					<Heading
-						className='mt-7 max-w-5xl text-[clamp(2.8rem,7vw,5.8rem)] leading-[0.94]'
-						level={1}
-						serif>
-						{timedOut ? en.subscription.pendingStillWaiting : en.subscription.pending}
-					</Heading>
-					<Text className='mx-auto mt-6 max-w-xl'>
+						as='h1'
+						className={styles.heading}>
 						{timedOut
-							? en.subscription.pendingStillWaitingDescription
-							: en.subscription.pendingDescription}
+							? dictionary.workspace.subscription.pendingStillWaiting
+							: dictionary.workspace.subscription.pending}
+					</Heading>
+					<Text className={styles.text2}>
+						{timedOut
+							? dictionary.workspace.subscription.pendingStillWaitingDescription
+							: dictionary.workspace.subscription.pendingDescription}
 					</Text>
 
-					<div className='mx-auto mt-12 grid max-w-2xl gap-px overflow-hidden rounded-xl border border-sage-200 bg-sage-200 sm:grid-cols-3'>
-						{en.subscription.accessSteps.map((step, index) => (
+					<div className={styles.card}>
+						{dictionary.workspace.subscription.accessSteps.map((step, index) => (
 							<div
-								className='bg-sage-50 p-6 text-left'
+								className={styles.container}
 								key={step.title}>
 								<Text
 									as='span'
-									className='grid size-7 place-items-center rounded-full bg-sage-100 text-xs font-bold text-sage-950'
+									className={styles.text3}
 									unstyled>
 									{index + 1}
 								</Text>
 								<Heading
-									className='mt-5 text-base font-semibold'
-									level={2}>
+									className={styles.heading2}
+									as='h2'>
 									{step.title}
 								</Heading>
 								<Text
-									className='mt-2 text-sm leading-6 text-sage-600'
+									className={styles.text4}
 									unstyled>
 									{step.description}
 								</Text>
@@ -138,7 +146,7 @@ export const PendingSubscriptionPage = ({}: PendingSubscriptionPageProps) => {
 
 					{error ? (
 						<Text
-							className='mt-6 text-sm text-red-700'
+							className={styles.error}
 							role='alert'
 							unstyled>
 							{error}
@@ -146,10 +154,12 @@ export const PendingSubscriptionPage = ({}: PendingSubscriptionPageProps) => {
 					) : null}
 
 					<Button
-						className='mt-9'
+						className={styles.action}
 						loading={checking}
 						onClick={() => void refreshStatus()}>
-						{checking ? en.subscription.checking : en.subscription.refresh}
+						{checking
+							? dictionary.workspace.subscription.checking
+							: dictionary.workspace.subscription.refresh}
 						{!checking ? (
 							<IconCheck
 								size={18}

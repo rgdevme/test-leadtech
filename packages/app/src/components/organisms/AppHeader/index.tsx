@@ -9,30 +9,40 @@ import { useState } from "react"
 import { Button } from "@/components/atoms/Button"
 import { Logo } from "@/components/atoms/Logo"
 import { Text } from "@/components/atoms/Text"
-import { en } from "@/data/locale/en"
 import { firebaseAuth } from "@/firebase/client"
+import { useLocale } from "@/hooks/useLocale"
+import { routes } from "@/i18n/routes"
 import { requestNoContent } from "@/utils/apiClient"
+import styles from "./index.module.css"
 
 type AppHeaderProps = PropsWithChildren<{
 	email: string | null
 }>
 
-const navItems = [
-	{ href: "/documents", label: en.navigation.documents, Icon: IconFiles },
-	{ href: "/profile", label: en.navigation.profile, Icon: IconUserCircle }
-]
-
 export const AppHeader = ({ email }: AppHeaderProps) => {
+	const { dictionary, locale } = useLocale()
 	const pathname = usePathname()
 	const router = useRouter()
 	const [signingOut, setSigningOut] = useState(false)
+	const navItems = [
+		{
+			href: routes.documents(locale),
+			label: dictionary.workspace.navigation.documents,
+			Icon: IconFiles
+		},
+		{
+			href: routes.profile(locale),
+			label: dictionary.workspace.navigation.profile,
+			Icon: IconUserCircle
+		}
+	]
 
 	const handleSignOut = async () => {
 		setSigningOut(true)
 		try {
 			await requestNoContent("/api/auth/session", { method: "DELETE" })
 			await firebaseAuth.signOut()
-			router.replace("/sign-in")
+			router.replace(routes.signIn(locale))
 			router.refresh()
 		} finally {
 			setSigningOut(false)
@@ -40,24 +50,23 @@ export const AppHeader = ({ email }: AppHeaderProps) => {
 	}
 
 	return (
-		<header className='sticky top-0 z-30 border-b border-sage-200 bg-sage-50/90 backdrop-blur-xl'>
-			<div className='mx-auto flex min-h-18 max-w-[90rem] items-center justify-between gap-5 px-5 sm:px-8 lg:px-12'>
+		<header className={styles.header}>
+			<div className={styles.row}>
 				<Logo
-					href='/documents'
+					href={routes.documents(locale)}
 					size='compact'
 				/>
 
 				<nav
-					aria-label='Workspace navigation'
-					className='flex items-center gap-1 rounded-lg border border-sage-200 bg-sage-50 p-1'>
+					aria-label={dictionary.workspace.navigation.workspace}
+					className={styles.navigation}>
 					{navItems.map(({ href, label, Icon }) => {
 						const active = pathname === href || pathname.startsWith(`${href}/`)
 						return (
 							<NextLink
 								aria-current={active ? "page" : undefined}
-								className={`flex min-h-9 items-center gap-2 rounded-md px-3 text-sm font-semibold transition ${
-									active ? "bg-sage-100 text-sage-950" : "text-sage-600 hover:text-sage-950"
-								}`}
+								className={styles.navigationLink}
+								data-active={active}
 								href={href}
 								key={href}>
 								<Icon
@@ -67,7 +76,7 @@ export const AppHeader = ({ email }: AppHeaderProps) => {
 								/>
 								<Text
 									as='span'
-									className='hidden sm:inline'
+									className={styles.text}
 									unstyled>
 									{label}
 								</Text>
@@ -76,18 +85,18 @@ export const AppHeader = ({ email }: AppHeaderProps) => {
 					})}
 				</nav>
 
-				<div className='flex items-center gap-3'>
+				<div className={styles.row2}>
 					{email ? (
 						<Text
 							as='span'
-							className='hidden max-w-44 truncate text-xs text-sage-600 lg:block'
+							className={styles.text2}
 							unstyled>
 							{email}
 						</Text>
 					) : null}
 					<Button
-						aria-label={en.navigation.signOut}
-						className='min-h-9 px-2.5 sm:px-3'
+						aria-label={dictionary.workspace.navigation.signOut}
+						className={styles.action}
 						loading={signingOut}
 						onClick={() => void handleSignOut()}
 						variant='quiet'>
@@ -98,9 +107,9 @@ export const AppHeader = ({ email }: AppHeaderProps) => {
 						/>
 						<Text
 							as='span'
-							className='hidden sm:inline'
+							className={styles.text3}
 							unstyled>
-							{en.navigation.signOut}
+							{dictionary.workspace.navigation.signOut}
 						</Text>
 					</Button>
 				</div>

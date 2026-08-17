@@ -1,0 +1,21 @@
+@reference "./globals.css";
+
+.main {
+	@apply grid min-h-screen place-items-center bg-sage-50 px-6 text-center;
+}
+
+.container {
+	@apply max-w-lg;
+}
+
+.heading {
+	@apply text-5xl;
+}
+
+.text {
+	@apply mt-5;
+}
+
+.action {
+	@apply mt-7;
+}

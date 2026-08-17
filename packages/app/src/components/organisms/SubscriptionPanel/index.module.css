@@ -1,0 +1,37 @@
+@reference "../../../app/globals.css";
+
+.section {
+	@apply rounded-xl border border-sage-200 bg-sage-50 p-6 sm:p-8;
+}
+
+.row {
+	@apply flex flex-col justify-between gap-6 sm:flex-row sm:items-start;
+}
+
+.container {
+	@apply max-w-xl;
+}
+
+.text {
+	@apply grid size-10 place-items-center rounded-lg bg-green-50 text-green-700;
+}
+
+.heading {
+	@apply mt-5 text-2xl;
+}
+
+.text2 {
+	@apply mt-2 text-sm;
+}
+
+.row2 {
+	@apply mt-8 flex flex-col gap-5 border-t border-sage-200 pt-6 sm:flex-row sm:items-end sm:justify-between;
+}
+
+.text3 {
+	@apply text-xs font-bold uppercase text-sage-600;
+}
+
+.text4 {
+	@apply mt-1.5 text-sm font-semibold text-sage-950;
+}

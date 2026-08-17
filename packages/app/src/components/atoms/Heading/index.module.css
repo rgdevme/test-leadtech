@@ -1,0 +1,30 @@
+@reference "../../../app/globals.css";
+
+.heading {
+	@apply m-0 text-balance text-sage-950;
+
+	&[data-size="display"] {
+		@apply max-w-6xl text-5xl leading-none font-medium sm:text-7xl lg:text-8xl;
+
+		& span,
+		& em {
+			@apply block;
+		}
+
+		& em {
+			@apply text-sage-700 not-italic;
+		}
+	}
+
+	&[data-size="section"] {
+		@apply max-w-3xl text-5xl leading-none font-medium md:text-6xl lg:text-7xl;
+	}
+
+	&[data-size="card"] {
+		@apply text-2xl leading-tight font-medium;
+	}
+
+	&[data-size="body"] {
+		@apply font-semibold;
+	}
+}

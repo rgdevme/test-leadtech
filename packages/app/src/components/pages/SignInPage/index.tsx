@@ -9,8 +9,10 @@ import { Link } from "@/components/atoms/Link"
 import { Text } from "@/components/atoms/Text"
 import { SignInForm, useSignInForm, type SignInFormValues } from "@/components/forms/SignInForm"
 import { AuthTemplate } from "@/components/templates/AuthTemplate"
-import { en } from "@/data/locale/en"
+import { useLocale } from "@/hooks/useLocale"
+import { routes } from "@/i18n/routes"
 import { ApiClientError } from "@/utils/apiClient"
+import styles from "./index.module.css"
 
 type SignInPageProps = PropsWithChildren<{
 	intent?: "subscribe"
@@ -18,27 +20,28 @@ type SignInPageProps = PropsWithChildren<{
 	sessionExpired?: boolean
 }>
 
-const translateError = (error: unknown) => {
+const translateError = (error: unknown, copy: ReturnType<typeof useLocale>["dictionary"]) => {
 	if (error instanceof ApiClientError && error.code === "rate_limited") {
-		return en.auth.errors.tooManyAttempts
+		return copy.workspace.auth.errors.tooManyAttempts
 	}
 	if (error instanceof FirebaseError) {
 		if (error.code === "auth/too-many-requests") {
-			return en.auth.errors.tooManyAttempts
+			return copy.workspace.auth.errors.tooManyAttempts
 		}
 		if (error.code === "auth/invalid-credential" || error.code === "auth/user-not-found") {
-			return en.auth.errors.invalidCredentials
+			return copy.workspace.auth.errors.invalidCredentials
 		}
 	}
 
-	return en.auth.errors.generic
+	return copy.workspace.auth.errors.generic
 }
 
 export const SignInPage = ({ intent, planKey, sessionExpired = false }: SignInPageProps) => {
+	const { dictionary, locale } = useLocale()
 	const { form, submit } = useSignInForm()
 	const router = useRouter()
 	const [error, setError] = useState<string | null>(
-		sessionExpired ? en.auth.errors.sessionExpired : null
+		sessionExpired ? dictionary.workspace.auth.errors.sessionExpired : null
 	)
 
 	const handleSubmit = async (values: SignInFormValues) => {
@@ -52,10 +55,10 @@ export const SignInPage = ({ intent, planKey, sessionExpired = false }: SignInPa
 					query.set("plan", planKey)
 				}
 			}
-			router.replace(`/documents${query.size > 0 ? `?${query.toString()}` : ""}`)
+			router.replace(`${routes.documents(locale)}${query.size > 0 ? `?${query.toString()}` : ""}`)
 			router.refresh()
 		} catch (submitError) {
-			setError(translateError(submitError))
+			setError(translateError(submitError, dictionary))
 		}
 	}
 
@@ -69,31 +72,34 @@ export const SignInPage = ({ intent, planKey, sessionExpired = false }: SignInPa
 
 	return (
 		<AuthTemplate
-			description={en.auth.signIn.description}
-			title={en.auth.signIn.title}>
+			description={dictionary.workspace.auth.signIn.description}
+			title={dictionary.workspace.auth.signIn.title}>
 			<form onSubmit={form.onSubmit(handleSubmit)}>
 				<SignInForm form={form} />
 				{error ? (
 					<Text
-						className='mt-5 text-sm text-red-700'
+						className={styles.error}
 						role='alert'
 						unstyled>
 						{error}
 					</Text>
 				) : null}
 				<Button
-					className='mt-7 w-full'
+					className={styles.action}
 					loading={form.submitting}
 					type='submit'>
-					{form.submitting ? en.auth.signIn.submitting : en.auth.signIn.submit}
+					{form.submitting
+						? dictionary.workspace.auth.signIn.submitting
+						: dictionary.workspace.auth.signIn.submit}
 				</Button>
 			</form>
 			<Text
-				className='mt-6 text-center text-sm text-sage-600'
+				className={styles.text}
 				unstyled>
-				{en.auth.signIn.alternatePrompt}{" "}
-				<Link href={`/sign-up${signUpQuery.size > 0 ? `?${signUpQuery.toString()}` : ""}`}>
-					{en.auth.signIn.alternateAction}
+				{dictionary.workspace.auth.signIn.alternatePrompt}{" "}
+				<Link
+					href={`${routes.signUp(locale)}${signUpQuery.size > 0 ? `?${signUpQuery.toString()}` : ""}`}>
+					{dictionary.workspace.auth.signIn.alternateAction}
 				</Link>
 			</Text>
 		</AuthTemplate>

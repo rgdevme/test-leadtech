@@ -1,4 +1,5 @@
 import type { PropsWithChildren, ReactNode } from "react"
+import styles from "./index.module.css"
 
 type FormFieldProps = PropsWithChildren<{
 	error?: ReactNode
@@ -7,16 +8,16 @@ type FormFieldProps = PropsWithChildren<{
 }>
 
 export const FormField = ({ children, error, label, name }: FormFieldProps) => (
-	<div className='grid gap-2'>
+	<div className={styles.grid}>
 		<label
-			className='text-sm font-semibold text-sage-950'
+			className={styles.label}
 			htmlFor={name}>
 			{label}
 		</label>
 		{children}
 		{error ? (
 			<p
-				className='text-sm leading-5 text-red-700'
+				className={styles.error}
 				id={`${name}-error`}
 				role='alert'>
 				{error}

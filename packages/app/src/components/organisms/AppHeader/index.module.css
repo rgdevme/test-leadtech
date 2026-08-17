@@ -1,0 +1,41 @@
+@reference "../../../app/globals.css";
+
+.header {
+	@apply sticky top-0 z-30 border-b border-sage-200 bg-sage-50/90 backdrop-blur-xl;
+}
+
+.row {
+	@apply mx-auto flex min-h-18 max-w-[90rem] items-center justify-between gap-5 px-5 sm:px-8 lg:px-12;
+}
+
+.navigation {
+	@apply flex items-center gap-1 rounded-lg border border-sage-200 bg-sage-50 p-1;
+}
+
+.navigationLink {
+	@apply flex min-h-9 items-center gap-2 rounded-md px-3 text-sm font-semibold text-sage-600 transition hover:text-sage-950;
+
+	&[data-active="true"] {
+		@apply bg-sage-100 text-sage-950;
+	}
+}
+
+.text {
+	@apply hidden sm:inline;
+}
+
+.row2 {
+	@apply flex items-center gap-3;
+}
+
+.text2 {
+	@apply hidden max-w-44 truncate text-xs text-sage-600 lg:block;
+}
+
+.action {
+	@apply min-h-9 px-2.5 sm:px-3;
+}
+
+.text3 {
+	@apply hidden sm:inline;
+}

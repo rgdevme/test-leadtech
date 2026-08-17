@@ -1,0 +1,5 @@
+@reference "../../../app/globals.css";
+
+.link {
+	@apply text-sm font-semibold text-sage-950 underline decoration-sage-200 underline-offset-4 transition hover:decoration-sage-950;
+}

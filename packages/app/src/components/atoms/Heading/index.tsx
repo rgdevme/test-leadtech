@@ -1,28 +1,25 @@
 import type { HTMLAttributes, PropsWithChildren } from "react"
 
-type HeadingLevel = 1 | 2 | 3 | 4
+import styles from "./index.module.css"
 
 type HeadingProps = PropsWithChildren<
 	HTMLAttributes<HTMLHeadingElement> & {
-		level?: HeadingLevel
-		serif?: boolean
+		as?: "h1" | "h2" | "h3" | "h4"
+		size?: "body" | "card" | "display" | "section"
 	}
 >
 
 export const Heading = ({
+	as: Component = "h2",
 	children,
 	className = "",
-	level = 2,
-	serif = false,
+	size = "body",
 	...props
-}: HeadingProps) => {
-	const Component = `h${level}` as const
-
-	return (
-		<Component
-			className={`${serif ? "font-serif" : ""} text-balance text-sage-950 ${className}`}
-			{...props}>
-			{children}
-		</Component>
-	)
-}
+}: HeadingProps) => (
+	<Component
+		className={[styles.heading, className].filter(Boolean).join(" ")}
+		data-size={size}
+		{...props}>
+		{children}
+	</Component>
+)

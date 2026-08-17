@@ -1,5 +1,5 @@
-import logo from "@leadtech/common/assets/logo.svg"
-import { brandLocale } from "@leadtech/common/data/locale/en"
+import logo from "@/assets/logo.svg"
+import { en } from "@/data/locale/en"
 import Image from "next/image"
 import NextLink from "next/link"
 import type { PropsWithChildren } from "react"
@@ -8,13 +8,15 @@ import styles from "./index.module.css"
 
 type LogoProps = PropsWithChildren<{
 	href: string
+	inverse?: boolean
 	size?: "compact" | "default"
 }>
 
-export const Logo = ({ href, size = "default" }: LogoProps) => (
+export const Logo = ({ href, inverse = false, size = "default" }: LogoProps) => (
 	<NextLink
-		aria-label={brandLocale.logoLabel}
+		aria-label={en.brand.logoLabel}
 		className={styles.logo}
+		data-inverse={inverse}
 		data-size={size}
 		href={href}>
 		<Image

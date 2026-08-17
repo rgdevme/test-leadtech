@@ -1,0 +1,45 @@
+@reference "../../../app/globals.css";
+
+.section {
+	@apply mx-auto max-w-3xl py-8 text-center sm:py-16;
+}
+
+.text {
+	@apply mx-auto grid size-14 place-items-center rounded-xl bg-green-50 text-green-700;
+}
+
+.heading {
+	@apply mt-7 max-w-5xl text-[clamp(2.8rem,7vw,5.8rem)] leading-[0.94];
+}
+
+.text2 {
+	@apply mx-auto mt-6 max-w-xl;
+}
+
+.card {
+	@apply mx-auto mt-12 grid max-w-2xl gap-px overflow-hidden rounded-xl border border-sage-200 bg-sage-200 sm:grid-cols-3;
+}
+
+.container {
+	@apply bg-sage-50 p-6 text-left;
+}
+
+.text3 {
+	@apply grid size-7 place-items-center rounded-full bg-sage-100 text-xs font-bold text-sage-950;
+}
+
+.heading2 {
+	@apply mt-5 text-base font-semibold;
+}
+
+.text4 {
+	@apply mt-2 text-sm leading-6 text-sage-600;
+}
+
+.error {
+	@apply mt-6 text-sm text-red-700;
+}
+
+.action {
+	@apply mt-9;
+}

@@ -1,4 +1,5 @@
 export { Button } from "./Button"
+export { Container } from "./Container"
 export { Dialog } from "./Dialog"
 export { Heading } from "./Heading"
 export { IconButton } from "./IconButton"

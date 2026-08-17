@@ -1,0 +1,21 @@
+@reference "../../../app/globals.css";
+
+.row {
+	@apply mx-auto flex max-w-[90rem] items-center gap-3;
+}
+
+.input {
+	@apply min-w-0 flex-1 bg-sage-50/0 px-2 py-1 text-lg font-semibold text-sage-950 outline-none placeholder:text-sage-400 disabled:text-sage-950;
+}
+
+.grid {
+	@apply grid gap-2 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center;
+}
+
+.card {
+	@apply rounded-xl border border-sage-200 bg-sage-50 px-6 py-8 sm:px-12 sm:py-12 lg:px-20 lg:py-16;
+}
+
+.error {
+	@apply fixed bottom-5 right-5 z-40 rounded-lg border border-red-50 bg-sage-50 px-4 py-3 text-sm text-red-700;
+}

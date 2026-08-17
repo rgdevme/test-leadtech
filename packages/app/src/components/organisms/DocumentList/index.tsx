@@ -4,6 +4,7 @@ import type { DocumentSummary } from "@leadtech/common/contracts"
 import type { PropsWithChildren } from "react"
 
 import { DocumentListItem } from "@/components/molecules/DocumentListItem"
+import styles from "./index.module.css"
 
 type DocumentListProps = PropsWithChildren<{
 	documents: DocumentSummary[]
@@ -13,7 +14,7 @@ type DocumentListProps = PropsWithChildren<{
 }>
 
 export const DocumentList = ({ documents, editable, onDelete, onRename }: DocumentListProps) => (
-	<section className='rounded-xl border border-sage-200 bg-sage-50 px-5 sm:px-8'>
+	<section className={styles.section}>
 		{documents.map(document => (
 			<DocumentListItem
 				document={document}

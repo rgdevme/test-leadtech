@@ -18,9 +18,11 @@ import { SubscriptionBadge } from "@/components/molecules/SubscriptionBadge"
 import { DocumentList } from "@/components/organisms/DocumentList"
 import { SubscriptionModal } from "@/components/organisms/SubscriptionModal"
 import { WorkspaceTemplate } from "@/components/templates/WorkspaceTemplate"
-import { en } from "@/data/locale/en"
 import { useEditorialMotion } from "@/hooks/useEditorialMotion"
+import { useLocale } from "@/hooks/useLocale"
+import { routes } from "@/i18n/routes"
 import { ApiClientError, requestJson, requestNoContent } from "@/utils/apiClient"
+import styles from "./index.module.css"
 
 type DocumentsPageProps = PropsWithChildren<{
 	documents: DocumentSummary[]
@@ -35,6 +37,7 @@ export const DocumentsPage = ({
 	openSubscription,
 	subscription
 }: DocumentsPageProps) => {
+	const { dictionary, locale } = useLocale()
 	const router = useRouter()
 	const scope = useRef<HTMLElement>(null)
 	const [documents, setDocuments] = useState(initialDocuments)
@@ -63,10 +66,14 @@ export const DocumentsPage = ({
 		setError(null)
 		try {
 			const document = await requestJson("/api/documents", { method: "POST" }, documentRecordSchema)
-			router.push(`/documents/${document.id}`)
+			router.push(routes.document(locale, document.id))
 		} catch (createError) {
 			if (!handleSubscriptionRequired(createError)) {
-				setError(createError instanceof Error ? createError.message : en.documents.mutationError)
+				setError(
+					createError instanceof Error
+						? createError.message
+						: dictionary.workspace.documents.mutationError
+				)
 			}
 			setCreating(false)
 		}
@@ -98,7 +105,11 @@ export const DocumentsPage = ({
 			)
 		} catch (renameError) {
 			if (!handleSubscriptionRequired(renameError)) {
-				setError(renameError instanceof Error ? renameError.message : en.documents.mutationError)
+				setError(
+					renameError instanceof Error
+						? renameError.message
+						: dictionary.workspace.documents.mutationError
+				)
 			}
 		}
 	}
@@ -116,7 +127,11 @@ export const DocumentsPage = ({
 			setDeleteTarget(null)
 		} catch (deleteError) {
 			if (!handleSubscriptionRequired(deleteError)) {
-				setError(deleteError instanceof Error ? deleteError.message : en.documents.mutationError)
+				setError(
+					deleteError instanceof Error
+						? deleteError.message
+						: dictionary.workspace.documents.mutationError
+				)
 			}
 		} finally {
 			setDeleting(false)
@@ -128,41 +143,42 @@ export const DocumentsPage = ({
 			<WorkspaceTemplate>
 				<WorkspaceTemplate.Header>
 					<div
-						className='flex flex-col items-start justify-between gap-7 sm:flex-row sm:items-end'
+						className={styles.row}
 						data-reveal>
-						<div className='max-w-4xl'>
+						<div className={styles.container}>
 							<SubscriptionBadge subscription={subscription} />
 							<Heading
-								className='mt-6 max-w-5xl text-[clamp(3rem,7vw,6.5rem)] leading-[0.9]'
-								level={1}
-								serif>
-								{en.documents.title}
+								as='h2'
+								className={styles.heading}>
+								{dictionary.workspace.documents.title}
 							</Heading>
-							<Text className='mt-6 max-w-xl'>{en.documents.description}</Text>
+							<Text className={styles.text}>{dictionary.workspace.documents.description}</Text>
 						</div>
 						<Button
-							className='shrink-0'
+							className={styles.action}
 							loading={creating}
 							onClick={() => void createDocument()}>
 							<IconPlus
 								size={18}
 								stroke={2}
 							/>
-							{creating ? en.documents.creating : en.documents.create}
+							{creating
+								? dictionary.workspace.documents.creating
+								: dictionary.workspace.documents.create}
 						</Button>
 					</div>
 					{!subscription.entitled ? (
 						<button
-							className='mt-8 flex w-full items-center justify-between gap-5 rounded-lg border border-yellow-50 bg-yellow-50 px-5 py-4 text-left text-sm text-yellow-800 transition hover:border-yellow-800'
+							className={styles.button}
 							onClick={() => setModalOpen(true)}
 							type='button'>
 							<Text
 								as='span'
 								unstyled>
-								{en.documents.readOnlyNotice}
+								{dictionary.workspace.documents.readOnlyNotice}
 							</Text>
 							<IconArrowRight
-								className='shrink-0'
+								className={styles.icon}
 								size={18}
 								stroke={2}
 							/>
@@ -170,7 +186,7 @@ export const DocumentsPage = ({
 					) : null}
 					{error ? (
 						<Text
-							className='mt-5 text-sm text-red-700'
+							className={styles.error}
 							role='alert'
 							unstyled>
 							{error}

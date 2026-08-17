@@ -1,0 +1,5 @@
+@reference "../../../app/globals.css";
+
+.main {
+	@apply min-h-[calc(100vh-4.5rem)] w-full max-w-full overflow-x-hidden bg-sage-50;
+}

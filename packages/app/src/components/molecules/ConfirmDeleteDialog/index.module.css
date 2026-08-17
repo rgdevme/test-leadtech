@@ -1,0 +1,21 @@
+@reference "../../../app/globals.css";
+
+.container {
+	@apply w-[min(92vw,28rem)] p-7;
+}
+
+.error {
+	@apply grid size-11 place-items-center rounded-lg bg-red-50 text-red-700;
+}
+
+.heading {
+	@apply mt-5 text-2xl;
+}
+
+.text {
+	@apply mt-2 text-sm;
+}
+
+.row {
+	@apply mt-7 flex justify-end gap-3;
+}

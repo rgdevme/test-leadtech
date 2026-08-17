@@ -1,0 +1,13 @@
+@reference "../../../app/globals.css";
+
+.grid {
+	@apply grid gap-2;
+}
+
+.label {
+	@apply text-sm font-semibold text-sage-950;
+}
+
+.error {
+	@apply text-sm leading-5 text-red-700;
+}

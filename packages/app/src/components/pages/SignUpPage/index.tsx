@@ -9,34 +9,37 @@ import { Link } from "@/components/atoms/Link"
 import { Text } from "@/components/atoms/Text"
 import { SignUpForm, useSignUpForm, type SignUpFormValues } from "@/components/forms/SignUpForm"
 import { AuthTemplate } from "@/components/templates/AuthTemplate"
-import { en } from "@/data/locale/en"
+import { useLocale } from "@/hooks/useLocale"
+import { routes } from "@/i18n/routes"
 import { ApiClientError } from "@/utils/apiClient"
+import styles from "./index.module.css"
 
 type SignUpPageProps = PropsWithChildren<{
 	intent?: "subscribe"
 	planKey?: string
 }>
 
-const translateError = (error: unknown) => {
+const translateError = (error: unknown, copy: ReturnType<typeof useLocale>["dictionary"]) => {
 	if (error instanceof ApiClientError && error.code === "rate_limited") {
-		return en.auth.errors.tooManyAttempts
+		return copy.workspace.auth.errors.tooManyAttempts
 	}
 	if (error instanceof FirebaseError) {
 		if (error.code === "auth/email-already-in-use") {
-			return en.auth.errors.emailInUse
+			return copy.workspace.auth.errors.emailInUse
 		}
 		if (error.code === "auth/weak-password") {
-			return en.auth.errors.weakPassword
+			return copy.workspace.auth.errors.weakPassword
 		}
 		if (error.code === "auth/too-many-requests") {
-			return en.auth.errors.tooManyAttempts
+			return copy.workspace.auth.errors.tooManyAttempts
 		}
 	}
 
-	return en.auth.errors.generic
+	return copy.workspace.auth.errors.generic
 }
 
 export const SignUpPage = ({ intent, planKey }: SignUpPageProps) => {
+	const { dictionary, locale } = useLocale()
 	const { form, submit } = useSignUpForm()
 	const router = useRouter()
 	const [error, setError] = useState<string | null>(null)
@@ -52,10 +55,10 @@ export const SignUpPage = ({ intent, planKey }: SignUpPageProps) => {
 					query.set("plan", planKey)
 				}
 			}
-			router.replace(`/documents${query.size > 0 ? `?${query.toString()}` : ""}`)
+			router.replace(`${routes.documents(locale)}${query.size > 0 ? `?${query.toString()}` : ""}`)
 			router.refresh()
 		} catch (submitError) {
-			setError(translateError(submitError))
+			setError(translateError(submitError, dictionary))
 		}
 	}
 
@@ -69,31 +72,34 @@ export const SignUpPage = ({ intent, planKey }: SignUpPageProps) => {
 
 	return (
 		<AuthTemplate
-			description={en.auth.signUp.description}
-			title={en.auth.signUp.title}>
+			description={dictionary.workspace.auth.signUp.description}
+			title={dictionary.workspace.auth.signUp.title}>
 			<form onSubmit={form.onSubmit(handleSubmit)}>
 				<SignUpForm form={form} />
 				{error ? (
 					<Text
-						className='mt-5 text-sm text-red-700'
+						className={styles.error}
 						role='alert'
 						unstyled>
 						{error}
 					</Text>
 				) : null}
 				<Button
-					className='mt-7 w-full'
+					className={styles.action}
 					loading={form.submitting}
 					type='submit'>
-					{form.submitting ? en.auth.signUp.submitting : en.auth.signUp.submit}
+					{form.submitting
+						? dictionary.workspace.auth.signUp.submitting
+						: dictionary.workspace.auth.signUp.submit}
 				</Button>
 			</form>
 			<Text
-				className='mt-6 text-center text-sm text-sage-600'
+				className={styles.text}
 				unstyled>
-				{en.auth.signUp.alternatePrompt}{" "}
-				<Link href={`/sign-in${signInQuery.size > 0 ? `?${signInQuery.toString()}` : ""}`}>
-					{en.auth.signUp.alternateAction}
+				{dictionary.workspace.auth.signUp.alternatePrompt}{" "}
+				<Link
+					href={`${routes.signIn(locale)}${signInQuery.size > 0 ? `?${signInQuery.toString()}` : ""}`}>
+					{dictionary.workspace.auth.signUp.alternateAction}
 				</Link>
 			</Text>
 		</AuthTemplate>

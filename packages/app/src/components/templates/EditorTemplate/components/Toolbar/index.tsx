@@ -1,11 +1,8 @@
 import type { PropsWithChildren } from "react"
+import styles from "./index.module.css"
 
 type ToolbarProps = PropsWithChildren
 
 export function Toolbar({ children }: ToolbarProps) {
-	return (
-		<div className='sticky top-[4.5rem] z-20 border-b border-sage-200 bg-sage-50/92 px-5 py-2 backdrop-blur-xl sm:px-8'>
-			{children}
-		</div>
-	)
+	return <div className={styles.container}>{children}</div>
 }

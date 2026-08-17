@@ -1,0 +1,14 @@
+import type { MetadataRoute } from "next"
+
+import { applicationUrl } from "@/config/environment"
+import { locales } from "@/i18n/config"
+
+const sitemap = (): MetadataRoute.Sitemap => {
+	return locales.map(locale => ({
+		url: new URL(`/${locale}`, applicationUrl).toString(),
+		changeFrequency: "monthly",
+		priority: 1
+	}))
+}
+
+export default sitemap

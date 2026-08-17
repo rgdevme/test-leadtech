@@ -1,0 +1,13 @@
+@reference "../../../app/globals.css";
+
+.spinner {
+	@apply inline-block animate-spin rounded-full border-2 border-current border-r-sage-950/0;
+
+	&[data-size="small"] {
+		@apply size-4;
+	}
+
+	&[data-size="medium"] {
+		@apply size-5;
+	}
+}

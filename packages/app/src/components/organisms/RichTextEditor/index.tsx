@@ -14,9 +14,11 @@ import { SaveIndicator } from "@/components/molecules/SaveIndicator"
 import { EditorToolbar } from "@/components/organisms/EditorToolbar"
 import { SubscriptionModal } from "@/components/organisms/SubscriptionModal"
 import { EditorTemplate } from "@/components/templates/EditorTemplate"
-import { en } from "@/data/locale/en"
+import { useLocale } from "@/hooks/useLocale"
+import { routes } from "@/i18n/routes"
 import { requestNoContent } from "@/utils/apiClient"
 import { useRichTextEditor } from "./hooks/useRichTextEditor"
+import layoutStyles from "./layout.module.css"
 
 type RichTextEditorProps = PropsWithChildren<{
 	document: DocumentRecord
@@ -29,6 +31,7 @@ export const RichTextEditor = ({
 	editable,
 	onSubscriptionRequired
 }: RichTextEditorProps) => {
+	const { dictionary, locale } = useLocale()
 	const router = useRouter()
 	const [accessRevoked, setAccessRevoked] = useState(false)
 	const [subscriptionOpen, setSubscriptionOpen] = useState(false)
@@ -48,10 +51,13 @@ export const RichTextEditor = ({
 	const canEdit = editable && !accessRevoked
 
 	const navigateBack = () => {
-		if (editorState.hasUnsavedChanges && !window.confirm(en.editor.save.navigationWarning)) {
+		if (
+			editorState.hasUnsavedChanges
+			&& !window.confirm(dictionary.workspace.editor.save.navigationWarning)
+		) {
 			return
 		}
-		router.push("/documents")
+		router.push(routes.documents(locale))
 	}
 
 	const deleteDocument = async () => {
@@ -59,10 +65,12 @@ export const RichTextEditor = ({
 		setDeleteError(null)
 		try {
 			await requestNoContent(`/api/documents/${document.id}`, { method: "DELETE" })
-			router.replace("/documents")
+			router.replace(routes.documents(locale))
 			router.refresh()
 		} catch (error) {
-			setDeleteError(error instanceof Error ? error.message : en.documents.mutationError)
+			setDeleteError(
+				error instanceof Error ? error.message : dictionary.workspace.documents.mutationError
+			)
 			setDeleting(false)
 		}
 	}
@@ -71,9 +79,9 @@ export const RichTextEditor = ({
 		<>
 			<EditorTemplate>
 				<EditorTemplate.Header>
-					<div className='mx-auto flex max-w-[90rem] items-center gap-3'>
+					<div className={layoutStyles.row}>
 						<IconButton
-							label={en.navigation.backToDocuments}
+							label={dictionary.workspace.navigation.backToDocuments}
 							onClick={navigateBack}>
 							<IconArrowLeft
 								size={19}
@@ -81,12 +89,12 @@ export const RichTextEditor = ({
 							/>
 						</IconButton>
 						<input
-							aria-label={en.editor.titlePlaceholder}
-							className='min-w-0 flex-1 bg-sage-50/0 px-2 py-1 text-lg font-semibold text-sage-950 outline-none placeholder:text-sage-400 disabled:text-sage-950'
+							aria-label={dictionary.workspace.editor.titlePlaceholder}
+							className={layoutStyles.input}
 							disabled={!canEdit}
 							maxLength={120}
 							onChange={event => editorState.updateTitle(event.currentTarget.value)}
-							placeholder={en.editor.titlePlaceholder}
+							placeholder={dictionary.workspace.editor.titlePlaceholder}
 							value={editorState.title}
 						/>
 						{!canEdit ? (
@@ -97,11 +105,11 @@ export const RichTextEditor = ({
 									size={16}
 									stroke={1.9}
 								/>
-								{en.editor.readOnly}
+								{dictionary.workspace.editor.readOnly}
 							</Button>
 						) : (
 							<IconButton
-								label={en.documents.delete}
+								label={dictionary.workspace.documents.delete}
 								onClick={() => setDeleteOpen(true)}>
 								<IconTrash
 									size={19}
@@ -112,7 +120,7 @@ export const RichTextEditor = ({
 					</div>
 				</EditorTemplate.Header>
 				<EditorTemplate.Toolbar>
-					<div className='grid gap-2 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center'>
+					<div className={layoutStyles.grid}>
 						<EditorToolbar
 							editable={canEdit}
 							editor={editorState.editor}
@@ -126,7 +134,7 @@ export const RichTextEditor = ({
 					</div>
 				</EditorTemplate.Toolbar>
 				<EditorTemplate.Content>
-					<div className='rounded-xl border border-sage-200 bg-sage-50 px-6 py-8 sm:px-12 sm:py-12 lg:px-20 lg:py-16'>
+					<div className={layoutStyles.card}>
 						<EditorContent editor={editorState.editor} />
 					</div>
 				</EditorTemplate.Content>
@@ -144,7 +152,7 @@ export const RichTextEditor = ({
 			/>
 			{deleteError ? (
 				<p
-					className='fixed bottom-5 right-5 z-40 rounded-lg border border-red-50 bg-sage-50 px-4 py-3 text-sm text-red-700'
+					className={layoutStyles.error}
 					role='alert'>
 					{deleteError}
 				</p>

@@ -1,0 +1,13 @@
+@reference "../../../app/globals.css";
+
+.subscription {
+	@apply inline-flex items-center gap-2 rounded-full bg-yellow-50 px-3 py-1.5 text-[0.68rem] font-bold text-yellow-800 uppercase;
+
+	&[data-entitled="true"] {
+		@apply bg-green-50 text-green-700;
+	}
+}
+
+.badge {
+	@apply size-1.5 rounded-full bg-current;
+}

@@ -1,0 +1,17 @@
+@reference "../../../app/globals.css";
+
+.row {
+	@apply mx-auto flex max-w-[90rem] items-center justify-between gap-4;
+}
+
+.row2 {
+	@apply flex flex-wrap items-center gap-0.5;
+}
+
+.container {
+	@apply hidden items-center gap-0.5 sm:flex;
+}
+
+.activeControl {
+	@apply border-sage-200 bg-sage-50 text-sage-950;
+}

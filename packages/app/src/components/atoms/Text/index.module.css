@@ -1,0 +1,29 @@
+@reference "../../../app/globals.css";
+
+.text {
+	@apply m-0 text-base leading-relaxed;
+
+	&[data-size="small"] {
+		@apply text-sm leading-normal;
+	}
+
+	&[data-size="lead"] {
+		@apply text-lg leading-relaxed md:text-xl;
+	}
+
+	&[data-tone="muted"] {
+		@apply text-sage-950/65;
+	}
+
+	&[data-tone="inverse"] {
+		@apply text-sage-100/70;
+	}
+
+	&[data-variant="eyebrow"] {
+		@apply mb-6 inline-flex min-h-7 items-center rounded-full bg-sage-950/5 px-3 py-1 text-xs leading-none font-bold text-sage-900 uppercase;
+
+		&[data-tone="inverse"] {
+			@apply bg-sage-100/10 text-sage-100;
+		}
+	}
+}

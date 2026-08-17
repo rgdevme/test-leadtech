@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server"
 
 import { requireSessionPrincipal } from "@/guards/authentication"
+import { publicSubscriptionPlans } from "@/data/subscriptionPlans"
 import { handleRoute, noStoreHeaders } from "@/utils/http"
-import { publicSubscriptionPlans } from "@leadtech/common/contracts"
 
 export const dynamic = "force-dynamic"
 

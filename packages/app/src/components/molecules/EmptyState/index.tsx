@@ -1,10 +1,13 @@
+"use client"
+
 import { IconFilePlus } from "@tabler/icons-react"
 import type { PropsWithChildren } from "react"
 
 import { Button } from "@/components/atoms/Button"
 import { Heading } from "@/components/atoms/Heading"
 import { Text } from "@/components/atoms/Text"
-import { en } from "@/data/locale/en"
+import { useLocale } from "@/hooks/useLocale"
+import styles from "./index.module.css"
 
 type EmptyStateProps = PropsWithChildren<{
 	canCreate: boolean
@@ -12,30 +15,35 @@ type EmptyStateProps = PropsWithChildren<{
 	onCreate: () => void
 }>
 
-export const EmptyState = ({ canCreate, creating, onCreate }: EmptyStateProps) => (
-	<section className='grid min-h-[32rem] place-items-center rounded-xl border border-sage-200 bg-sage-50 px-6 py-16 text-center'>
-		<div
-			className='max-w-md'
-			data-reveal>
-			<span className='mx-auto grid size-12 place-items-center rounded-lg bg-blue-50 text-blue-600'>
-				<IconFilePlus
-					size={24}
-					stroke={1.8}
-				/>
-			</span>
-			<Heading
-				className='mt-6 text-3xl'
-				level={2}
-				serif>
-				{en.documents.emptyTitle}
-			</Heading>
-			<Text className='mt-3'>{en.documents.emptyDescription}</Text>
-			<Button
-				className='mt-7'
-				loading={creating}
-				onClick={onCreate}>
-				{canCreate ? en.documents.create : en.subscription.subscribe}
-			</Button>
-		</div>
-	</section>
-)
+export const EmptyState = ({ canCreate, creating, onCreate }: EmptyStateProps) => {
+	const { dictionary } = useLocale()
+
+	return (
+		<section className={styles.section}>
+			<div
+				className={styles.container}
+				data-reveal>
+				<span className={styles.text}>
+					<IconFilePlus
+						size={24}
+						stroke={1.8}
+					/>
+				</span>
+				<Heading
+					as='h2'
+					className={styles.heading}>
+					{dictionary.workspace.documents.emptyTitle}
+				</Heading>
+				<Text className={styles.text2}>{dictionary.workspace.documents.emptyDescription}</Text>
+				<Button
+					className={styles.action}
+					loading={creating}
+					onClick={onCreate}>
+					{canCreate
+						? dictionary.workspace.documents.create
+						: dictionary.workspace.subscription.subscribe}
+				</Button>
+			</div>
+		</section>
+	)
+}

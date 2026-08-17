@@ -10,54 +10,58 @@ import { Heading } from "@/components/atoms/Heading"
 import { Text } from "@/components/atoms/Text"
 import { SubscriptionBadge } from "@/components/molecules/SubscriptionBadge"
 import { SubscriptionModal } from "@/components/organisms/SubscriptionModal"
-import { en } from "@/data/locale/en"
+import { useLocale } from "@/hooks/useLocale"
+import styles from "./index.module.css"
 
 type SubscriptionPanelProps = PropsWithChildren<{
 	subscription: SubscriptionResponse
 }>
 
 export const SubscriptionPanel = ({ subscription }: SubscriptionPanelProps) => {
+	const { dictionary } = useLocale()
 	const [modalOpen, setModalOpen] = useState(false)
 
 	return (
 		<>
-			<section className='rounded-xl border border-sage-200 bg-sage-50 p-6 sm:p-8'>
-				<div className='flex flex-col justify-between gap-6 sm:flex-row sm:items-start'>
-					<div className='max-w-xl'>
-						<span className='grid size-10 place-items-center rounded-lg bg-green-50 text-green-700'>
+			<section className={styles.section}>
+				<div className={styles.row}>
+					<div className={styles.container}>
+						<span className={styles.text}>
 							<IconShieldCheck
 								size={21}
 								stroke={1.8}
 							/>
 						</span>
 						<Heading
-							className='mt-5 text-2xl'
-							level={2}>
-							{en.subscription.manageHeading}
+							className={styles.heading}
+							as='h2'>
+							{dictionary.workspace.subscription.manageHeading}
 						</Heading>
-						<Text className='mt-2 text-sm'>{en.subscription.manageDescription}</Text>
+						<Text className={styles.text2}>
+							{dictionary.workspace.subscription.manageDescription}
+						</Text>
 					</div>
 					<SubscriptionBadge subscription={subscription} />
 				</div>
 
-				<div className='mt-8 flex flex-col gap-5 border-t border-sage-200 pt-6 sm:flex-row sm:items-end sm:justify-between'>
+				<div className={styles.row2}>
 					<div>
 						<Text
-							className='text-xs font-bold uppercase text-sage-600'
+							className={styles.text3}
 							unstyled>
-							{en.subscription.updated}
+							{dictionary.workspace.subscription.updated}
 						</Text>
 						<Text
-							className='mt-1.5 text-sm font-semibold text-sage-950'
+							className={styles.text4}
 							unstyled>
 							{subscription.updatedAt
 								? new Date(subscription.updatedAt).toLocaleString()
-								: en.subscription.notConfirmed}
+								: dictionary.workspace.subscription.notConfirmed}
 						</Text>
 					</div>
 					{!subscription.entitled ? (
 						<Button onClick={() => setModalOpen(true)}>
-							{en.subscription.subscribe}
+							{dictionary.workspace.subscription.subscribe}
 							<IconArrowRight
 								size={18}
 								stroke={2}

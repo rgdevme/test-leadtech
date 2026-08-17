@@ -1,11 +1,9 @@
-@import "@leadtech/common/styles/theme.css";
+@import "../styles/theme.css";
 @import "tailwindcss";
 
 :root {
-	@apply bg-sage-50 text-sage-950;
 	color-scheme: light;
 	font-synthesis: none;
-	text-rendering: optimizeLegibility;
 }
 
 * {
@@ -13,11 +11,12 @@
 }
 
 html {
-	@apply scroll-smooth bg-sage-50;
+	@apply scroll-smooth bg-sage-100;
 }
 
 body {
-	@apply m-0 min-w-80 bg-sage-50 font-sans text-sage-950;
+	@apply m-0 min-w-80 bg-radial from-sage-500/20 to-sage-100 font-sans text-sage-950;
+	text-rendering: optimizeLegibility;
 }
 
 button,
@@ -26,7 +25,19 @@ input {
 }
 
 ::selection {
-	@apply bg-sage-200 text-sage-950;
+	@apply bg-yellow-400 text-sage-950;
+}
+
+a {
+	@apply text-inherit no-underline;
+}
+
+:focus-visible {
+	@apply outline-3 outline-offset-4 outline-yellow-400;
+}
+
+img {
+	@apply block max-w-full;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -34,8 +45,8 @@ input {
 	*::before,
 	*::after {
 		scroll-behavior: auto !important;
+		transition-duration: 0.01ms !important;
 		animation-duration: 0.01ms !important;
 		animation-iteration-count: 1 !important;
-		transition-duration: 0.01ms !important;
 	}
 }

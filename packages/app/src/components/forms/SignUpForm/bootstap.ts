@@ -6,9 +6,10 @@ import { useForm } from "@mantine/form"
 import { csrfTokenResponseSchema } from "@leadtech/common/contracts"
 
 import { firebaseAuth, prepareFirebaseAuth } from "@/firebase/client"
+import { useLocale } from "@/hooks/useLocale"
 import { requestJson, requestNoContent } from "@/utils/apiClient"
 import { enhanceInputPropsWithDisable, validateFormWith } from "@/utils/forms"
-import { signUpFormSchema, type SignUpFormValues } from "./schemas"
+import { createSignUpFormSchema, type SignUpFormValues } from "./schemas"
 
 const createAccount = async ({ email, password }: SignUpFormValues) => {
 	await prepareFirebaseAuth()
@@ -32,10 +33,11 @@ const createAccount = async ({ email, password }: SignUpFormValues) => {
 }
 
 export const useSignUpForm = () => {
+	const { dictionary } = useLocale()
 	const form = useForm<SignUpFormValues>({
 		mode: "controlled",
 		initialValues: { email: "", password: "", confirmPassword: "" },
-		validate: validateFormWith(signUpFormSchema),
+		validate: validateFormWith(createSignUpFormSchema(dictionary.workspace.auth.errors)),
 		enhanceGetInputProps: enhanceInputPropsWithDisable()
 	})
 

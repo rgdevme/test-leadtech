@@ -1,27 +1,22 @@
-"use client"
+import { Children, isValidElement } from "react"
+import type { ElementType, ReactElement, ReactNode } from "react"
 
-import { Children, isValidElement, type ComponentType, type ReactNode } from "react"
+type AllowedSlots = Record<string, ElementType>
 
-type SlotMap = Record<string, ComponentType<{ children?: ReactNode }>>
-
-export const useComponentSlots = <Slots extends SlotMap>(
+export const useComponentSlots = <Slots extends AllowedSlots>(
 	allowedSlots: Slots,
 	children: ReactNode
-) => {
-	const slots = Object.fromEntries(
-		Object.keys(allowedSlots).map(slotName => [slotName, null])
-	) as Record<keyof Slots, ReactNode>
+) =>
+	(Object.entries(allowedSlots) as [keyof Slots, ElementType][]).reduce<
+		Partial<Record<keyof Slots, ReactElement>>
+	>((slots, [name, Slot]) => {
+		const match = Children.toArray(children).find(
+			child => isValidElement(child) && child.type === Slot
+		)
 
-	Children.forEach(children, child => {
-		if (!isValidElement(child)) {
-			return
+		if (isValidElement(match)) {
+			slots[name] = match
 		}
 
-		const match = Object.entries(allowedSlots).find(([, Slot]) => child.type === Slot)
-		if (match) {
-			slots[match[0] as keyof Slots] = child
-		}
-	})
-
-	return slots
-}
+		return slots
+	}, {})

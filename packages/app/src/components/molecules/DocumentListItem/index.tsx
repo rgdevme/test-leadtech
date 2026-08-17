@@ -10,7 +10,9 @@ import { Heading } from "@/components/atoms/Heading"
 import { IconButton } from "@/components/atoms/IconButton"
 import { Input } from "@/components/atoms/Input"
 import { Text } from "@/components/atoms/Text"
-import { en } from "@/data/locale/en"
+import { useLocale } from "@/hooks/useLocale"
+import { routes } from "@/i18n/routes"
+import styles from "./index.module.css"
 
 type DocumentListItemProps = PropsWithChildren<{
 	document: DocumentSummary
@@ -25,6 +27,7 @@ export const DocumentListItem = ({
 	onDelete,
 	onRename
 }: DocumentListItemProps) => {
+	const { dictionary, locale } = useLocale()
 	const [menuOpen, setMenuOpen] = useState(false)
 	const [renaming, setRenaming] = useState(false)
 	const [title, setTitle] = useState(document.title)
@@ -43,49 +46,47 @@ export const DocumentListItem = ({
 
 	return (
 		<article
-			className='group relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b border-sage-200 py-5 last:border-b-0'
+			className={styles.item}
 			data-reveal>
-			<div className='min-w-0'>
+			<div className={styles.container}>
 				{renaming ? (
 					<form
-						className='flex max-w-lg items-center gap-2'
+						className={styles.form}
 						onSubmit={event => {
 							event.preventDefault()
 							void submitRename()
 						}}>
 						<Input
-							aria-label={en.documents.rename}
+							aria-label={dictionary.workspace.documents.rename}
 							autoFocus
 							maxLength={120}
 							onChange={event => setTitle(event.currentTarget.value)}
 							value={title}
 						/>
 						<button
-							className='text-sm font-semibold text-sage-950'
+							className={styles.button}
 							type='submit'>
-							{en.documents.renameSave}
+							{dictionary.workspace.documents.renameSave}
 						</button>
 						<button
-							className='text-sm text-sage-600'
+							className={styles.button2}
 							onClick={() => {
 								setTitle(document.title)
 								setRenaming(false)
 							}}
 							type='button'>
-							{en.documents.renameCancel}
+							{dictionary.workspace.documents.renameCancel}
 						</button>
 					</form>
 				) : (
 					<NextLink
-						className='block'
-						href={`/documents/${document.id}`}>
-						<Heading className='truncate text-lg font-semibold transition group-hover:text-sage-900'>
-							{document.title}
-						</Heading>
+						className={styles.link}
+						href={routes.document(locale, document.id)}>
+						<Heading className={styles.heading}>{document.title}</Heading>
 						<Text
-							className='mt-1.5 text-sm text-sage-600'
+							className={styles.text}
 							unstyled>
-							{en.documents.updated}{" "}
+							{dictionary.workspace.documents.updated}{" "}
 							{new Date(document.updatedAt).toLocaleDateString(undefined, {
 								day: "numeric",
 								month: "short",
@@ -97,20 +98,20 @@ export const DocumentListItem = ({
 			</div>
 
 			{!renaming ? (
-				<div className='flex items-center gap-1'>
+				<div className={styles.row}>
 					<NextLink
-						aria-label={`Open ${document.title}`}
-						className='grid size-10 place-items-center rounded-[6px] text-sage-600 transition hover:bg-sage-100 hover:text-sage-950'
-						href={`/documents/${document.id}`}>
+						aria-label={dictionary.workspace.documents.open}
+						className={styles.link2}
+						href={routes.document(locale, document.id)}>
 						<IconArrowUpRight
 							size={19}
 							stroke={1.8}
 						/>
 					</NextLink>
 					{editable ? (
-						<div className='relative'>
+						<div className={styles.container2}>
 							<IconButton
-								label={`Actions for ${document.title}`}
+								label={dictionary.workspace.documents.actions}
 								onClick={() => setMenuOpen(open => !open)}>
 								<IconDots
 									size={19}
@@ -118,9 +119,9 @@ export const DocumentListItem = ({
 								/>
 							</IconButton>
 							{menuOpen ? (
-								<div className='absolute right-0 top-11 z-10 w-48 rounded-lg border border-sage-200 bg-sage-50 p-1.5 shadow-lg'>
+								<div className={styles.card}>
 									<button
-										className='flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-sage-950 hover:bg-sage-100'
+										className={styles.button3}
 										onClick={() => {
 											setRenaming(true)
 											setMenuOpen(false)
@@ -130,17 +131,17 @@ export const DocumentListItem = ({
 											size={16}
 											stroke={1.8}
 										/>
-										{en.documents.rename}
+										{dictionary.workspace.documents.rename}
 									</button>
 									<button
-										className='flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-red-700 hover:bg-red-50'
+										className={styles.error}
 										onClick={() => onDelete(document)}
 										type='button'>
 										<IconTrash
 											size={16}
 											stroke={1.8}
 										/>
-										{en.documents.delete}
+										{dictionary.workspace.documents.delete}
 									</button>
 								</div>
 							) : null}

@@ -1,9 +1,14 @@
 import type { HTMLAttributes, PropsWithChildren } from "react"
 
+import styles from "./index.module.css"
+
 type TextProps = PropsWithChildren<
 	HTMLAttributes<HTMLElement> & {
-		as?: "p" | "span"
+		as?: "em" | "p" | "span" | "strong"
+		tone?: "default" | "inverse" | "muted"
+		size?: "body" | "lead" | "small"
 		unstyled?: boolean
+		variant?: "body" | "eyebrow"
 	}
 >
 
@@ -11,11 +16,17 @@ export const Text = ({
 	as: Component = "p",
 	children,
 	className = "",
+	size = "body",
+	tone = "default",
 	unstyled = false,
+	variant = "body",
 	...props
 }: TextProps) => (
 	<Component
-		className={unstyled ? className : `leading-7 text-sage-600 ${className}`}
+		className={unstyled ? className : [styles.text, className].filter(Boolean).join(" ")}
+		data-size={unstyled ? undefined : size}
+		data-tone={unstyled ? undefined : tone}
+		data-variant={unstyled ? undefined : variant}
 		{...props}>
 		{children}
 	</Component>

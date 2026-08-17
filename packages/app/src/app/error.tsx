@@ -4,6 +4,7 @@ import { Button } from "@/components/atoms/Button"
 import { Heading } from "@/components/atoms/Heading"
 import { Text } from "@/components/atoms/Text"
 import { en } from "@/data/locale/en"
+import styles from "./error.module.css"
 
 type ErrorPageProps = {
 	error: Error & { digest?: string }
@@ -12,17 +13,18 @@ type ErrorPageProps = {
 
 export default function ErrorPage({ reset }: ErrorPageProps) {
 	return (
-		<main className='grid min-h-screen place-items-center bg-sage-50 px-6 text-center'>
-			<div className='max-w-lg'>
+		<main className={styles.main}>
+			<div className={styles.container}>
 				<Heading
-					className='text-5xl'
-					level={1}
-					serif>
+					as='h1'
+					className={styles.heading}>
 					The page could not be prepared.
 				</Heading>
-				<Text className='mt-5'>Your data has not been changed. Try loading the page again.</Text>
+				<Text className={styles.text}>
+					Your data has not been changed. Try loading the page again.
+				</Text>
 				<Button
-					className='mt-7'
+					className={styles.action}
 					onClick={reset}>
 					{en.common.retry}
 				</Button>

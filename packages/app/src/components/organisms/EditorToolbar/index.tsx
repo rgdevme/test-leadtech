@@ -14,7 +14,8 @@ import type { Editor } from "@tiptap/react"
 import type { PropsWithChildren } from "react"
 
 import { IconButton } from "@/components/atoms/IconButton"
-import { en } from "@/data/locale/en"
+import { useLocale } from "@/hooks/useLocale"
+import styles from "./index.module.css"
 
 type EditorToolbarProps = PropsWithChildren<{
 	editor: Editor | null
@@ -22,39 +23,40 @@ type EditorToolbarProps = PropsWithChildren<{
 }>
 
 export const EditorToolbar = ({ editable, editor }: EditorToolbarProps) => {
+	const { dictionary } = useLocale()
 	const controls = [
 		{
-			label: en.editor.toolbar.bold,
+			label: dictionary.workspace.editor.toolbar.bold,
 			active: editor?.isActive("bold") ?? false,
 			action: () => editor?.chain().focus().toggleBold().run(),
 			Icon: IconBold
 		},
 		{
-			label: en.editor.toolbar.italic,
+			label: dictionary.workspace.editor.toolbar.italic,
 			active: editor?.isActive("italic") ?? false,
 			action: () => editor?.chain().focus().toggleItalic().run(),
 			Icon: IconItalic
 		},
 		{
-			label: en.editor.toolbar.headingOne,
+			label: dictionary.workspace.editor.toolbar.headingOne,
 			active: editor?.isActive("heading", { level: 1 }) ?? false,
 			action: () => editor?.chain().focus().toggleHeading({ level: 1 }).run(),
 			Icon: IconH1
 		},
 		{
-			label: en.editor.toolbar.headingTwo,
+			label: dictionary.workspace.editor.toolbar.headingTwo,
 			active: editor?.isActive("heading", { level: 2 }) ?? false,
 			action: () => editor?.chain().focus().toggleHeading({ level: 2 }).run(),
 			Icon: IconH2
 		},
 		{
-			label: en.editor.toolbar.bulletList,
+			label: dictionary.workspace.editor.toolbar.bulletList,
 			active: editor?.isActive("bulletList") ?? false,
 			action: () => editor?.chain().focus().toggleBulletList().run(),
 			Icon: IconList
 		},
 		{
-			label: en.editor.toolbar.orderedList,
+			label: dictionary.workspace.editor.toolbar.orderedList,
 			active: editor?.isActive("orderedList") ?? false,
 			action: () => editor?.chain().focus().toggleOrderedList().run(),
 			Icon: IconListNumbers
@@ -62,12 +64,12 @@ export const EditorToolbar = ({ editable, editor }: EditorToolbarProps) => {
 	]
 
 	return (
-		<div className='mx-auto flex max-w-[90rem] items-center justify-between gap-4'>
-			<div className='flex flex-wrap items-center gap-0.5'>
+		<div className={styles.row}>
+			<div className={styles.row2}>
 				{controls.map(({ Icon, action, active, label }) => (
 					<IconButton
 						aria-pressed={active}
-						className={active ? "border-sage-200 bg-sage-50 text-sage-950" : ""}
+						className={active ? styles.activeControl : undefined}
 						disabled={!editable || !editor}
 						key={label}
 						label={label}
@@ -79,10 +81,10 @@ export const EditorToolbar = ({ editable, editor }: EditorToolbarProps) => {
 					</IconButton>
 				))}
 			</div>
-			<div className='hidden items-center gap-0.5 sm:flex'>
+			<div className={styles.container}>
 				<IconButton
 					disabled={!editable || !editor?.can().chain().focus().undo().run()}
-					label={en.editor.toolbar.undo}
+					label={dictionary.workspace.editor.toolbar.undo}
 					onClick={() => editor?.chain().focus().undo().run()}>
 					<IconArrowBackUp
 						size={18}
@@ -91,7 +93,7 @@ export const EditorToolbar = ({ editable, editor }: EditorToolbarProps) => {
 				</IconButton>
 				<IconButton
 					disabled={!editable || !editor?.can().chain().focus().redo().run()}
-					label={en.editor.toolbar.redo}
+					label={dictionary.workspace.editor.toolbar.redo}
 					onClick={() => editor?.chain().focus().redo().run()}>
 					<IconArrowForwardUp
 						size={18}

@@ -7,7 +7,8 @@ import { Button } from "@/components/atoms/Button"
 import { Dialog } from "@/components/atoms/Dialog"
 import { Heading } from "@/components/atoms/Heading"
 import { Text } from "@/components/atoms/Text"
-import { en } from "@/data/locale/en"
+import { useLocale } from "@/hooks/useLocale"
+import styles from "./index.module.css"
 
 type ConfirmDeleteDialogProps = PropsWithChildren<{
 	deleting: boolean
@@ -21,38 +22,42 @@ export const ConfirmDeleteDialog = ({
 	onClose,
 	onConfirm,
 	open
-}: ConfirmDeleteDialogProps) => (
-	<Dialog
-		labelledBy='delete-dialog-title'
-		onClose={onClose}
-		open={open}>
-		<div className='w-[min(92vw,28rem)] p-7'>
-			<span className='grid size-11 place-items-center rounded-lg bg-red-50 text-red-700'>
-				<IconTrash
-					size={21}
-					stroke={1.8}
-				/>
-			</span>
-			<Heading
-				className='mt-5 text-2xl'
-				id='delete-dialog-title'
-				level={2}>
-				{en.documents.deleteTitle}
-			</Heading>
-			<Text className='mt-2 text-sm'>{en.documents.deleteDescription}</Text>
-			<div className='mt-7 flex justify-end gap-3'>
-				<Button
-					onClick={onClose}
-					variant='secondary'>
-					{en.documents.deleteCancel}
-				</Button>
-				<Button
-					loading={deleting}
-					onClick={onConfirm}
-					variant='danger'>
-					{en.documents.deleteConfirm}
-				</Button>
+}: ConfirmDeleteDialogProps) => {
+	const { dictionary } = useLocale()
+
+	return (
+		<Dialog
+			labelledBy='delete-dialog-title'
+			onClose={onClose}
+			open={open}>
+			<div className={styles.container}>
+				<span className={styles.error}>
+					<IconTrash
+						size={21}
+						stroke={1.8}
+					/>
+				</span>
+				<Heading
+					className={styles.heading}
+					id='delete-dialog-title'
+					as='h2'>
+					{dictionary.workspace.documents.deleteTitle}
+				</Heading>
+				<Text className={styles.text}>{dictionary.workspace.documents.deleteDescription}</Text>
+				<div className={styles.row}>
+					<Button
+						onClick={onClose}
+						variant='secondary'>
+						{dictionary.workspace.documents.deleteCancel}
+					</Button>
+					<Button
+						loading={deleting}
+						onClick={onConfirm}
+						variant='danger'>
+						{dictionary.workspace.documents.deleteConfirm}
+					</Button>
+				</div>
 			</div>
-		</div>
-	</Dialog>
-)
+		</Dialog>
+	)
+}

@@ -1,0 +1,5 @@
+@reference "../../../../../app/globals.css";
+
+.container {
+	@apply mb-10 sm:mb-14;
+}

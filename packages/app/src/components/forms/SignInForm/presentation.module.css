@@ -1,0 +1,5 @@
+@reference "../../../app/globals.css";
+
+.grid {
+	@apply grid gap-5;
+}
