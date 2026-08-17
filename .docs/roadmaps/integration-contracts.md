@@ -31,12 +31,12 @@ Stripe ──signed webhook──> @leadtech/functions
 
 # Package ownership
 
-| Package               | Owns                                                                                               | Must not own                                                            |
-| --------------------- | -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `@leadtech/common`    | Runtime contracts, shared types, public plan and brand data, assets, and the Tailwind theme        | React components, provider SDK objects, secrets, and business workflows |
-| `@leadtech/website`   | Public product information, pricing presentation, responsive marketing UI, and links to the app    | Authentication, Stripe calls, Firestore calls, and private data         |
-| `@leadtech/app`       | Authentication UI, server sessions, document APIs, editor UI, Checkout creation, and access checks | Stripe webhook processing and direct browser access to Firestore        |
-| `@leadtech/functions` | Stripe signature verification, event filtering, duplicate protection, and subscription projection  | Browser UI, session cookies, Checkout creation, and document APIs       |
+| Package               | Owns                                                                                              | Must not own                                                            |
+| --------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `@leadtech/common`    | Runtime contracts, shared types, brand data, assets, and the Tailwind theme                       | React components, provider SDK objects, secrets, and business workflows |
+| `@leadtech/website`   | Public product information, pricing presentation, responsive marketing UI, and links to the app   | Authentication, Stripe calls, Firestore calls, and private data         |
+| `@leadtech/app`       | Authentication UI, server sessions, document APIs, editor UI, Stripe plan catalog, and Checkout   | Stripe webhook processing and direct browser access to Firestore        |
+| `@leadtech/functions` | Stripe signature verification, event filtering, duplicate protection, and subscription projection | Browser UI, session cookies, Checkout creation, and document APIs       |
 
 # Common package
 
@@ -53,7 +53,7 @@ Rules:
 
 - Use `@leadtech/common/contracts` at transport, persistence, and provider boundaries.
 - Keep Firebase and Stripe SDK types inside the package that calls the provider.
-- Keep Stripe Price IDs and credentials out of shared data and browser bundles.
+- Keep Stripe Product IDs, Price IDs, and credentials out of shared data and browser bundles.
 - Convert provider timestamps and objects before returning API responses.
 - Build `@leadtech/common` before consumers that need compiled contracts or locale data.
 
@@ -74,7 +74,9 @@ Rules:
 # Billing boundary
 
 ```text
-App resolves public plan key
+App loads configured Stripe Products and their active recurring Prices
+  -> App returns public plans with opaque keys
+  -> App resolves the selected public plan key
   -> App creates Stripe Checkout Session
   -> Stripe redirects user to pending screen
   -> Stripe sends signed event to Functions
@@ -84,11 +86,11 @@ App resolves public plan key
 ```
 
 - The browser submits a public plan key, not a Stripe Product ID, Price ID, amount, or access state.
-- The app resolves the plan key through its server allowlist.
+- The app resolves the plan key through the server-only `STRIPE_PLANS_IDS` Product allowlist.
 - The Checkout success redirect does not grant access.
-- Editing requires an entitled Stripe status and an allowed Price ID.
+- Editing requires an entitled Stripe status and a subscription Price belonging to the Product recorded by Checkout.
 - A delayed webhook leaves the user in the pending subscription state.
-- The public plan catalog is defined by the billing contracts and shared locale data in `@leadtech/common`.
+- Stripe Products and their active recurring Prices are the public plan catalog source.
 
 # Document access
 
@@ -111,7 +113,7 @@ App resolves public plan key
 | ------------------------ | ----------------------------- | ----------------------------------------------------- |
 | `GET`                    | `/api/auth/csrf`              | Issue the request token used during session creation. |
 | `GET`, `POST`, `DELETE`  | `/api/auth/session`           | Read, create, or clear the server session.            |
-| `GET`                    | `/api/billing/plans`          | Return selectable public plans.                       |
+| `GET`                    | `/api/billing/plans`          | Return selectable Stripe-backed public plans.         |
 | `POST`                   | `/api/billing/checkout`       | Create a Stripe Checkout Session.                     |
 | `GET`                    | `/api/billing/subscription`   | Return the projected subscription state.              |
 | `GET`, `POST`            | `/api/documents`              | List or create documents.                             |
@@ -135,9 +137,9 @@ Processing order:
 2. Require and verify the Stripe signature.
 3. Ignore verified unsupported events.
 4. Check the event record for duplicate delivery.
-5. Resolve the Firebase UID from server-created Stripe metadata.
+5. Resolve the Firebase UID and selected Product from server-created Stripe metadata.
 6. Read current subscription state when event order may be stale.
-7. Validate the status and allowed Price ID.
+7. Validate the status and confirm a subscription Price belongs to the selected Product.
 8. Write the event record and subscription projection in one Firestore transaction.
 9. Return success only after durable handling.
 

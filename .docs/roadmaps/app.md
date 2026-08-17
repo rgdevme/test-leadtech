@@ -22,6 +22,7 @@ Shared boundaries and API behavior are defined in [Integration contracts and pro
 
 - Registration, sign-in, sign-out, and server-validated sessions are implemented.
 - The app shows separate signed-out, inactive-owner, pending-subscription, and active-subscriber states.
+- The home page and subscription modal share a Stripe-backed plan catalog and card layout.
 - Stripe Checkout is created by the app server from a public plan key.
 - Document listing, reading, creation, editing, saving, renaming, and confirmed deletion are implemented.
 - Inactive owners keep read access while document changes remain blocked.
@@ -36,7 +37,7 @@ Shared boundaries and API behavior are defined in [Integration contracts and pro
 - Server session creation, validation, and deletion.
 - Request origin validation for protected mutations.
 - Document APIs and owner checks.
-- Subscription status reads and Checkout Session creation.
+- Stripe plan catalog retrieval, subscription status reads, and Checkout Session creation.
 - Document and account interface presentation.
 
 ## Does not own
@@ -74,12 +75,13 @@ Browser component
 
 # Subscription flow
 
-1. An authenticated user selects a shared public plan.
-2. The app server resolves the plan through its Stripe allowlist.
-3. Stripe Checkout receives the Firebase UID as server-created correlation metadata.
-4. The user returns to the pending screen after Checkout.
-5. The app reads only the subscription projection written by Functions.
-6. Editing becomes available after the projection is entitled.
+1. The app loads configured Stripe Products and their active recurring Prices.
+2. A user selects a public plan through its opaque key.
+3. The app server resolves the plan through its server-only Product allowlist.
+4. Stripe Checkout receives the Firebase UID and selected Product as server-created correlation metadata.
+5. The user returns to the pending screen after Checkout.
+6. The app reads only the subscription projection written by Functions.
+7. Editing becomes available after the projection is entitled.
 
 # Document behavior
 

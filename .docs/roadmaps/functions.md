@@ -34,9 +34,9 @@ Shared boundaries and persistence ownership are defined in [Integration contract
 - Public Stripe webhook handling.
 - Stripe signature verification.
 - Supported event filtering.
-- Firebase UID correlation from server-created Stripe metadata.
+- Firebase UID and selected Product correlation from server-created Stripe metadata.
 - Current subscription retrieval.
-- Allowed-price and status checks.
+- Product and subscription status checks.
 - Duplicate event protection.
 - Subscription projection writes.
 
@@ -55,9 +55,9 @@ Receive raw request
   -> verify Stripe signature
   -> filter event type
   -> check duplicate event
-  -> resolve Firebase UID and Subscription
+  -> resolve Firebase UID, selected Product, and Subscription
   -> read current Stripe state when required
-  -> validate status and allowed Price ID
+  -> validate status and confirm a subscription Price belongs to the selected Product
   -> write event record and subscription projection atomically
   -> return success
 ```
