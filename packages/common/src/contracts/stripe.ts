@@ -1,7 +1,8 @@
 import { z } from "zod"
 
 export const stripeMetadataKeys = {
-	firebaseUid: "firebaseUid"
+	firebaseUid: "firebaseUid",
+	subscriptionProductId: "subscriptionProductId"
 } as const
 
 export const supportedStripeWebhookEvents = [
@@ -22,6 +23,7 @@ export const firebaseUidSchema = z
 export const stripeCustomerIdSchema = z.string().regex(/^cus_[A-Za-z0-9]+$/)
 export const stripeEventIdSchema = z.string().regex(/^evt_[A-Za-z0-9]+$/)
 export const stripePriceIdSchema = z.string().regex(/^price_[A-Za-z0-9]+$/)
+export const stripeProductIdSchema = z.string().regex(/^prod_[A-Za-z0-9]+$/)
 export const stripeSubscriptionIdSchema = z.string().regex(/^sub_[A-Za-z0-9]+$/)
 
 export const stripeCorrelationMetadataSchema = z.object({

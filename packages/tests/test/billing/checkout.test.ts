@@ -1,10 +1,11 @@
 import { randomUUID } from "node:crypto"
 
-import { expect, test } from "@playwright/test"
+import { expect, test, type APIRequestContext } from "@playwright/test"
 import {
 	createCheckoutResponseSchema,
+	listSubscriptionPlansResponseSchema,
 	stripeMetadataKeys,
-	subscriptionPlanIds
+	type SubscriptionPlan
 } from "@leadtech/common/contracts"
 import Stripe from "stripe"
 
@@ -21,6 +22,18 @@ import { createTestIdentity } from "../helpers/identity.js"
 import { createSessionContext } from "../helpers/session.js"
 import { cleanupStripeResources, getStripeCheckoutSessionId } from "../helpers/stripe.js"
 
+const getFirstPlan = async (context: APIRequestContext): Promise<SubscriptionPlan> => {
+	const response = await context.get("/api/billing/plans")
+	expect(response.status()).toBe(200)
+	const [plan] = listSubscriptionPlansResponseSchema.parse(await response.json()).items
+
+	if (!plan) {
+		throw new Error("The Stripe test catalog must contain at least one subscription plan.")
+	}
+
+	return plan
+}
+
 /** As a subscriber, I can start one correctly configured Checkout flow from an authenticated account. */
 test.describe("to create a safe Stripe Checkout as a subscriber, I...", () => {
 	test.skip(!stripeApiKey, "STRIPE_API_KEY is unavailable; Stripe sandbox tests are skipped.")
@@ -34,15 +47,16 @@ test.describe("to create a safe Stripe Checkout as a subscriber, I...", () => {
 		const context = await createSessionContext(playwright, identity, "198.51.100.61")
 
 		try {
+			const plan = await getFirstPlan(context)
 			const unauthenticated = await request.post("/api/billing/checkout", {
-				data: { intent: "subscribe", planKey: input.planKey },
+				data: { intent: "subscribe", planKey: plan.key },
 				headers: {
 					"Idempotency-Key": randomUUID(),
 					Origin: applicationUrl
 				}
 			})
 			const invalidOrigin = await context.post("/api/billing/checkout", {
-				data: { intent: "subscribe", planKey: input.planKey },
+				data: { intent: "subscribe", planKey: plan.key },
 				headers: { "Idempotency-Key": randomUUID(), Origin: "https://untrusted.example" }
 			})
 			const invalidPlan = await context.post("/api/billing/checkout", {
@@ -50,7 +64,7 @@ test.describe("to create a safe Stripe Checkout as a subscriber, I...", () => {
 				headers: { "Idempotency-Key": randomUUID() }
 			})
 			const invalidIdempotencyKey = await context.post("/api/billing/checkout", {
-				data: { intent: "subscribe", planKey: input.planKey },
+				data: { intent: "subscribe", planKey: plan.key },
 				headers: { "Idempotency-Key": input.invalidIdempotencyKey }
 			})
 
@@ -63,7 +77,7 @@ test.describe("to create a safe Stripe Checkout as a subscriber, I...", () => {
 
 			await seedSubscription(identity.uid)
 			const activeEntitlement = await context.post("/api/billing/checkout", {
-				data: { intent: "subscribe", planKey: input.planKey },
+				data: { intent: "subscribe", planKey: plan.key },
 				headers: { "Idempotency-Key": randomUUID() }
 			})
 			expect(activeEntitlement.status()).toBe(409)
@@ -84,9 +98,10 @@ test.describe("to create a safe Stripe Checkout as a subscriber, I...", () => {
 		const context = await createSessionContext(playwright, identity, "198.51.100.62")
 
 		try {
+			const plan = await getFirstPlan(context)
 			const idempotencyKey = randomUUID()
 			const firstResponse = await context.post("/api/billing/checkout", {
-				data: { intent: "subscribe", planKey: input.planKey },
+				data: { intent: "subscribe", planKey: plan.key },
 				headers: { "Idempotency-Key": idempotencyKey }
 			})
 			expect(firstResponse.status()).toBe(201)
@@ -95,7 +110,7 @@ test.describe("to create a safe Stripe Checkout as a subscriber, I...", () => {
 			sessionIds.add(firstSessionId)
 
 			const repeatedResponse = await context.post("/api/billing/checkout", {
-				data: { intent: "subscribe", planKey: input.planKey },
+				data: { intent: "subscribe", planKey: plan.key },
 				headers: { "Idempotency-Key": idempotencyKey }
 			})
 			expect(repeatedResponse.status()).toBe(201)
@@ -103,7 +118,7 @@ test.describe("to create a safe Stripe Checkout as a subscriber, I...", () => {
 			expect(getStripeCheckoutSessionId(repeatedCheckout.checkoutUrl)).toBe(firstSessionId)
 
 			const nextResponse = await context.post("/api/billing/checkout", {
-				data: { intent: "subscribe", planKey: input.planKey },
+				data: { intent: "subscribe", planKey: plan.key },
 				headers: { "Idempotency-Key": randomUUID() }
 			})
 			expect(nextResponse.status()).toBe(201)
@@ -126,7 +141,7 @@ test.describe("to create a safe Stripe Checkout as a subscriber, I...", () => {
 				metadata: { [stripeMetadataKeys.firebaseUid]: identity.uid }
 			})
 			const expectedSuccessUrl = `${applicationUrl}/en/subscribe/pending`
-			const expectedCancelUrl = `${applicationUrl}/en/documents?intent=subscribe&plan=write`
+			const expectedCancelUrl = `${applicationUrl}/en/documents?intent=subscribe&plan=${plan.key}`
 
 			for (const checkoutSession of [firstSession, nextSession]) {
 				expect(checkoutSession).toMatchObject({
@@ -137,7 +152,14 @@ test.describe("to create a safe Stripe Checkout as a subscriber, I...", () => {
 					mode: "subscription",
 					success_url: expectedSuccessUrl
 				})
-				expect(checkoutSession.line_items?.data[0]?.price?.id).toBe(subscriptionPlanIds.write)
+				expect(checkoutSession.line_items?.data[0]?.price).toMatchObject({
+					currency: plan.currency,
+					recurring: {
+						interval: plan.interval,
+						interval_count: plan.intervalCount
+					},
+					unit_amount: plan.unitAmount
+				})
 			}
 		} finally {
 			await context.dispose()

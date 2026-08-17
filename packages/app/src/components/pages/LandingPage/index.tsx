@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from "react"
+import type { SubscriptionPlan } from "@leadtech/common/contracts"
 
 import { Button } from "@/components/atoms/Button"
 import { Logo } from "@/components/atoms/Logo"
@@ -12,29 +13,21 @@ import { TrustSection } from "@/components/organisms/TrustSection"
 import { WorkflowSection } from "@/components/organisms/WorkflowSection"
 import { MarketingTemplate } from "@/components/templates/MarketingTemplate"
 import { applicationUrl } from "@/config/environment"
-import { publicSubscriptionPlans } from "@/data/subscriptionPlans"
 import type { Locale } from "@/i18n/config"
 import type { Dictionary } from "@/i18n/getDictionary"
 import { createSubscribePath, routes } from "@/i18n/routes"
 
 type LandingPageProps = PropsWithChildren<{
 	copy: Dictionary["marketing"]
-	languageTag: string
 	locale: Locale
 	metadata: Dictionary["metadata"]
+	plans: readonly SubscriptionPlan[]
 }>
 
-export const LandingPage = ({ copy, languageTag, locale, metadata }: LandingPageProps) => {
-	const [plan] = publicSubscriptionPlans
-
-	if (!plan) {
-		throw new Error("At least one public subscription plan is required.")
-	}
-
+export const LandingPage = ({ copy, locale, metadata, plans }: LandingPageProps) => {
 	const homeHref = routes.home(locale)
 	const signInHref = routes.signIn(locale)
 	const subscribeHref = createSubscribePath(locale)
-	const planHref = createSubscribePath(locale, plan.key)
 	const softwareApplicationSchema = {
 		"@context": "https://schema.org",
 		"@type": "SoftwareApplication",
@@ -43,13 +36,13 @@ export const LandingPage = ({ copy, languageTag, locale, metadata }: LandingPage
 		operatingSystem: "Web browser",
 		description: metadata.description,
 		url: new URL(homeHref, applicationUrl).toString(),
-		offers: {
+		offers: plans.map(plan => ({
 			"@type": "Offer",
 			price: (plan.unitAmount / 100).toFixed(2),
 			priceCurrency: plan.currency,
 			category: "subscription",
-			url: planHref
-		}
+			url: createSubscribePath(locale, plan.key)
+		}))
 	}
 	const faqSchema = {
 		"@context": "https://schema.org",
@@ -97,10 +90,9 @@ export const LandingPage = ({ copy, languageTag, locale, metadata }: LandingPage
 					<WorkflowSection copy={copy.workflow} />
 					<TrustSection copy={copy.trust} />
 					<PricingSection
-						actionHref={planHref}
 						copy={copy.pricing}
-						locale={languageTag}
-						plan={plan}
+						locale={locale}
+						plans={plans}
 					/>
 					<FaqSection copy={copy.faq} />
 				</Main>

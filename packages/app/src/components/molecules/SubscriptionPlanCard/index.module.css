@@ -1,7 +1,7 @@
 @reference "../../../app/globals.css";
 
 .card {
-	@apply relative flex size-full min-h-80 flex-col overflow-hidden rounded-xl border border-sage-200 bg-sage-50 p-6 text-left text-sage-950 transition hover:border-sage-400 active:scale-[0.99];
+	@apply relative flex size-full min-h-80 flex-col overflow-hidden rounded-xl border border-sage-200 bg-sage-50 p-6 text-left text-sage-950 no-underline transition hover:border-sage-400 active:scale-[0.99];
 
 	&[data-selected="true"] {
 		@apply border-sage-950 bg-sage-950 text-sage-50;

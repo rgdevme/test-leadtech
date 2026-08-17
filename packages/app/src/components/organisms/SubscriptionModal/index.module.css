@@ -24,12 +24,8 @@
 	@apply grid min-h-80 place-items-center text-sm text-sage-600;
 }
 
-.grid2 {
-	@apply mt-8 grid grid-flow-dense gap-3 grid-cols-1 md:grid-cols-3;
-}
-
-.container3 {
-	@apply col-span-1;
+.planList {
+	@apply mt-8;
 }
 
 .card {

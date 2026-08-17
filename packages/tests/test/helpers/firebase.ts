@@ -2,7 +2,7 @@ import { createRequire } from "node:module"
 
 import type { App } from "firebase-admin/app"
 
-import { emptyRichTextDocument, subscriptionPlanIds } from "@leadtech/common/contracts"
+import { emptyRichTextDocument } from "@leadtech/common/contracts"
 
 import { firebaseProjectId } from "./environment.js"
 import type { TestIdentity } from "./identity.js"
@@ -86,7 +86,7 @@ export const seedSubscription = async (
 			lastStripeEventId: `evt_${stripeIdentifier}`,
 			status: entitlement === "active" ? "active" : "canceled",
 			stripeCustomerId: `cus_${stripeIdentifier}`,
-			stripePriceId: subscriptionPlanIds.write,
+			stripePriceId: "price_testSeed",
 			stripeSubscriptionId: `sub_${stripeIdentifier}`,
 			uid,
 			updatedAt: FieldValue.serverTimestamp()

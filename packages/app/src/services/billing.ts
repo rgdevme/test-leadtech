@@ -4,9 +4,8 @@ import { createHash } from "node:crypto"
 
 import {
 	stripeMetadataKeys,
-	subscriptionPlanIds,
-	SubscriptionPlanKeys,
-	type CreateCheckoutResponse
+	type CreateCheckoutResponse,
+	type SubscriptionPlanKey
 } from "@leadtech/common/contracts"
 
 import { ApiError } from "@/errors/apiError"
@@ -14,6 +13,7 @@ import { defaultLocale } from "@/i18n/config"
 import { routes } from "@/i18n/routes"
 import { getSubscription } from "@/repositories/subscriptions"
 import { getUserAccount, setStripeCustomerId } from "@/repositories/users"
+import { getSubscriptionCheckoutPlan } from "@/services/subscriptionPlans"
 import { getStripe } from "@/stripe/server"
 import { getApplicationUrl } from "@/utils/http"
 
@@ -28,7 +28,7 @@ const integrationIdentifier = (idempotencyKey: string) => {
 export const createSubscriptionCheckout = async (
 	uid: string,
 	email: string | null,
-	planKey: SubscriptionPlanKeys,
+	planKey: SubscriptionPlanKey,
 	idempotencyKey: string
 ): Promise<CreateCheckoutResponse> => {
 	const subscription = await getSubscription(uid)
@@ -36,14 +36,14 @@ export const createSubscriptionCheckout = async (
 		throw new ApiError(409, "conflict", "This account already has an active subscription.")
 	}
 
-	const priceId = subscriptionPlanIds[planKey]
-	if (!priceId) {
-		throw new ApiError(400, "invalid_request", "The selected plan is not available.")
-	}
-
 	const stripe = getStripe()
 
 	try {
+		const checkoutPlan = await getSubscriptionCheckoutPlan(planKey)
+		if (!checkoutPlan) {
+			throw new ApiError(400, "invalid_request", "The selected plan is not available.")
+		}
+
 		const user = await getUserAccount(uid)
 		let customerId = user.stripeCustomerId
 
@@ -66,10 +66,13 @@ export const createSubscriptionCheckout = async (
 				customer: customerId,
 				client_reference_id: uid,
 				integration_identifier: integrationIdentifier(idempotencyKey),
-				line_items: [{ price: priceId, quantity: 1 }],
+				line_items: [{ price: checkoutPlan.priceId, quantity: 1 }],
 				metadata: { [stripeMetadataKeys.firebaseUid]: uid },
 				subscription_data: {
-					metadata: { [stripeMetadataKeys.firebaseUid]: uid }
+					metadata: {
+						[stripeMetadataKeys.firebaseUid]: uid,
+						[stripeMetadataKeys.subscriptionProductId]: checkoutPlan.productId
+					}
 				},
 				success_url: new URL(routes.pendingSubscription(defaultLocale), appUrl).toString(),
 				cancel_url: new URL(

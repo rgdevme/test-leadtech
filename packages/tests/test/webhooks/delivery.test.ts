@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto"
 
-import { subscriptionPlanIds } from "@leadtech/common/contracts"
+import { stripeMetadataKeys } from "@leadtech/common/contracts"
 import Stripe from "stripe"
 import { afterAll, describe, expect, test } from "vitest"
 
@@ -21,7 +21,7 @@ const createIdentifier = () => randomUUID().replaceAll("-", "")
 
 const createSubscriptionEvent = ({
 	eventId,
-	priceId = subscriptionPlanIds.write,
+	priceId = `price_${createIdentifier()}`,
 	type = "customer.subscription.deleted",
 	uid
 }: {
@@ -31,6 +31,7 @@ const createSubscriptionEvent = ({
 	uid?: string
 }) => {
 	const identifier = createIdentifier()
+	const productId = `prod_${identifier}`
 
 	return {
 		api_version: "2026-07-29.dahlia",
@@ -41,9 +42,12 @@ const createSubscriptionEvent = ({
 				customer: `cus_${identifier}`,
 				id: `sub_${identifier}`,
 				items: {
-					data: [{ price: { id: priceId } }]
+					data: [{ price: { id: priceId, product: productId } }]
 				},
-				metadata: uid ? { firebaseUid: uid } : {},
+				metadata: {
+					...(uid ? { [stripeMetadataKeys.firebaseUid]: uid } : {}),
+					[stripeMetadataKeys.subscriptionProductId]: productId
+				},
 				object: "subscription",
 				status: "active"
 			}

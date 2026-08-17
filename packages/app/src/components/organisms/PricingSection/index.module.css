@@ -15,23 +15,3 @@
 		@apply lg:col-span-2;
 	}
 }
-
-.layout {
-	@apply grid grid-cols-1 items-stretch gap-4 lg:grid-cols-2;
-}
-
-.mediaShell {
-	@apply relative h-full rounded-4xl bg-sage-950/5 p-2 inset-ring inset-ring-sage-950/5;
-}
-
-.mediaCore {
-	@apply relative h-full overflow-hidden rounded-3xl bg-sage-50 inset-shadow-sm;
-
-	&:hover img {
-		@apply scale-105;
-	}
-
-	& img {
-		@apply aspect-4/5 h-full w-full object-cover object-right transition-transform duration-1000 ease-mass md:aspect-auto;
-	}
-}

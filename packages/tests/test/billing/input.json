@@ -1,5 +1,4 @@
 {
 	"invalidIdempotencyKey": "not-a-uuid",
-	"invalidPlanKey": "enterprise",
-	"planKey": "write"
+	"invalidPlanKey": "enterprise"
 }

@@ -10,29 +10,44 @@ import { Text } from "@/components/atoms/Text"
 import { useLocale } from "@/hooks/useLocale"
 import styles from "./index.module.css"
 
-type SubscriptionPlanCardProps = PropsWithChildren<{
-	onSelect: (planKey: string) => void
-	plan: SubscriptionPlan
-	selected: boolean
-}>
+type SubscriptionPlanCardProps = PropsWithChildren<
+	{
+		plan: SubscriptionPlan
+	} & (
+		| {
+				href: string
+				onSelect?: never
+				selected?: never
+		  }
+		| {
+				href?: never
+				onSelect: (planKey: string) => void
+				selected: boolean
+		  }
+	)
+>
 
-const formatPrice = (plan: SubscriptionPlan) =>
-	new Intl.NumberFormat("en-US", {
+const formatPrice = (locale: string, plan: SubscriptionPlan) =>
+	new Intl.NumberFormat(locale, {
 		style: "currency",
 		currency: plan.currency,
 		maximumFractionDigits: 0
 	}).format(plan.unitAmount / 100)
 
-export const SubscriptionPlanCard = ({ onSelect, plan, selected }: SubscriptionPlanCardProps) => {
-	const { dictionary } = useLocale()
-
-	return (
-		<button
-			aria-pressed={selected}
-			className={styles.card}
-			data-selected={selected}
-			onClick={() => onSelect(plan.key)}
-			type='button'>
+export const SubscriptionPlanCard = (props: SubscriptionPlanCardProps) => {
+	const { dictionary, locale } = useLocale()
+	const { plan } = props
+	const selected = "selected" in props && props.selected === true
+	const intervalNames =
+		plan.intervalCount === 1
+			? dictionary.workspace.subscription.intervals.singular
+			: dictionary.workspace.subscription.intervals.plural
+	const formattedInterval =
+		plan.intervalCount === 1
+			? intervalNames[plan.interval]
+			: `${plan.intervalCount} ${intervalNames[plan.interval]}`
+	const content = (
+		<>
 			<div className={styles.row}>
 				<div>
 					<Heading
@@ -40,11 +55,13 @@ export const SubscriptionPlanCard = ({ onSelect, plan, selected }: SubscriptionP
 						as='h3'>
 						{plan.name}
 					</Heading>
-					<Text
-						className={styles.description}
-						unstyled>
-						{plan.description}
-					</Text>
+					{plan.description ? (
+						<Text
+							className={styles.description}
+							unstyled>
+							{plan.description}
+						</Text>
+					) : null}
 				</div>
 				<span className={styles.selectionIndicator}>
 					<IconCheck
@@ -59,34 +76,36 @@ export const SubscriptionPlanCard = ({ onSelect, plan, selected }: SubscriptionP
 					as='span'
 					className={styles.text}
 					unstyled>
-					{formatPrice(plan)}
+					{formatPrice(locale, plan)}
 				</Text>
 				<Text
 					as='span'
 					className={styles.interval}
 					unstyled>
-					{dictionary.workspace.subscription.priceConnector} {plan.interval}
+					{dictionary.workspace.subscription.priceConnector} {formattedInterval}
 				</Text>
 			</div>
 
-			<ul className={styles.list}>
-				{plan.features.map(feature => (
-					<li
-						className={styles.listItem}
-						key={feature}>
-						<IconCheck
-							className={styles.icon}
-							size={16}
-							stroke={2.2}
-						/>
-						<Text
-							as='span'
-							unstyled>
-							{feature}
-						</Text>
-					</li>
-				))}
-			</ul>
+			{plan.features.length > 0 ? (
+				<ul className={styles.list}>
+					{plan.features.map(feature => (
+						<li
+							className={styles.listItem}
+							key={feature}>
+							<IconCheck
+								className={styles.icon}
+								size={16}
+								stroke={2.2}
+							/>
+							<Text
+								as='span'
+								unstyled>
+								{feature}
+							</Text>
+						</li>
+					))}
+				</ul>
+			) : null}
 
 			<Text
 				as='span'
@@ -96,6 +115,27 @@ export const SubscriptionPlanCard = ({ onSelect, plan, selected }: SubscriptionP
 					? dictionary.workspace.subscription.selectedPlan
 					: dictionary.workspace.subscription.selectPlan}
 			</Text>
+		</>
+	)
+
+	if ("href" in props) {
+		return (
+			<a
+				className={styles.card}
+				href={props.href}>
+				{content}
+			</a>
+		)
+	}
+
+	return (
+		<button
+			aria-pressed={selected}
+			className={styles.card}
+			data-selected={selected}
+			onClick={() => props.onSelect(plan.key)}
+			type='button'>
+			{content}
 		</button>
 	)
 }

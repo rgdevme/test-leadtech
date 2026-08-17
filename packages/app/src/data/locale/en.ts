@@ -111,19 +111,10 @@ const marketingDictionary = {
 		proofLabel: "Product assurances—not certification claims"
 	},
 	pricing: {
-		eyebrow: "One plan. No maze.",
-		title: "A straightforward monthly home for your documents.",
+		eyebrow: "Clear plans. No maze.",
+		title: "A straightforward home for your documents.",
 		description:
-			"Subscribe to create and edit. Cancel when you need to; your existing documents remain available to read.",
-		imageAlt: "A single charcoal subscription card nested in a warm paper tray",
-		billedMonthly: "Billed monthly",
-		perInterval: {
-			month: "per month",
-			year: "per year"
-		},
-		action: "Choose this plan",
-		terms:
-			"Payment is confirmed before editing access is enabled. Cancel anytime; saved documents remain readable."
+			"Subscribe to create and edit. Cancel when you need to; your existing documents remain available to read."
 	},
 	faq: {
 		eyebrow: "The practical details",
@@ -277,8 +268,22 @@ const workspaceDictionary = {
 		dismiss: "Not now",
 		featured: "Recommended",
 		unavailable: "No plans are configured yet.",
-		unavailableDescription: "Add Stripe Price IDs to make subscriptions available.",
+		unavailableDescription: "Add Stripe Product IDs to make subscriptions available.",
 		priceConnector: "per",
+		intervals: {
+			singular: {
+				day: "day",
+				week: "week",
+				month: "month",
+				year: "year"
+			},
+			plural: {
+				day: "days",
+				week: "weeks",
+				month: "months",
+				year: "years"
+			}
+		},
 		status: "Subscription",
 		active: "Active",
 		inactive: "Inactive",
@@ -329,27 +334,6 @@ export const en = {
 	locale: marketingDictionary.locale,
 	metadata: marketingDictionary.metadata,
 	common: workspaceDictionary.common,
-	plans: {
-		write: {
-			name: "Writing",
-			description: "A focused workspace for a steady writing practice.",
-			features: ["Unlimited documents", "Rich-text editing", "Automatic version-safe saving"]
-		},
-		studio: {
-			name: "Studio",
-			description: "More room for long-form projects and an active archive.",
-			features: [
-				"Everything in Writing",
-				"Priority workspace access",
-				"Cancel without losing read access"
-			]
-		},
-		studioYearly: {
-			name: "Studio annual",
-			description: "A full year of focused writing at a quieter monthly cost.",
-			features: ["Everything in Studio", "Two months included", "One annual renewal"]
-		}
-	},
 	marketing: {
 		accessibility: marketingDictionary.accessibility,
 		navigation: marketingDictionary.navigation,

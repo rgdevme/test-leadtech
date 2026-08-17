@@ -4,6 +4,8 @@ import {
 	projectedSubscriptionStatusSchema,
 	stripeEventIdSchema,
 	stripePriceIdSchema,
+	stripeProductIdSchema,
+	stripeMetadataKeys,
 	subscriptionPersistenceDataSchema,
 	type ProjectedSubscriptionStatus,
 	type SubscriptionPersistenceData
@@ -14,7 +16,6 @@ type ProjectSubscriptionInput = {
 	eventId: string
 	firebaseUid: string
 	forceCanceled: boolean
-	entitledPriceIds: ReadonlySet<string>
 	subscription: Stripe.Subscription
 }
 
@@ -47,17 +48,25 @@ const isEntitledStatus = (
 ): status is (typeof entitledStripeStatuses)[number] =>
 	entitledStripeStatuses.some(entitledStatus => entitledStatus === status)
 
+const getStripeProductId = (product: Stripe.Price["product"]) =>
+	typeof product === "string" ? product : product.id
+
 export const projectSubscription = ({
 	eventId,
 	firebaseUid,
 	forceCanceled,
-	entitledPriceIds,
 	subscription
 }: ProjectSubscriptionInput): SubscriptionPersistenceData => {
 	const status = getProjectedStatus(subscription, forceCanceled)
-	const priceIds = subscription.items.data.map(item => item.price.id)
-	const entitledPriceId = priceIds.find(priceId => entitledPriceIds.has(priceId))
-	const stripePriceId = entitledPriceId ?? priceIds[0]
+	const configuredProductId = stripeProductIdSchema.safeParse(
+		subscription.metadata[stripeMetadataKeys.subscriptionProductId]
+	)
+	const entitledItem = configuredProductId.success
+		? subscription.items.data.find(
+				item => getStripeProductId(item.price.product) === configuredProductId.data
+			)
+		: undefined
+	const stripePriceId = entitledItem?.price.id ?? subscription.items.data[0]?.price.id
 
 	if (!stripePriceId) {
 		throw new SubscriptionProjectionError("Stripe returned a subscription without a Price.")
@@ -70,7 +79,7 @@ export const projectSubscription = ({
 		stripePriceId: stripePriceIdSchema.parse(stripePriceId),
 		status,
 		entitlement:
-			!forceCanceled && isEntitledStatus(status) && entitledPriceId
+			!forceCanceled && isEntitledStatus(status) && entitledItem
 				? ("active" as const)
 				: ("inactive" as const),
 		cancelAtPeriodEnd: subscription.cancel_at_period_end,

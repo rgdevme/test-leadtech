@@ -1,8 +1,7 @@
 import {
 	firebaseUidSchema,
 	stripeMetadataKeys,
-	stripeSubscriptionIdSchema,
-	subscriptionPlanIds
+	stripeSubscriptionIdSchema
 } from "@leadtech/common/contracts"
 import type Stripe from "stripe"
 
@@ -42,8 +41,6 @@ type ResolvedSubscription = {
 	forceCanceled: boolean
 	subscription: Stripe.Subscription
 }
-
-const entitledPriceIds = new Set(Object.values(subscriptionPlanIds))
 
 export type ProcessStripeWebhookResult =
 	| {
@@ -242,7 +239,6 @@ export const processStripeWebhook = async (
 			eventId: event.id,
 			firebaseUid: resolvedSubscription.firebaseUid,
 			forceCanceled: resolvedSubscription.forceCanceled,
-			entitledPriceIds,
 			subscription: resolvedSubscription.subscription
 		})
 		const persistenceOutcome = await persistSubscriptionProjection(firestore, {

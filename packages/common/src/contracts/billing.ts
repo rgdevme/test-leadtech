@@ -12,15 +12,6 @@ export const subscriptionStatuses = [
 	"paused"
 ] as const
 
-export const subscriptionPlanIds = {
-	write: "price_1U4HeLBU3frfYophbxGKIo6Y",
-	studio: "price_1U4HfYBU3frfYoph2Spnjjut",
-	studioYearly: "price_1U4HfxBU3frfYoph1dU2Bb0H"
-} as const
-
-export type SubscriptionPlanKeys = keyof typeof subscriptionPlanIds
-export const subscriptionPlanKeys = Object.keys(subscriptionPlanIds) as SubscriptionPlanKeys[]
-
 export const projectedSubscriptionStatuses = [
 	"incomplete",
 	"incomplete_expired",
@@ -36,20 +27,19 @@ export const entitledStripeStatuses = ["active", "trialing"] as const
 
 export const subscriptionStatusSchema = z.enum(subscriptionStatuses)
 export const projectedSubscriptionStatusSchema = z.enum(projectedSubscriptionStatuses)
-export const subscriptionPlanKeySchema = z.literal(subscriptionPlanKeys)
+export const subscriptionPlanKeySchema = z.string().regex(/^[a-f0-9]{64}$/)
 
 export const subscriptionPlanSchema = z.object({
 	key: subscriptionPlanKeySchema,
 	name: z.string().min(1),
-	description: z.string().min(1),
+	description: z.string(),
 	unitAmount: z.int().nonnegative(),
 	currency: z.string().length(3),
-	interval: z.enum(["month", "year"]),
-	features: z.array(z.string().min(1)).min(1),
+	interval: z.enum(["day", "week", "month", "year"]),
+	intervalCount: z.int().positive(),
+	features: z.array(z.string().min(1)),
 	featured: z.boolean()
 })
-
-export const publicSubscriptionPlanKeys = subscriptionPlanKeys
 
 export const listSubscriptionPlansResponseSchema = z.object({
 	items: z.array(subscriptionPlanSchema)

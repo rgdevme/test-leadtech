@@ -13,7 +13,7 @@ import { Dialog } from "@/components/atoms/Dialog"
 import { Heading } from "@/components/atoms/Heading"
 import { IconButton } from "@/components/atoms/IconButton"
 import { Text } from "@/components/atoms/Text"
-import { SubscriptionPlanCard } from "@/components/molecules/SubscriptionPlanCard"
+import { SubscriptionPlanList } from "@/components/molecules/SubscriptionPlanList"
 import { useLocale } from "@/hooks/useLocale"
 import { requestJson } from "@/utils/apiClient"
 import styles from "./index.module.css"
@@ -135,18 +135,12 @@ export const SubscriptionModal = ({ initialPlanKey, onClose, open }: Subscriptio
 				{loading ? (
 					<div className={styles.grid}>{dictionary.common.loading}</div>
 				) : plans.length > 0 ? (
-					<div className={styles.grid2}>
-						{plans.map(plan => (
-							<div
-								className={styles.container3}
-								key={plan.key}>
-								<SubscriptionPlanCard
-									onSelect={setSelectedPlanKey}
-									plan={plan}
-									selected={selectedPlanKey === plan.key}
-								/>
-							</div>
-						))}
+					<div className={styles.planList}>
+						<SubscriptionPlanList
+							onSelect={setSelectedPlanKey}
+							plans={plans}
+							selectedPlanKey={selectedPlanKey}
+						/>
 					</div>
 				) : (
 					<div className={styles.card}>
