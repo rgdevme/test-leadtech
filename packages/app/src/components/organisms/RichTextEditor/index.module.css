@@ -57,4 +57,8 @@
 	&:global(.ProseMirror)[contenteditable="false"] {
 		@apply cursor-default;
 	}
+
+	& :global(.spellcheckError) {
+		@apply cursor-pointer underline decoration-red-700 decoration-wavy decoration-1 underline-offset-2;
+	}
 }

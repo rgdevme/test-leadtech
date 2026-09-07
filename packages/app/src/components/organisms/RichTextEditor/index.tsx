@@ -11,6 +11,7 @@ import { Button } from "@/components/atoms/Button"
 import { IconButton } from "@/components/atoms/IconButton"
 import { ConfirmDeleteDialog } from "@/components/molecules/ConfirmDeleteDialog"
 import { SaveIndicator } from "@/components/molecules/SaveIndicator"
+import { SpellcheckSuggestions } from "@/components/molecules/SpellcheckSuggestions"
 import { EditorToolbar } from "@/components/organisms/EditorToolbar"
 import { SubscriptionModal } from "@/components/organisms/SubscriptionModal"
 import { EditorTemplate } from "@/components/templates/EditorTemplate"
@@ -91,11 +92,14 @@ export const RichTextEditor = ({
 							</IconButton>
 							<input
 								aria-label={dictionary.workspace.editor.titlePlaceholder}
+								autoCorrect='off'
 								className={layoutStyles.input}
 								disabled={!canEdit}
+								lang='en'
 								maxLength={120}
 								onChange={event => editorState.updateTitle(event.currentTarget.value)}
 								placeholder={dictionary.workspace.editor.titlePlaceholder}
+								spellCheck
 								value={editorState.title}
 							/>
 						</div>
@@ -151,6 +155,18 @@ export const RichTextEditor = ({
 				onConfirm={() => void deleteDocument()}
 				open={deleteOpen}
 			/>
+			{canEdit && editorState.spellcheckSuggestion ? (
+				<SpellcheckSuggestions
+					anchor={editorState.spellcheckSuggestion.anchor}
+					closeLabel={dictionary.common.close}
+					ignoreLabel={dictionary.workspace.editor.spellcheck.ignoreWord}
+					label={`${dictionary.workspace.editor.spellcheck.suggestionsFor} ${editorState.spellcheckSuggestion.word}`}
+					onClose={editorState.closeSpellcheckSuggestions}
+					onIgnore={editorState.ignoreSpellingSuggestion}
+					onSelect={editorState.replaceSpelling}
+					suggestions={editorState.spellcheckSuggestion.suggestions}
+				/>
+			) : null}
 			{deleteError ? (
 				<p
 					className={layoutStyles.error}

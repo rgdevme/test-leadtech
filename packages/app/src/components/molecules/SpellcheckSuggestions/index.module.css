@@ -1,0 +1,13 @@
+@reference "../../../app/globals.css";
+
+.menu {
+	@apply fixed z-50 flex max-w-xs -translate-x-1/2 -translate-y-full items-center gap-1 rounded-lg border border-sage-200 bg-sage-50 p-1 shadow-lg;
+}
+
+.suggestion {
+	@apply min-h-0 rounded-md px-3 py-2;
+}
+
+.action {
+	@apply size-9 min-h-0;
+}

@@ -11,6 +11,12 @@ import { useCallback, useEffect, useRef, useState } from "react"
 
 import { useEditorStore } from "@/stores/useEditorStore"
 import { ApiClientError, requestJson } from "@/utils/apiClient"
+import { checkEnglishWords } from "../extensions/EnglishSpellcheck/checkWords"
+import {
+	EnglishSpellcheck,
+	ignoreSpelling,
+	type SpellcheckSuggestion
+} from "../extensions/EnglishSpellcheck"
 import styles from "../index.module.css"
 
 type SaveSnapshot = {
@@ -32,6 +38,8 @@ export const useRichTextEditor = ({
 }: UseRichTextEditorOptions) => {
 	const [title, setTitle] = useState(document.title)
 	const [saveRevision, setSaveRevision] = useState(0)
+	const [spellcheckSuggestion, setSpellcheckSuggestion] =
+		useState<SpellcheckSuggestion | null>(null)
 	const documentRef = useRef(document)
 	const titleRef = useRef(document.title)
 	const revisionRef = useRef(0)
@@ -46,17 +54,27 @@ export const useRichTextEditor = ({
 	const resetStore = useEditorStore(state => state.reset)
 
 	const editor = useEditor({
-		extensions: [StarterKit],
+		extensions: [
+			StarterKit,
+			EnglishSpellcheck.configure({
+				checkWords: checkEnglishWords,
+				onOpenSuggestions: setSpellcheckSuggestion
+			})
+		],
 		content: document.content,
 		editable,
 		immediatelyRender: false,
 		editorProps: {
 			attributes: {
 				class: styles.editor!,
-				"aria-label": "Document editor"
+				"aria-label": "Document editor",
+				autocorrect: "off",
+				lang: "en",
+				spellcheck: "true"
 			}
 		},
 		onUpdate: ({ editor: currentEditor }) => {
+			setSpellcheckSuggestion(null)
 			if (!editable || stoppedRef.current) {
 				return
 			}
@@ -199,6 +217,31 @@ export const useRichTextEditor = ({
 		void flush()
 	}
 
+	const replaceSpelling = (replacement: string) => {
+		if (!editable || !editor || !spellcheckSuggestion) {
+			return
+		}
+
+		editor
+			.chain()
+			.focus()
+			.insertContentAt(
+				{ from: spellcheckSuggestion.from, to: spellcheckSuggestion.to },
+				replacement
+			)
+			.run()
+		setSpellcheckSuggestion(null)
+	}
+
+	const ignoreSpellingSuggestion = () => {
+		if (!editable || !editor || !spellcheckSuggestion) {
+			return
+		}
+
+		ignoreSpelling(editor, spellcheckSuggestion.word)
+		setSpellcheckSuggestion(null)
+	}
+
 	const hasUnsavedChanges =
 		saveState === "dirty" || saveState === "saving" || saveState === "failed"
 
@@ -209,6 +252,10 @@ export const useRichTextEditor = ({
 		saveState,
 		lastSavedAt,
 		retry,
-		hasUnsavedChanges
+		hasUnsavedChanges,
+		spellcheckSuggestion,
+		replaceSpelling,
+		ignoreSpellingSuggestion,
+		closeSpellcheckSuggestions: () => setSpellcheckSuggestion(null)
 	}
 }

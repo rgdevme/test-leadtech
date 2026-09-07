@@ -237,6 +237,10 @@ const workspaceDictionary = {
 		titlePlaceholder: "Untitled document",
 		canvasLabel: "Document editor",
 		readOnly: "Read-only",
+		spellcheck: {
+			ignoreWord: "Ignore word",
+			suggestionsFor: "Spelling suggestions for"
+		},
 		toolbar: {
 			bold: "Bold",
 			italic: "Italic",
